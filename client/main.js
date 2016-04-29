@@ -30,33 +30,39 @@ import './main.html';
 // });
 
 Template.body.rendered = function() {
-  // Assuming you're using jQuery
   var x=100,y=100;
-  var value=25;
-  var move = function() {
-    $("#crosshair").css('left',x);
-    $("#crosshair").css('top',y);
+  var value=40;
+  var ch = $("#crosshair");
+
+  var NONE=0,LEFT=11,RIGHT=12,UP=21,DOWN=22;
+  var move = function(direction) {
+    if(direction==undefined) direction=NONE;
+    if(direction==0) {
+      ch.css('left',x);
+      ch.css('top',y);
+    } else if(direction<20) { //left/right
+      if(direction==LEFT) x-=value;
+      if(direction==RIGHT) x+=value;
+      ch.css('left',x);
+    } else if(direction>20) { //UP/DOWN
+      if(direction==UP) y-=value;
+      if(direction==DOWN) y+=value;
+      ch.css('top',y);
+    }
   }
-  move();
+
+  move(); //init move
   $('body').on('keydown',function(event) {
     if(event.keyCode == 32) { //space=32
       console.log("fire");
     } else if(event.keyCode == 65) { //a=65
-      console.log("links");
-      x-=value;
-      move();
+      move(LEFT);
     } else if(event.keyCode == 68) { //d=68
-      console.log("rechts");
-      x+=value;
-      move();
+      move(RIGHT);
     } else if(event.keyCode == 87) { //w=87
-      console.log("oben");
-      y-=value;
-      move();
+      move(UP);
     } else if(event.keyCode == 83) { //s=83
-      console.log("unten");
-      y+=value;
-      move();
+      move(DOWN);
     }
   });
 }
