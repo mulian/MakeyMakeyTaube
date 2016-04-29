@@ -43,11 +43,23 @@ Template.body.rendered = function() {
     } else if(direction<20) { //left/right
       if(direction==LEFT) x-=value;
       if(direction==RIGHT) x+=value;
-      ch.css('left',x);
+      if(x<0) {
+        x=0;
+      } else if ((x+value)>window.innerWidth) {
+        x-=value;
+      } else {
+        ch.css('left',x);
+      }
     } else if(direction>20) { //UP/DOWN
       if(direction==UP) y-=value;
       if(direction==DOWN) y+=value;
-      ch.css('top',y);
+      if(y<0) {
+        y=0;
+      } else if ((y+value)>window.innerHeight) {
+        y-=value;
+      } else {
+        ch.css('top',y);
+      }
     }
   }
 
