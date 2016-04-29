@@ -5,4 +5,5 @@
   left:0px;
   top:0px;
   width: 100px;
+  transition: left 0.3s,top 0.3s;
 }

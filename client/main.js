@@ -32,7 +32,7 @@ import './main.html';
 Template.body.rendered = function() {
   // Assuming you're using jQuery
   var x=100,y=100;
-  var value=20;
+  var value=25;
   var move = function() {
     $("#crosshair").css('left',x);
     $("#crosshair").css('top',y);
