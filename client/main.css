@@ -7,3 +7,11 @@
   width: 100px;
   transition: left 0.3s,top 0.3s;
 }
+
+#frog {
+  background: url(images/frog.jpg);
+}
+
+body {
+  background: url(images/frog.jpg);
+}
