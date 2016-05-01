@@ -1,0 +1,1 @@
+Shoots = new Mongo.Collection('shoots');

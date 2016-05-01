@@ -1,0 +1,31 @@
+<template name="complete">
+    {{> frog}}
+    <svg height="200" width="100%" id="shoots">{{> one}}}</svg>
+</template>
+
+<template name="one">
+    {{#each svgShoots}}
+    <circle cx="{{x}}" cy="{{y}}" stroke="{{border}}" stroke-width="3" fill="{{color}}" />
+    {{/each}}
+</template>
+
+<template name="info">
+    <div id="info">
+        <h1>Taube! use a,s,d,w!</h1>
+
+        <img id="crosshair" src="/crosshair.png" />
+        <button id="clear">Reset</button>
+    </div>
+</template>
+
+<template name="frog">
+    <div id="frog">
+        {{> info}}
+    </div>
+</template>
+
+<template name="baseball">
+    <div id="baseball">
+        {{> info}}
+    </div>
+</template>
