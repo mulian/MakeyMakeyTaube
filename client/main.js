@@ -1,7 +1,9 @@
 import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
+import notie from 'notie';
 
 import './main.html';
+import 'notie/dist/notie.css';
 
 // Template.hello.onCreated(function helloOnCreated() {
 //   // counter starts at 0
@@ -67,6 +69,8 @@ Template.body.rendered = function() {
   $('body').on('keydown',function(event) {
     if(event.keyCode == 32) { //space=32
       console.log("fire");
+      notie.alert(1, 'FIRE!',2);
+      event.preventDefault();
     } else if(event.keyCode == 65) { //a=65
       move(LEFT);
     } else if(event.keyCode == 68) { //d=68
