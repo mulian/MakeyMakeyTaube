@@ -10,7 +10,7 @@
     Taube - Menu
   </div>
   <div id="menu_">
-    <ul>
+    <ul id='menu_lu'>
       {{#each games}}
         <li style="background-image: url({{img}});"><a href='game/{{id}}'><div>{{name}}</div></a></li>
       {{/each}}
@@ -19,7 +19,5 @@
 </template>
 
 <template name="game">
-  <div>
-    <button class='test'>asd</button>
-  </div>
+  <img id='crosshair' src='../../crosshair.png'>
 </template>

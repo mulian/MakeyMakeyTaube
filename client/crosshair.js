@@ -1,81 +1,54 @@
 var Crosshair = {
-  NONE: 0, LEFT: 11, RIGHT: 12, UP: 21, DOWN: 22,
+  NONE: 0, LEFT: 11, RIGHT: 12, UP: 21, DOWN: 22, FIRE: 30,
   x: 100, y: 100,
   value: 40,
-  KEYS: {
-    AWSD: {
-      UP: 87, DOWN: 83, LEFT: 65, RIGHT: 68, FIRE: 32
-    }
-  },
   init: function(show) {
     if(show==undefined) show=true;
     if(Meteor.isClient) {
       this.element = $("#crosshair");
       if(!show) this.hide();
-      this.bindKeys();
+      // this.bindKeys();
       this.move();
     }
-  },
-  bindKeys: function(keys) {
-    var _this = this;
-    if(keys==undefined) keys="AWSD";
-    $('body').on('keypress', function(event) {
-      switch(event.keyCode) {
-        case _this.KEYS[keys].FIRE:
-          notie.alert(1, 'FIRE!',2);
-          event.preventDefault();
-          break;
-        case _this.KEYS[keys].LEFT:
-          _this.move(_this.LEFT);
-          event.preventDefault();
-          break;
-        case _this.KEYS[keys].RIGHT:
-          _this.move(_this.RIGHT);
-          event.preventDefault();
-          break;
-        case _this.KEYS[keys].UP:
-          _this.move(_this.UP);
-          event.preventDefault();
-          break;
-        case _this.KEYS[keys].DOWN:
-          _this.move(_this.DOWN);
-
-          break;
-      }
-    });
   },
   show: function() {
     this.element.show();
   },
   hide: function() {
-    console.log(this.element);
     this.element.hide();
   },
-  move: function(direction) {
-    if(direction == undefined) direction = this.NONE;
+  move: function(direction,_this) {
+    if(_this==undefined) _this=this;
+    if(direction == undefined) direction = _this.NONE;
     if(direction == 0) {
-      this.element.css('left',this.x);
-      this.element.css('top',this.y);
+      _this.element.css('left',_this.x);
+      _this.element.css('top',_this.y);
     } else if(direction < 20) { //left/right
-      if(direction == this.LEFT) this.x -= this.value;
-      if(direction == this.RIGHT) this.x += this.value;
-      if(this.x < 0) {
-        this.x = 0;
-      } else if ((this.x + this.value) > window.innerWidth) {
-        this.x -= this.value;
+      if(direction == _this.LEFT) _this.x -= _this.value;
+      if(direction == _this.RIGHT) _this.x += _this.value;
+      if(_this.x < 0) {
+        _this.x = 0;
+      } else if ((_this.x + _this.value) > window.innerWidth) {
+        _this.x -= _this.value;
       } else {
-        this.element.css('left',this.x);
+        _this.element.css('left',_this.x);
       }
     } else if(direction > 20) { //UP/DOWN
-      if(direction == this.UP) this.y -= this.value;
-      if(direction == this.DOWN) this.y += this.value;
-      if(this.y < 0) {
-        this.y = 0;
-      } else if ((this.y + this.value) > window.innerHeight) {
-        this.y -= this.value;
+      if(direction == _this.UP) _this.y -= _this.value;
+      if(direction == _this.DOWN) _this.y += _this.value;
+      if(_this.y < 0) {
+        _this.y = 0;
+      } else if ((_this.y + _this.value) > window.innerHeight) {
+        _this.y -= _this.value;
       } else {
-        this.element.css('top',this.y);
+        _this.element.css('top',_this.y);
       }
+    }
+  },
+  moveThis: function(direction) {
+    var _this = this;
+    return function() {
+      _this.move(direction,_this);
     }
   }
 }

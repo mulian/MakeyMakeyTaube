@@ -35,17 +35,22 @@ body {
   background-size: 100% 100%;
 
   border-radius: 5px;
-  border: 2px white;
   display: inline-block;;
+
+  margin: 10px;
+
+  filter: grayscale(100%);
+}
+#menu_ .selected {
+  filter: grayscale(0%);
 }
 #menu_ ul li div {
   font-size: 200%;
-  
+
   color: white;
   height: 160px;
   width: 200px;
 
-  margin: 10px;
   padding-left: 20px;
   padding-top: 20px;
 }
