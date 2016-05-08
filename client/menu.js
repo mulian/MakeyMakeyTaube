@@ -19,14 +19,15 @@ module.exports = {
       _this.aktivate(_this.selectedElement.next());
     }
   },
-  enter: function() {
+  enter: function(callback) {
     var _this = this;
     return function() {
-      _this.gotoGame(_this.selectedElement);
+      _this.gotoGame(_this.selectedElement,callback);
     }
   },
   aktivate: function(element) {
     if(element.length==1) {
+      //every selected element...
       if(this.selectedElement !=undefined) {
         this.selectedElement.removeClass('selected');
       }
@@ -34,8 +35,8 @@ module.exports = {
       this.selectedElement = element;
     }
   },
-  gotoGame: function(element) {
+  gotoGame: function(element,callback) {
     // console.log(element);
-    window.location.href = element[0].children[0].href;
+    callback(element[0].children[0].href);
   }
 }

@@ -12,7 +12,13 @@
   <div id="menu_">
     <ul id='menu_lu'>
       {{#each games}}
-        <li style="background-image: url({{img}});"><a href='game/{{id}}'><div>{{name}}</div></a></li>
+        <li>
+          <a href='game/{{id}}'>
+            <img src="{{img}}" />
+            <div>{{name}}</div>
+          </a>
+        </li>
+        <!-- <li><a href='game/{{id}}'><div style="background-image: url({{img}});">{{name}}</div></a></li> -->
       {{/each}}
     </ul>
   </div>

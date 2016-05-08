@@ -2,13 +2,13 @@ var Crosshair = {
   NONE: 0, LEFT: 11, RIGHT: 12, UP: 21, DOWN: 22, FIRE: 30,
   x: 100, y: 100,
   value: 40,
-  init: function(show) {
-    if(show==undefined) show=true;
+  init: function(reachedGoaldCallback,goalNotReachedCallback) {
     if(Meteor.isClient) {
       this.element = $("#crosshair");
-      if(!show) this.hide();
       // this.bindKeys();
       this.move();
+      this.reachedGoaldCallback = reachedGoaldCallback;
+      this.goalNotReachedCallback = goalNotReachedCallback;
     }
   },
   show: function() {
@@ -16,6 +16,16 @@ var Crosshair = {
   },
   hide: function() {
     this.element.hide();
+  },
+  image: function(url) {
+    this.element.attr("src","../../"+url);
+  },
+  debugCrosshairClick: function() {
+    $("body").click(function(e) {
+      console.log(e);
+      console.log("x:",e.clientX/(window.innerWidth/100));
+      console.log("y:",e.clientY/(window.innerHeight/100));
+    });
   },
   move: function(direction,_this) {
     if(_this==undefined) _this=this;
@@ -50,6 +60,22 @@ var Crosshair = {
     return function() {
       _this.move(direction,_this);
     }
+  },
+  isGoal: function(gameGoal) {
+    var diff = 10;
+    console.log(gameGoal);
+    var cX = this.x/(window.innerWidth/100);
+    var cY = this.y/(window.innerHeight/100);
+    console.log("cX: "+cX);
+    console.log("cY: "+cY);
+    // if(
+    if( (Math.abs(gameGoal.x-cX)<diff) && (Math.abs(gameGoal.y-cY)<diff) ) {
+      console.log("GOAL!");
+      this.reachedGoaldCallback();
+    } else {
+      this.goalNotReachedCallback();
+    }
+
   }
 }
 
