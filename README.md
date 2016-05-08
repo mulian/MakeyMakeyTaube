@@ -12,3 +12,5 @@ Ist ein interaktives Spiel.
 * Handy ans Ladekabel
 * Lippenstift in das Handtäschchen
 * Kondom auf Dildo
+* Lehrer im anmarsch! Spicker verschwinden lassen unterm tisch.
+* Ein Raubüberfall, trette den Räuber in die Klöten.

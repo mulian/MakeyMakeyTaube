@@ -3,5 +3,23 @@
 </head>
 
 <body>
-    {{> complete}}
 </body>
+
+<template name="menu">
+  <div id="title">
+    Taube - Menu
+  </div>
+  <div id="menu_">
+    <ul>
+      {{#each games}}
+        <li style="background-image: url({{img}});"><a href='game/{{id}}'><div>{{name}}</div></a></li>
+      {{/each}}
+    </ul>
+  </div>
+</template>
+
+<template name="game">
+  <div>
+    <button class='test'>asd</button>
+  </div>
+</template>

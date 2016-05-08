@@ -3,82 +3,65 @@ import { ReactiveVar } from 'meteor/reactive-var';
 import './main.html';
 
 // Notie
-import notie from 'notie';
-import 'notie/dist/notie.css';
+// import notie from 'notie';
+// import 'notie/dist/notie.css';
 
-Template.body.rendered = function() {
-  var x = 100, y = 100;
-  var value = 40;
-  var ch = $("#crosshair");
+var games = [{id:'base',name:"Baseball",img:"baseball.jpg"},{id:'frog',name:"Frog",img:"frog.jpg"}];
+var isGameMode=false;
+var changeGame = function(gameId) {
 
-  var NONE = 0, LEFT = 11, RIGHT = 12, UP = 21, DOWN = 22;
-  var move = function(direction) {
-    if(direction == undefined) direction = NONE;
-    if(direction == 0) {
-      ch.css('left',x);
-      ch.css('top',y);
-    } else if(direction < 20) { //left/right
-      if(direction == LEFT) x -= value;
-      if(direction == RIGHT) x += value;
-      if(x < 0) {
-        x = 0;
-      } else if ((x + value) > window.innerWidth) {
-        x -= value;
-      } else {
-        ch.css('left',x);
-      }
-    } else if(direction > 20) { //UP/DOWN
-      if(direction == UP) y -= value;
-      if(direction == DOWN) y += value;
-      if(y < 0) {
-        y = 0;
-      } else if ((y + value) > window.innerHeight) {
-        y -= value;
-      } else {
-        ch.css('top',y);
-      }
-    }
-  }
-
-  move(); //init move
-  $('body').off().on('keydown', function(event) {
-    switch(event.keyCode) {
-      case 32:
-        console.log("Geschossen!");
-        notie.alert(1, 'FIRE!',2);
-        var offset = $('img#crosshair').offset();
-        var xpos = offset.left+30;
-        var ypos = offset.top-60;
-        var colors = ['#bada55', '#B43831', '783BA3', '#00AB1B', '#143275', '#FFA700'],
-            color = Random.choice(colors), border = Random.choice(colors);
-        var saveShoot = Shapes.insert({'x': xpos, 'y': ypos, 'border': border, 'color': color});
-        console.log(saveShoot);
-        setTimeout(function(){
-          //Shoots.remove({_id:saveShoot});
-        }, 5000);
-        event.preventDefault();
-        break;
-      case 65:
-        move(LEFT);
-        break;
-      case 68:
-        move(RIGHT);
-        break;
-      case 87:
-        move(UP);
-        break;
-      case 83:
-        move(DOWN);
-        break;
-    }
-  });
+  isGameMode=true;
+  console.log(Template.instance());
 }
 
-// Template.hello.onCreated(function helloOnCreated() {
-//   // counter starts at 0
-//   this.counter = new ReactiveVar(0);
-//   this.asd = "!!!!!";
-// });
+//Routing
+Router.route('/', function () {
+  this.render('menu');
+});
+Router.route('/game/:_gameID', function () {
+  console.log(this.params._gameID);
+  this.render('game');
+});
+
+// Crosshair
+import crosshair from './crosshair.js'
+
+Template.body.onCreated(function helloOnCreated() {
+  // counter starts at 0
+  this.counter = new ReactiveVar(0);
+});
+
+Template.body.rendered = function() {
+  crosshair.init(true);
+}
+Template.body.events({
+  'keydown a': function(event) {
+    console.log("KEY!");
+  }
+});
+Template.body.helpers({
+  "gameMode": function() {
+    return isGameMode;
+  }
+});
+
+// MENU
+Template.menu.onCreated(function helloOnCreated() {
+  console.log("Hello! from menu");
+});
+Template.menu.helpers({
+  'games':function() {
+    return games;
+  }
+});
+Template.menu.events({
+  'click li': function(event) {
+    console.log("CLICK");
+    console.log(event.target);
+    changeGame();
+  }
+});
+
 //
 // Template.hello.helpers({
 //   counter() {
