@@ -2,10 +2,18 @@
     "id": "base",
     "name": "Baseball",
     "img": "baseball.jpg",
-    "crosshair": "baseball_crosshair.png",
-    "goal": {
-        "x": 91,
-        "y": 47
+    "crosshair": {
+      "url": "/baseball_crosshair.png",
+      "width": 50,
+      "startpos": {
+        "x": 200,
+        "y": 100
+      },
+      "goal": {
+          "x": 91,
+          "y": 52,
+          "diff": 8
+      }
     }
 }, {
     "id": "frog",

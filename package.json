@@ -1,6 +1,8 @@
 {
   "name": "taube",
   "private": true,
+  "debug": false,
+  "keymap": "AWSD",
   "scripts": {
     "start": "meteor run"
   },

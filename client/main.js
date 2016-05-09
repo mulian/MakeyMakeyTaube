@@ -4,7 +4,8 @@ import './main.html';
 
 import GlobalKeyBinder from './global-key-binder.js'
 import keyMap from './key-map.js'
-var map = "AWSD";
+import package from '../package.json'
+var map = package.keymap;
 
 // Crosshair
 // Should the CrosshairController part of GameController and not of main?
@@ -43,13 +44,13 @@ Template.menu.rendered = function() {
   GlobalKeyBinder.bind([
     {
       key: keyMap[map].LEFT,
-      call: MenuController.prev()
+      call: MenuController.prev(),
     }, {
       key: keyMap[map].RIGHT,
-      call: MenuController.next()
+      call: MenuController.next(),
     }, {
       key: keyMap[map].FIRE,
-      call: MenuController._enter()
+      call: MenuController._enter(),
     },
   ]);
 }
@@ -75,41 +76,41 @@ Router.route('/game/:_gameID', function() {
 Template.game.rendered = function() {
   // Define Dom Vars for Controller
   GameController.init();
-  CrosshairController.init();
   //Define currentGame from instance
   var currentGame = Template.instance().data.currentGame;
+  CrosshairController.init(currentGame.crosshair);
   //redefine Global Keys to Functions
   GlobalKeyBinder.bind([
     {
       key: keyMap[map].UP,
-      call: CrosshairController.moveThis(CrosshairController.UP)
+      call: CrosshairController.moveThis(CrosshairController.UP),
     }, {
       key: keyMap[map].DOWN,
-      call: CrosshairController.moveThis(CrosshairController.DOWN)
+      call: CrosshairController.moveThis(CrosshairController.DOWN),
     }, {
       key: keyMap[map].LEFT,
-      call: CrosshairController.moveThis(CrosshairController.LEFT)
+      call: CrosshairController.moveThis(CrosshairController.LEFT),
     }, {
       key: keyMap[map].RIGHT,
-      call: CrosshairController.moveThis(CrosshairController.RIGHT)
+      call: CrosshairController.moveThis(CrosshairController.RIGHT),
     }, {
       key: keyMap[map].FIRE,
       call: function() {
         console.log("FIRE!");
-        if (CrosshairController.isGoal(currentGame.goal)) {
+        if (CrosshairController.isGoal()) {
           GameController.goalReached();
         } else {
           GameController.goalNotReached();
+          CrosshairController.showGoal();
         }
-      }
+      },
     },
   ]);
 
-  //Define Crosshair Image
-  CrosshairController.image(currentGame.crosshair);
   //Only debbuger! to Find the right coords fog Goal
-  CrosshairController.debugCrosshairClick();
-}
+  if (package.debug)
+    CrosshairController.debugCrosshairClick();
+  }
 Template.game.helpers({
   game: function() {
     //For Template, how needs background img url

@@ -50,7 +50,7 @@ module.exports = {
     return this.withThis(this.goalNotReached);
   },
   goalNotReached: function() {
-    notie.alert(3, "Verloren!", 2)
+    notie.alert(3, "Falsch!", 1)
   },
   withThis: function(func) {
     _this = this;
