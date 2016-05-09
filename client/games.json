@@ -1,0 +1,26 @@
+[{
+    "id": "base",
+    "name": "Baseball",
+    "img": "baseball.jpg",
+    "crosshair": "baseball_crosshair.png",
+    "goal": {
+        "x": 91,
+        "y": 47
+    }
+}, {
+    "id": "frog",
+    "name": "Frog",
+    "img": "frog.jpg"
+}, {
+    "id": "fire",
+    "name": "Feuer",
+    "img": "fire.jpg"
+}, {
+    "id": "sun",
+    "name": "Sonne",
+    "img": "sun.jpg"
+}, {
+    "id": "softball",
+    "name": "Softball",
+    "img": "softball.jpg"
+}]

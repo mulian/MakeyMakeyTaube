@@ -12,18 +12,16 @@
   <div id="menu_">
     <ul id='menu_lu'>
       {{#each games}}
-        <li>
-          <a href='game/{{id}}'>
-            <img src="{{img}}" />
-            <div>{{name}}</div>
-          </a>
-        </li>
-        <!-- <li><a href='game/{{id}}'><div style="background-image: url({{img}});">{{name}}</div></a></li> -->
+        <li style="background-image: url(/{{img}});" gameid='{{id}}'>{{name}}</li>
       {{/each}}
     </ul>
   </div>
 </template>
 
 <template name="game">
-  <img id='crosshair' src='../../crosshair.png'>
+  {{#with game}}
+  <img id='background_img' src='/{{img}}'>
+  {{/with}}
+  <img id='crosshair' src='/../../crosshair.png'>
+
 </template>

@@ -1,155 +1,118 @@
-import { Template } from 'meteor/templating';
-import { ReactiveVar } from 'meteor/reactive-var';
+import {Template} from 'meteor/templating';
+import {ReactiveVar} from 'meteor/reactive-var';
 import './main.html';
 
-
-import globalKeyBinder from './global-key-binder.js'
+import GlobalKeyBinder from './global-key-binder.js'
 import keyMap from './key-map.js'
 var map = "AWSD";
 
-//Notie
-import notie from 'notie';
-import 'notie/dist/notie.css';
-
-import Menu from './menu.js'
-
-var games = [
-  {
-    id:'base',
-    name:"Baseball",
-    img:"baseball.jpg",
-    crosshair:"baseball_crosshair.png",
-    goal: { //Procent!
-      x: 91,
-      y: 47
-    }
-  },
-  {id:'frog',name:"Frog",img:"frog.jpg"},
-  {id:'fire',name:"Feuer",img:"fire.jpg"},
-  {id:'sun',name:"Sonne",img:"sun.jpg"},
-  {id:'softball',name:"Softball",img:"softball.jpg"}
-]
-var getGameById = function(id) {
-  for(var i=0;i<games.length;i++) {
-    if(games[i].id==id) {
-      return games[i];
-    }
-  }
-}
-var isGameMode = false;
-var changeGame = function(gameId) {
-
-  isGameMode=true;
-}
-var game=null;
-//Routing
-Router.route('/', function () {
-  this.render('menu');
-});
-Router.route('/game/:_gameID', function () {
-  game = this.params._gameID;
-  this.render('game');
-});
-
 // Crosshair
-import crosshair from './crosshair.js'
+// Should the CrosshairController part of GameController and not of main?
+import CrosshairController from './crosshair-controller.js';
+
+//Template Controller
+import MenuController from './menu-controller.js';
+import GameController from './game-controller.js';
+import Games from "./games.json";
 
 // BODY
-Template.body.onCreated(function helloOnCreated() {
-  // counter starts at 0
-  this.counter = new ReactiveVar(0);
+Template.body.rendered = function() {
+  GlobalKeyBinder.init();
+}
+
+// MENU
+Router.route('/', function() {
+  // on Route / goto Template 'menu'
+  this.render('menu');
+}, {
+  name: 'menu' //currently no need?
 });
-Template.body.events({
-  'keydown a': function(event) {
-    console.log("KEY!");
+Template.menu.onCreated(function() {
+  //reset picSize on every recreate
+  Session.set('picSize', null);
+});
+Template.menu.helpers({
+  games: function() {
+    //Call from View, get all Games
+    return Games;
   }
 });
-Template.body.helpers({
-  "gameMode": function() {
-    return isGameMode;
+Template.menu.rendered = function() {
+  MenuController.init(); //to instanceiate Dom Vars only once
+  //bind key's to Functions
+  GlobalKeyBinder.bind([
+    {
+      key: keyMap[map].LEFT,
+      call: MenuController.prev()
+    }, {
+      key: keyMap[map].RIGHT,
+      call: MenuController.next()
+    }, {
+      key: keyMap[map].FIRE,
+      call: MenuController._enter()
+    },
+  ]);
+}
+Template.menu.events({
+  'click li': function(event, instance) {
+    // On click, call enter
+    MenuController.enter();
   }
 });
 
 // GAME
-var goalReached = function() {
-  Router.go('/');
-  notie.alert(1,"Gewonnen!",2)
-}
-var goalNotReached = function() {
-  notie.alert(3,"Verloren!",2)
-}
-Template.game.onCreated(function () {
-  var g = getGameById(game);
-  // console.log(games[game].img);
-  $("body").css('background-image','url(../../'+g.img+')');
+Router.route('/game/:_gameID', function() {
+  //on route /game/:var, var is in this.params
+  this.render('game', {
+    data: {
+      //set current game Data to template instance.data
+      currentGame: GameController.getGameById(this.params._gameID)
+    }
+  });
+}, {
+  name: 'game' //gamename for better use Route.go
 });
 Template.game.rendered = function() {
-  var g = getGameById(game);
-  crosshair.init(goalReached,goalNotReached);
-  globalKeyBinder.bind(keyMap[map].UP,crosshair.moveThis(crosshair.UP));
-  globalKeyBinder.bind(keyMap[map].DOWN,crosshair.moveThis(crosshair.DOWN));
-  globalKeyBinder.bind(keyMap[map].LEFT,crosshair.moveThis(crosshair.LEFT));
-  globalKeyBinder.bind(keyMap[map].RIGHT,crosshair.moveThis(crosshair.RIGHT));
-  globalKeyBinder.bind(keyMap[map].FIRE,function() {
-    console.log("FIRE!");
-    crosshair.isGoal(g.goal);
-  });
-  globalKeyBinder.init();
+  // Define Dom Vars for Controller
+  GameController.init();
+  CrosshairController.init();
+  //Define currentGame from instance
+  var currentGame = Template.instance().data.currentGame;
+  //redefine Global Keys to Functions
+  GlobalKeyBinder.bind([
+    {
+      key: keyMap[map].UP,
+      call: CrosshairController.moveThis(CrosshairController.UP)
+    }, {
+      key: keyMap[map].DOWN,
+      call: CrosshairController.moveThis(CrosshairController.DOWN)
+    }, {
+      key: keyMap[map].LEFT,
+      call: CrosshairController.moveThis(CrosshairController.LEFT)
+    }, {
+      key: keyMap[map].RIGHT,
+      call: CrosshairController.moveThis(CrosshairController.RIGHT)
+    }, {
+      key: keyMap[map].FIRE,
+      call: function() {
+        console.log("FIRE!");
+        if (CrosshairController.isGoal(currentGame.goal)) {
+          GameController.goalReached();
+        } else {
+          GameController.goalNotReached();
+        }
+      }
+    },
+  ]);
 
-  crosshair.image(g.crosshair);
-
-  $("body").css("background-size",window.innerWidth+"px "+window.innerHeight+"px");
-  $("body").css("height",window.innerHeight+"px");
-  $("body").css("width",window.innerWidth+"px");
-  $(window).resize(function() {
-    $("body").css("background-size",window.innerWidth+"px "+window.innerHeight+"px");
-    $("body").css("height",window.innerHeight+"px");
-    $("body").css("width",window.innerWidth+"px");
-  });
-
-  crosshair.debugCrosshairClick();
+  //Define Crosshair Image
+  CrosshairController.image(currentGame.crosshair);
+  //Only debbuger! to Find the right coords fog Goal
+  CrosshairController.debugCrosshairClick();
 }
-
-// MENU
-var callEnter= function(url) {
-  Router.go(url);
-}
-
-Template.menu.onCreated(function helloOnCreated() {
-  console.log("Hello! from menu");
-  $("body").css('background-image',"");
-});
-Template.menu.helpers({
-  'games':function() {
-    return games;
+Template.game.helpers({
+  game: function() {
+    //For Template, how needs background img url
+    return Template.instance().data.currentGame;
   }
 });
-Template.menu.rendered = function() {
-  console.log("BIND MENU");
-  Menu.init();
-  globalKeyBinder.bind(keyMap[map].LEFT,Menu.prev());
-  globalKeyBinder.bind(keyMap[map].RIGHT,Menu.next());
-  globalKeyBinder.bind(keyMap[map].FIRE,Menu.enter(callEnter));
-  globalKeyBinder.init();
-}
-
-//
-// Template.hello.helpers({
-//   counter() {
-//     return Template.instance().counter.get();
-//   },
-//   asd() {
-//     return Template.instance().asd.get();
-//   }
-// });
-//
-// Template.hello.events({
-//   'click #1'(event, instance) {
-//     // increment the counter when button is clicked
-//     instance.counter.set(instance.counter.get() + 1);
-//   },
-//   'click #2'(event, instance) {
-//     // increment the counter when button is clicked
-//     instance.counter.set(instance.counter.get() - 1);
-//   },
-// });
