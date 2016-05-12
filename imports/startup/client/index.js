@@ -1,22 +1,23 @@
-import '/imports/startup/client';
-/*
 import {Template} from 'meteor/templating';
 import {ReactiveVar} from 'meteor/reactive-var';
-import './main.html';
+import '../../ui/components/main.html';
+import './routes.js'
 
-import GlobalKeyBinder from './global-key-binder.js'
-import keyMap from './key-map.js'
-import package from '../package.json'
+import GlobalKeyBinder from '../../api/keys/global-key-binder.js'
+import keyMap from '../../api/keys/key-map.js'
+import package from '../../../package.json'
+import Games from "../../../games.json";
 var map = package.keymap;
 
 // Crosshair
 // Should the CrosshairController part of GameController and not of main?
-import CrosshairController from './crosshair-controller.js';
+import CrosshairController from '../../api/crosshair-controller.js';
 
 //Template Controller
-import MenuController from './menu-controller.js';
-import GameController from './game-controller.js';
-import Games from "./games.json";
+import MenuController from '../../api/menu-controller.js';
+import GameController from '../../api/game-controller.js';
+
+import '../../ui/stylesheets/main.css'
 
 // BODY
 Template.body.rendered = function() {
@@ -24,12 +25,6 @@ Template.body.rendered = function() {
 }
 
 // MENU
-Router.route('/', function() {
-  // on Route / goto Template 'menu'
-  this.render('menu');
-}, {
-  name: 'menu' //currently no need?
-});
 Template.menu.onCreated(function() {
   //reset picSize on every recreate
   Session.set('picSize', null);
@@ -64,17 +59,7 @@ Template.menu.events({
 });
 
 // GAME
-Router.route('/game/:_gameID', function() {
-  //on route /game/:var, var is in this.params
-  this.render('game', {
-    data: {
-      //set current game Data to template instance.data
-      currentGame: GameController.getGameById(this.params._gameID)
-    }
-  });
-}, {
-  name: 'game' //gamename for better use Route.go
-});
+
 Template.game.rendered = function() {
   // Define Dom Vars for Controller
   GameController.init();
@@ -119,4 +104,3 @@ Template.game.helpers({
     return Template.instance().data.currentGame;
   }
 });
-*/

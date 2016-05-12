@@ -1,4 +1,4 @@
-import Games from "./games.json";
+import Games from "../../games.json";
 //Notie
 import notie from 'notie';
 import 'notie/dist/notie.css';
