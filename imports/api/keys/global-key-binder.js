@@ -2,6 +2,7 @@ module.exports = {
   binds: {},
   init: function() {
     var _this = this;
+    console.log("init");
     $('body').on('keydown', function(event) {
       _this.fire(event, _this);
     });

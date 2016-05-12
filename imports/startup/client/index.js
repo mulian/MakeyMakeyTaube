@@ -1,6 +1,6 @@
 import {Template} from 'meteor/templating';
 import {ReactiveVar} from 'meteor/reactive-var';
-import '../../ui/components/main.html';
+// import '../../ui/components/main.html';
 import './routes.js'
 
 import GlobalKeyBinder from '../../api/keys/global-key-binder.js'
@@ -19,12 +19,17 @@ import GameController from '../../api/game-controller.js';
 
 import '../../ui/stylesheets/main.css'
 
+import Game from '../../ui/components/game/game.js'
+import Menu from '../../ui/components/menu/menu.js'
+
 // BODY
 Template.body.rendered = function() {
   GlobalKeyBinder.init();
+  Session.set("GlobalKeyBinder",GlobalKeyBinder);
 }
 
 // MENU
+/*
 Template.menu.onCreated(function() {
   //reset picSize on every recreate
   Session.set('picSize', null);
@@ -57,9 +62,10 @@ Template.menu.events({
     MenuController.enter();
   }
 });
+*/
 
 // GAME
-
+/*
 Template.game.rendered = function() {
   // Define Dom Vars for Controller
   GameController.init();
@@ -104,3 +110,4 @@ Template.game.helpers({
     return Template.instance().data.currentGame;
   }
 });
+*/
