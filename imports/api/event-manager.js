@@ -1,4 +1,5 @@
-class EventManager {
+var EM=null;
+export default class EventManager {
   constructor() {
     this.eventMap = {};
   }
@@ -23,11 +24,9 @@ class EventManager {
   printfEventList() {
     console.log(this.eventMap);
   }
+  static create() {
+    if(EM==null) EM = new this();
+    return EM;
+  }
 }
-
-var EM = null;
-if(EM == null) {
-  EM = new EventManager();
-}
-
-export default EM;
+export let eventManager = EventManager.create();

@@ -8,9 +8,9 @@ import keyMap from '../../../api/keys/key-map.js'
 import package from '../../../../package.json'
 var map = package.keymap;
 
-import GlobalKeyBinder from '../../../api/keys/global-key-binder.js'
-
-GlobalKeyBinder.bindAll('menu',[
+// import GlobalKeyBinder from '../../../api/keys/global-key-binder.js'
+import {keymapManager} from '../../../api/keymap-manager.js';
+keymapManager.bindAll('menu',[
   {keyName:'LEFT', once:true, call:MenuController.prev()},
   {keyName:'RIGHT', once:true, call:MenuController.next()},
   {keyName:'FIRE', once:true, call: MenuController._enter()}
@@ -18,7 +18,7 @@ GlobalKeyBinder.bindAll('menu',[
 Template.menu.onCreated(function() {
   //reset picSize on every recreate
   Session.set('picSize', null);
-  GlobalKeyBinder.currentTamplate = 'menu';
+  keymapManager.currentTamplate = 'menu';
 });
 Template.menu.helpers({
   games: function() {

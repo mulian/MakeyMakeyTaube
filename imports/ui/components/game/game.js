@@ -1,18 +1,34 @@
 import './game.html'
 import GameController from '../../../api/game-controller.js';
-import Crosshair from '../../../api/crosshair-controller.js';
+import {crosshair} from '../../../api/crosshair.js';
 
-import package from '../../../../package.json'
+import package from '../../../../package.json';
 
-import GlobalKeyBinder from '../../../api/keys/global-key-binder.js'
+// import GlobalKeyBinder from '../../../api/keys/global-key-binder.js';
+import {keymapManager} from '../../../api/keymap-manager.js';
 
-import EventManager from '../../../api/event-manager.js'
+import {eventManager} from '../../../api/event-manager.js'
 // EventManager.add('game:left',function(e) {
 //   console.log("jo game:left",e);
 // });
 // EventManager.dispatch('game:left',{bla:'BAM'});
 
 
+keymapManager.bindAll('game',[
+  {key:'W', call:'crosshair:up'},
+  {key:'S', call:'crosshair:down'},
+  {key:'A', call:'crosshair:left'},
+  {key:'D', call:'crosshair:right'},
+  {key:'FIRE', once:true, call: function() {
+      if (CrosshairController.isGoal()) {
+        GameController.goalReached();
+      } else {
+        GameController.goalNotReached();
+        CrosshairController.showGoal();
+      }
+    }
+  }
+]);
 
 /*
 GlobalKeyBinder.bindAll('game',[
@@ -31,22 +47,21 @@ GlobalKeyBinder.bindAll('game',[
   }
 ]);
 */
-var crosshair = null
 $(document).ready(function() {
   setTimeout(function() {
     console.log("dispatch!");
-    EventManager.dispatch('crosshair:up');
+    eventManager.dispatch('crosshair:up');
   },2000)
 })
 
 Template.game.onCreated (function() {
-  GlobalKeyBinder.currentTamplate = 'game';
-  crosshair = new Crosshair()
+  keymapManager.currentTamplate = 'game';
 });
 
 Template.game.rendered = function() {
   // GlobalKeyBinder = Session.get('GlobalKeyBinder');
   // Define Dom Vars for Controller
+  crosshair.init();
   GameController.init();
   //Define currentGame from instance
   var currentGame = Template.instance().data.currentGame;

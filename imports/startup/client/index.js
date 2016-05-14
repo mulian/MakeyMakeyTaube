@@ -3,14 +3,13 @@ import {ReactiveVar} from 'meteor/reactive-var';
 // import '../../ui/components/main.html';
 import './routes.js'
 
-import GlobalKeyBinder from '../../api/keys/global-key-binder.js'
+// import GlobalKeyBinder from '../../api/keys/global-key-binder.js'
 import keyMap from '../../api/keys/key-map.js'
 import package from '../../../package.json'
 import Games from "../../../games.json";
 var map = package.keymap;
 // Crosshair
 // Should the CrosshairController part of GameController and not of main?
-import CrosshairController from '../../api/crosshair-controller.js';
 
 //Template Controller
 import MenuController from '../../api/menu-controller.js';
@@ -24,7 +23,7 @@ import Menu from '../../ui/components/menu/menu.js'
 // BODY
 Template.body.rendered = function() {
   // GlobalKeyBinder.init();
-  Session.set("GlobalKeyBinder",GlobalKeyBinder);
+  // Session.set("GlobalKeyBinder",GlobalKeyBinder);
 }
 
 // MENU
