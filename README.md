@@ -1,5 +1,4 @@
 # Taube
-
 Ist ein interaktives Spiel.
 
 ## Weitere Ideen
@@ -14,3 +13,11 @@ Ist ein interaktives Spiel.
 * Kondom auf Dildo
 * Lehrer im anmarsch! Spicker verschwinden lassen unterm tisch.
 * Ein Raubüberfall, trette den Räuber in die Klöten.
+* Dartscheibe Pfeil
+* Billiard tisch kö am
+
+## Spielzeit
+* Alle spiele (zeiten) in die DB!
+
+## Veröffentlichung
+18.06.16

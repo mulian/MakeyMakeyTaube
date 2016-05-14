@@ -8,7 +8,6 @@ import keyMap from '../../api/keys/key-map.js'
 import package from '../../../package.json'
 import Games from "../../../games.json";
 var map = package.keymap;
-
 // Crosshair
 // Should the CrosshairController part of GameController and not of main?
 import CrosshairController from '../../api/crosshair-controller.js';
@@ -24,7 +23,7 @@ import Menu from '../../ui/components/menu/menu.js'
 
 // BODY
 Template.body.rendered = function() {
-  GlobalKeyBinder.init();
+  // GlobalKeyBinder.init();
   Session.set("GlobalKeyBinder",GlobalKeyBinder);
 }
 

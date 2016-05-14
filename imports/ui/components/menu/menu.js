@@ -10,9 +10,15 @@ var map = package.keymap;
 
 import GlobalKeyBinder from '../../../api/keys/global-key-binder.js'
 
+GlobalKeyBinder.bindAll('menu',[
+  {keyName:'LEFT', once:true, call:MenuController.prev()},
+  {keyName:'RIGHT', once:true, call:MenuController.next()},
+  {keyName:'FIRE', once:true, call: MenuController._enter()}
+]);
 Template.menu.onCreated(function() {
   //reset picSize on every recreate
   Session.set('picSize', null);
+  GlobalKeyBinder.currentTamplate = 'menu';
 });
 Template.menu.helpers({
   games: function() {
@@ -23,6 +29,7 @@ Template.menu.helpers({
 Template.menu.rendered = function() {
   MenuController.init(); //to instanceiate Dom Vars only once
   //bind key's to Functions
+  /*
   GlobalKeyBinder.bind([
     {
       key: keyMap[map].LEFT,
@@ -35,6 +42,7 @@ Template.menu.rendered = function() {
       call: MenuController._enter(),
     },
   ]);
+  */
 }
 Template.menu.events({
   'click li': function(event, instance) {
