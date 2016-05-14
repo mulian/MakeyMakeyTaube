@@ -1,4 +1,4 @@
-// import KeyMap from '../../../api/keys/key-map.js'
+import KeyMap from './key-map.js'
 
 class GlobalKeyBinder {
   defineAttributes() {
@@ -19,18 +19,25 @@ class GlobalKeyBinder {
     let GKB = this;
     console.log("HELLO!1");
     this.defineAttributes();
-    $(document).ready(() => {
-      this.init();
-    });
+    // $(document).ready(() => {
+    //   this.init();
+    // });
+    this.init();
   }
   init() {
-    console.log("HELLO!2");
-    $('body').on('keydown',(event) => {
-      this.down(event);
-    });
-    $('body').on('keyup',(event) => {
+    // console.log("HELLO!2");
+    document.body.addEventListener('keydown', (e) => {
+      // console.log(String.fromCharCode(e.keyCode));
+      console.log(keyboardMap[e.keyCode]);
+      this.down(e);
+    })
+    document.body.addEventListener('keyup', (event) => {
       this.up(event);
-    });
+    })
+    // $('body').on('keyup',(e) => {
+    //    var value = this.value + String.fromCharCode(e.keyCode);
+    //    console.log(value);
+    // });
   }
   once(event) {
     var call = this.binds[this.currentTamplate].once[event.keyCode];
@@ -85,58 +92,3 @@ if(GKB == null) {
 }
 
 export default GKB;
-/*
-var GKB = null;
-export default function() {
-  if(GKB==null) {
-    GKB = new GlobalKeyBinder();
-  }
-  return GKB;
-}
-*/
-
-/*
-module.exports = {
-  // LEFT: 11,RIGHT: 12, UP: 21, DOWN: 22,
-  binds: {},
-  keyMap: "awsd",
-  init: function() {
-    var _this = this;
-    console.log("init");
-    $('body').on('keydown', function(event) {
-      _this.fire(event, _this);
-    });
-  },
-  bind: function(keyCode, callback) {
-    if (keyCode instanceof Array) { //on Array
-      for (var key in keyCode) {
-        var obj = keyCode[key];
-        this.bind(obj.key, obj.call);
-      }
-    } else
-      this.binds[keyCode] = callback; // normal add
-    }
-  ,
-  fire: function(event, _this) {
-    var keyCode = event.keyCode;
-    if (_this.binds[KeyMap[this.keyMap].keyCode] != undefined) {
-      _this.binds[keyCode]();
-      event.preventDefault();
-    }
-  },
-}
-*/
-
-// module.exports = {
-//   binds: {},
-//   keyMap: 'AWSD',
-//   init: function() {
-//     var _this = this;
-//     $('body').on('keydown', function(event) {
-//       _this.fire(event, _this);
-//     });
-//   },
-//   fire: function(event,_this) {
-//     if(event.keyCode==bind[])
-//   }
-// }

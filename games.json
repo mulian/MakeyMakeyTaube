@@ -3,7 +3,7 @@
     "name": "Baseball",
     "img": "baseball.jpg",
     "crosshair": {
-      "url": "/baseball_crosshair.png",
+      "url": "baseball_crosshair.png",
       "width": 50,
       "startpos": {
         "x": 200,

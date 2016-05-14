@@ -7,6 +7,7 @@
   /*width: 100px;*/
   opacity: 0;
   transition: left 0.3s,top 0.3s,opacity 1s;
+  z-index: 999;
 }
 #gamegoal {
   position: absolute;
