@@ -1,3 +1,5 @@
+import {eventManager} from './event-manager.js'
+
 module.exports = {
   init: function() {
     var _this = this;
@@ -6,21 +8,20 @@ module.exports = {
     this.element.children().hover(function(e) {
       _this.aktivate($(e.currentTarget));
     });
+    this.initEvents();
+  },
+  initEvents() {
+    eventManager.addAll([
+      {name:'menu:left', call: ()=> this.prev()},
+      {name:'menu:right', call: ()=> this.next()},
+      {name:'menu:enter', call: ()=> this.enter()}
+    ]);
   },
   prev: function() {
-    var _this = this;
-    return function() {
-      _this.aktivate(_this.selectedElement.prev());
-    }
+    this.aktivate(this.selectedElement.prev());
   },
   next: function() {
-    var _this = this;
-    return function() {
-      _this.aktivate(_this.selectedElement.next());
-    }
-  },
-  _enter: function() {
-    return this.withThis(this.enter);
+    this.aktivate(this.selectedElement.next());
   },
   enter: function() {
     // console.log($(this.selectedElement[0]).attr('gameid'));
