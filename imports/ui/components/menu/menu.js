@@ -1,6 +1,6 @@
 import './menu.html'
 
-import MenuController from '../../../api/menu-controller.js';
+import {menu} from '../../../api/menu-controller.js';
 import Games from "../../../../games.json";
 
 import keyMap from '../../../api/keys/key-map.js'
@@ -29,7 +29,8 @@ Template.menu.helpers({
   }
 });
 Template.menu.rendered = function() {
-  MenuController.init(); //to instanceiate Dom Vars only once
+
+  menu.id = 'menu_lu'; //to instanceiate Dom Vars only once
   //bind key's to Functions
   /*
   GlobalKeyBinder.bind([

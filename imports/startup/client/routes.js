@@ -1,4 +1,14 @@
 import GameController from '../../api/game-controller.js';
+import eventManager from '../../api/event-manager.js'
+
+//TODO: no need?
+/*
+eventManager.addAll([
+  {name:'router:menu', call: undefined},
+  {name:'router:game', call: undefined}
+]);
+*/
+
 Router.route('/', function() {
   // on Route / goto Template 'menu'
   this.render('menu');
