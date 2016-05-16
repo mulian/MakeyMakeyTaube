@@ -18,9 +18,3 @@ import '../../ui/stylesheets/main.css'
 
 import Game from '../../ui/components/game/game.js'
 import Menu from '../../ui/components/menu/menu.js'
-
-// BODY
-Template.body.rendered = function() {
-  // GlobalKeyBinder.init();
-  // Session.set("GlobalKeyBinder",GlobalKeyBinder);
-}

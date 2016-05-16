@@ -1,6 +1,8 @@
 import {eventManager} from './event-manager.js'
 import {keymapManager} from './keymap-manager.js';
 
+//TODO: remove Template, this is not good because of equality to others and this value
+
 export default
 class ViewClass {
   constructor(templateName,keyTemplate=true) {

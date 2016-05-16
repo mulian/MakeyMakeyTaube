@@ -1,4 +1,5 @@
-import {eventManager} from '../../../api/event-manager.js'
+// import {eventManager} from '../../../api/event-manager.js'
+import ViewClass from '../../../api/view-class.js'
 
 var def = {
   "url": "baseball_crosshair.png",
@@ -17,11 +18,11 @@ var def = {
 let ch =null;
 
 export default
-class Crosshair {
+class Crosshair extends ViewClass {
   constructor(id) {
+    super('game');
     this.init(id);
     this._setAttr();
-    this._regEvents();
   }
   _setAttr() {
     this.NONE= 0; this.LEFT= 11; this.RIGHT= 12; this.UP= 21; this.DOWN= 22; this.FIRE= 30;
@@ -29,15 +30,6 @@ class Crosshair {
   }
   init(id) {
     this.id = id;
-  }
-  _regEvents() {
-    // console.log("Crosshair._regEvents");
-    eventManager.addAll([
-      {name:'crosshair:left',call: ()=> this._move(this.LEFT)},
-      {name:'crosshair:right',call:  ()=> this._move(this.RIGHT)},
-      {name:'crosshair:up',call:  ()=> this._move(this.UP)},
-      {name:'crosshair:down',call: ()=> this._move(this.DOWN)}
-    ]);
   }
   //TODO: REMOVE css...
   _move(direction) {
@@ -180,6 +172,16 @@ class Crosshair {
   static create() {
     if(ch==null) ch = new this();
     return ch;
+  }
+
+  //Viewclass methodes
+  addEvents() {
+    return [
+      {name:'crosshair:left',call: ()=> this._move(this.LEFT)},
+      {name:'crosshair:right',call:  ()=> this._move(this.RIGHT)},
+      {name:'crosshair:up',call:  ()=> this._move(this.UP)},
+      {name:'crosshair:down',call: ()=> this._move(this.DOWN)}
+    ];
   }
 }
 
