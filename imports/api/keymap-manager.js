@@ -42,8 +42,8 @@ export default class KeymapManager {
     var key = String.fromCharCode(e.keyCode);
     // console.log('key: <'+key+'>');
     var targetMap = this.keyMap[this.currentTamplate];
-    console.log(targetMap);
-    console.log(key);
+    // console.log(targetMap);
+    // console.log(key);
     if(targetMap!=undefined) {
       var call = targetMap[key.toUpperCase()];
       if(call!=undefined) {

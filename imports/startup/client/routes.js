@@ -1,4 +1,3 @@
-import GameController from '../../api/game-controller.js';
 import eventManager from '../../api/event-manager.js'
 
 //TODO: no need?
@@ -21,7 +20,7 @@ Router.route('/game/:_gameID', function() {
     data: {
       //set current game Data to template instance.data
       //TODO: ohne GameController lösen
-      currentGame: GameController.getGameById(this.params._gameID)
+      currentGame: this.params._gameID
     }
   });
 }, {

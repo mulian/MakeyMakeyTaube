@@ -1,7 +1,61 @@
+/*
 import Games from "../../games.json";
 //Notie
 import notie from 'notie';
 import 'notie/dist/notie.css';
+
+export default
+class GameController {
+  constructor() {
+
+  }
+  init() {
+    this.img = "background_img":
+    this.setPicSize();
+  }
+  getGameById(id) {
+    for (var i = 0; i < Games.length; i++) {
+      if (Games[i].id == id) {
+        return Games[i];
+      }
+    }
+  }
+  gotoMenu() {
+    this.img.removeClass('transform');
+    setTimeout(function() {
+      Router.go('/');
+    }, 500)
+  }
+  setPicSize() {
+    var picSize = Session.get('picSize');
+    if (picSize != null) {
+      this.img.css('width', picSize.width);
+      this.img.css('height', picSize.height);
+      this.img.css('left', picSize.left);
+      this.img.css('top', picSize.top);
+      Session.set('picSize', null); //no need, becaus of menu onCreate reset?
+      setTimeout(() => {
+        this.img.addClass('transform');
+      }, 1);
+    } else {
+      this.img.addClass('transform');
+    }
+  }
+  goalReached() => {
+    this.gotoMenu();
+    notie.alert(1, "Gewonnen!", 2)
+  }
+  goalNotReached() => {
+    notie.alert(3, "Falsch!", 1)
+  }
+
+  //GETTER & SETTER
+  set img(val= 'background_img') {
+    this._img = $(`#${val}`);
+  }
+
+  get img() { return this._img; }
+}
 
 module.exports = {
   init: function() {
@@ -59,3 +113,4 @@ module.exports = {
     }
   },
 }
+*/

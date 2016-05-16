@@ -22,7 +22,7 @@ export default class EventManager {
     window.dispatchEvent(event);
   }
   printfEventList() {
-    console.log(this.eventMap);
+    // console.log(this.eventMap);
   }
   static create() {
     if(EM==null) EM = new this();
