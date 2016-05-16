@@ -1,4 +1,4 @@
-import {eventManager} from './event-manager.js'
+import {eventManager} from '../../../api/event-manager.js'
 
 var def = {
   "url": "baseball_crosshair.png",
@@ -184,53 +184,3 @@ class Crosshair {
 }
 
 export let crosshair = Crosshair.create();
-
-/*
-isGoal: function(gameGoal) {
-  if(gameGoal==undefined) {
-    if(this.crosshairInfo!=undefined) gameGoal = this.crosshairInfo.goal;
-    else {
-      gameGoal = {
-        x: 80,
-        y: 80,
-        diff: 10
-      }
-    }
-  }
-  var cX = this.x / (window.innerWidth / 100); //calc crosshair x in %
-  var cY = this.y / (window.innerHeight / 100); //calc crosshair y in %
-  if ((Math.abs(gameGoal.x - cX) < gameGoal.diff) && (Math.abs(gameGoal.y - cY) < gameGoal.diff)) {
-    // console.log("GOAL!");
-    return true;
-  } else {
-    return false;
-  }
-},
-debugCrosshairClick: function() {
-  $("body").click(function(e) {
-    console.log(e);
-    console.log("x: " + e.clientX / (window.innerWidth / 100) + "%");
-    console.log("y: " + e.clientY / (window.innerHeight / 100) + "%");
-  });
-},
-showGoal: function() {
-  var gameGoal = this.crosshairInfo.goal;
-  var goalElement = $("<div/>", {
-    id: "gamegoal",
-    text: "",
-    css: {
-      left: (gameGoal.x*(window.innerWidth/100))-(gameGoal.diff*(window.innerWidth/100)),
-      top: (gameGoal.y*(window.innerHeight/100))-(gameGoal.diff*(window.innerHeight/100)),
-      width: (gameGoal.diff*2*(window.innerWidth/100))+"px",
-      height: (gameGoal.diff*2*(window.innerHeight/100))+"px",
-      "background-color": "#FFF"
-    }
-  });
-  $("body").append(goalElement);
-  goalElement.addClass("showg");
-  setTimeout(function() {
-    goalElement.removeClass("showg");
-    goalElement.remove();
-  },1000);
-}
-*/

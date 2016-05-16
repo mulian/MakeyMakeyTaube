@@ -9,7 +9,11 @@ class ViewClass {
     this.initTemplateFunctions();
     this.initOtherFunctions();
   }
-  initTemplateFunctions() {
+  initOtherFunctions() {
+    if(this.addEvents!=undefined) eventManager.addAll( this.addEvents() ); //return obj
+    if(this.addKeys!=undefined) keymapManager.bindAll(this.templateName, this.addKeys() ); //return obj
+  }
+  initTemplateFunctions() { //no need because of this value
     if(this.rendered!=undefined) Template[this.templateName].rendered = this.rendered;
     if(this.onCreated!=undefined) Template[this.templateName].onCreated( this.onCreated );
     if(this.helpers!=undefined) Template[this.templateName].helpers( this.helpers() ); //return obj
@@ -20,13 +24,4 @@ class ViewClass {
         keymapManager.currentTamplate = 'game';
       });
   }
-  initOtherFunctions() {
-    if(this.addEvents!=undefined) eventManager.addAll( this.addEvents() ); //return obj
-    if(this.addKeys!=undefined) keymapManager.bindAll(this.templateName, this.addKeys() ); //return obj
-  }
 }
-
-/*
-Template.game.rendered
-Template.game.onCreated (func)
-*/

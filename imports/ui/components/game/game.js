@@ -1,6 +1,6 @@
 import './game.html'
 // import GameController from '../../../api/game-controller.js';
-import {crosshair} from '../../../api/crosshair.js';
+import {crosshair} from './crosshair.js';
 
 import package from '../../../../package.json';
 
@@ -9,35 +9,7 @@ import Games from "../../../../games.json";
 import notie from 'notie';
 import 'notie/dist/notie.css';
 
-// import {keymapManager} from '../../../api/keymap-manager.js';
-// import {eventManager} from '../../../api/event-manager.js'
-
 import ViewClass from '../../../api/view-class.js'
-
-/*
-console.log("start game");
-
-keymapManager.bindAll('game',[
-  {key:'W', call:'crosshair:up', multiKey:true},
-  {key:'S', call:'crosshair:down', multiKey:true},
-  {key:'A', call:'crosshair:left', multiKey:true},
-  {key:'D', call:'crosshair:right', multiKey:true},
-  {key:' ', call:'game:check'}
-]);
-
-eventManager.addAll([
-  {name:'game:check',
-    call: ()=> {
-      if (crosshair.isGoal()) {
-        GameController.goalReached();
-      } else {
-        GameController.goalNotReached();
-        crosshair.showGoal();
-      }
-    }
-  }
-]);
-*/
 
 class Game extends ViewClass {
   constructor() {
@@ -46,6 +18,7 @@ class Game extends ViewClass {
   init() {
     this.img = "background_img";
     this.setPicSize();
+    crosshair.init();
   }
   getGameById(id) {
     for (var i = 0; i < Games.length; i++) {
