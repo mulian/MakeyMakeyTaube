@@ -7,7 +7,8 @@ import notie from 'notie';
 import 'notie/dist/notie.css';
 
 import package from '../../../../package.json';
-import Games from "../../../../games.json";
+// import Games from "../../../../games.json";
+import {getGames} from "../../../api/games.js";
 
 class Game extends ViewClass {
   constructor() {
@@ -19,6 +20,7 @@ class Game extends ViewClass {
     crosshair.init();
   }
   getGameById(id) {
+    var Games = getGames();
     for (var i = 0; i < Games.length; i++) {
       if (Games[i].id == id) {
         return Games[i];

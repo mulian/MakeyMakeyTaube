@@ -1,7 +1,7 @@
 import './menu.html'
 import '../../stylesheets/menu.less'
 
-import Games from "../../../../games.json";
+import {getGames} from "../../../api/games.js";
 import ViewClass from '../../../api/view-class.js'
 
 class Menu extends ViewClass {
@@ -74,7 +74,7 @@ Template.menu.onCreated(function() {
 Template.menu.helpers({
   games: function() {
     //Call from View, get all Games
-    return Games;
+    return getGames();
   }
 });
 Template.menu.rendered = function() {

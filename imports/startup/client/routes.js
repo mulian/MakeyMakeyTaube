@@ -8,6 +8,10 @@ eventManager.addAll([
 ]);
 */
 
+Router.route('loading',function() {
+  this.render('loading');
+});
+
 Router.route('/', function() {
   // on Route / goto Template 'menu'
   this.render('menu');

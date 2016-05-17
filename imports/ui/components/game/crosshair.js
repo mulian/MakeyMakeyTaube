@@ -27,7 +27,7 @@ class Crosshair extends ViewClass {
   }
   _setAttr() {
     this.NONE= 0; this.LEFT= 11; this.RIGHT= 12; this.UP= 21; this.DOWN= 22; this.FIRE= 30;
-    this.value= 20;
+    this.value= 1;
   }
   init(id,gameGoalId) {
     this.id = id;
@@ -38,10 +38,11 @@ class Crosshair extends ViewClass {
     // console.log("move?",direction);
     if (direction == undefined)
       direction = this.NONE;
-    if (direction == 0) {
-      this.element.css('left', this.x);
-      this.element.css('top', this.y);
-    } else if (direction < 20) { //left/right
+    // if (direction == 0) {
+      // this.element.css('left', this.x);
+      // this.element.css('top', this.y);
+    // } else
+    if (direction < 20) { //left/right
       if (direction == this.LEFT)
         this.x -= this.value;
       if (direction == this.RIGHT)
@@ -50,9 +51,10 @@ class Crosshair extends ViewClass {
         this.x = 0;
       } else if ((this.x + this.value) > window.innerWidth) {
         this.x -= this.value;
-      } else {
-        this.element.css('left', this.x);
       }
+      // else {
+        // this.element.css('left', this.x);
+      // }
     } else if (direction >= 20) { //UP/DOWN
       if (direction == this.UP)
         this.y -= this.value;
@@ -62,9 +64,10 @@ class Crosshair extends ViewClass {
         this.y = 0;
       } else if ((this.y + this.value) > window.innerHeight) {
         this.y -= this.value;
-      } else {
-        this.element.css('top', this.y);
       }
+      // else {
+        // this.element.css('top', this.y);
+      // }
     }
   }
 
@@ -79,10 +82,12 @@ class Crosshair extends ViewClass {
         }
       }
     }
-    var cX = this.x / (window.innerWidth / 100); //calc crosshair x in %
-    var cY = this.y / (window.innerHeight / 100); //calc crosshair y in %
-    if ((Math.abs(gameGoal.x - cX) < gameGoal.diff) && (Math.abs(gameGoal.y - cY) < gameGoal.diff)) {
-      // console.log("GOAL!");
+    var cX = this.x+((this.element.width()/window.innerWidth)*50); //calc crosshair x in %
+    var cY = this.y+((this.element.height()/window.innerHeight)*50); //calc crosshair y in %
+    if (
+      (cX>=(gameGoal.x-gameGoal.diff) && (cX<=(gameGoal.x+gameGoal.diff))) &&
+      (cY>=(gameGoal.y-gameGoal.diff) && (cY<=(gameGoal.y+gameGoal.diff)))
+    ) {
       return true;
     } else {
       return false;
@@ -106,7 +111,7 @@ class Crosshair extends ViewClass {
   //SETTER & GETTER
   set obj(obj=def) {
     var {url,width,startpos,goal} = obj;
-    this.url = url;
+    // this.url = url;
     this.width = width;
     this.startpos = startpos;
     this.goal = goal;
@@ -140,24 +145,26 @@ class Crosshair extends ViewClass {
   }
   set currentPos(pos) {
     if(this.element!=undefined) {
-      this.x= pos.x; this.y= pos.y;
+      this.x= pos.x;
+      this.y= pos.y;
     }
   }
   set x(val) {
-    this.element.css('left', val);
+    this.element.css('left', val+'%');
     this._x=val;
   }
   set y(val) {
-    this.element.css('top', val);
+    // console.log(this.element.css());
+    this.element.css('top', val+'%');
     this._y=val;
   }
   set goal(goal={x: 91,y: 52,diff: 8}) {
     this._goal= goal;
     this.gameGoal.css({
-      left: (goal.x*(window.innerWidth/100))-(goal.diff*(window.innerWidth/100)),
-      top: (goal.y*(window.innerHeight/100))-(goal.diff*(window.innerHeight/100)),
-      width: (goal.diff*2*(window.innerWidth/100))+"px",
-      height: (goal.diff*2*(window.innerHeight/100))+"px"
+      left: (goal.x-goal.diff)+'%',
+      top: (goal.y-goal.diff)+'%',
+      width: (goal.diff*2)+"%",
+      height: (goal.diff*2)+"%"
     });
   }
   get gameGoal() {return this._gameGoal; }
