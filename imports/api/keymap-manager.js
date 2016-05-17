@@ -43,6 +43,7 @@ export default class KeymapManager {
     if(targetMap!=undefined) {
       var call = targetMap[key.toUpperCase()];
       if(call!=undefined) {
+        e.preventDefault();
         eventManager.dispatch(call);
       }
     }
@@ -54,6 +55,8 @@ export default class KeymapManager {
     var targetMap = this.multiKeyMap[this.currentTamplate];
     if(targetMap!=undefined) {
       if(targetMap[k]!=undefined && this.runninKeys[k]==undefined) {
+        e.preventDefault();
+        eventManager.dispatch(targetMap[k]);
         this.runninKeys[k] = setInterval(() => {
           eventManager.dispatch(targetMap[k]);
         },this.intervalTime);
@@ -63,6 +66,7 @@ export default class KeymapManager {
   up(e) {
     var k = String.fromCharCode(e.keyCode);
     if(this.runninKeys[k]!=undefined) {
+      e.preventDefault();
       clearInterval(this.runninKeys[k]);
       delete this.runninKeys[k];
     }
