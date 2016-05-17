@@ -3,14 +3,18 @@
 @gamegoal-opacity-time: 1s;
 
 @crosshair-xy-time: 0.4s;
+
+@bgimg-time-in: 0.8s;
 @bgimg-time-out: 0.5s;
-@bgimg-time-in: 0.5s;
+
+@above-notie-zindex:  1000000000;
 
 #game {
   #crosshair {
     position: absolute;
     left:0px;
     top:0px;
+    z-index: @above-notie-zindex+1;
 
     opacity: 0;
     transition: opacity 1s;
@@ -25,6 +29,8 @@
     opacity: 0;
     background-color: @gamegoal-color;
     border-radius: 50px;
+
+    z-index: @above-notie-zindex; //above notie
 
     transition: opacity @gamegoal-opacity-time;
     &.show {

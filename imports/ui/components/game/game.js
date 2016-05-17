@@ -34,10 +34,13 @@ class Game extends ViewClass {
   setPicSize() {
     var picSize = Session.get('picSize');
     if (picSize != null) {
-      this.img.css('width', picSize.width);
-      this.img.css('height', picSize.height);
-      this.img.css('left', picSize.left);
-      this.img.css('top', picSize.top);
+      this.img.css({
+        width: picSize.width,
+        height: picSize.height,
+        left: picSize.left,
+        top: picSize.top
+      })
+
       Session.set('picSize', null); //no need, becaus of menu onCreate reset?
       setTimeout(() => {
         this.img.addClass('transform');
