@@ -1,6 +1,7 @@
 const fs = require('fs');
-const watch = require('node-watch');
+// const watch = require('node-watch');
 
+//TODO: move to api
 //depreciadet! CHANGE THIS!
 var base = process.env.PWD;
 
@@ -15,10 +16,10 @@ class CollectGames {
   }
   watchIt() {
     console.log("WATCH!");
-    watch(gameRootPath,(item) => {
-      console.log("jo");
-      this.searchGameFolders();
-    });
+    // watch(gameRootPath,(item) => {
+    //   console.log("jo");
+    //   this.searchGameFolders();
+    // });
   }
   searchGameFolders() {
     this.games = []; //flush games
