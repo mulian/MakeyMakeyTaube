@@ -1,42 +1,48 @@
+@gamegoal-color: white;
+@gamegoal-opacity: 0.5;
+@gamegoal-opacity-time: 1s;
+
 @crosshair-xy-time: 0.4s;
 @bgimg-time-out: 0.5s;
 @bgimg-time-in: 0.5s;
 
-#crosshair {
-  position: absolute;
-  left:0px;
-  top:0px;
+#game {
+  #crosshair {
+    position: absolute;
+    left:0px;
+    top:0px;
 
-  opacity: 0;
-  transition: opacity 1s;
-  &.show {
-    opacity: 1;
-    transition: opacity 1s,left @crosshair-xy-time,top @crosshair-xy-time;
-  }
-}
-
-#gamegoal {
-  position: absolute;
-  opacity: 0;
-  transition: opacity 1s;
-  z-index: 200;
-  border-radius: 50px;
-
-  &.showg {
-    opacity: 0.5 !important;
+    opacity: 0;
     transition: opacity 1s;
+    &.show {
+      opacity: 1;
+      transition: opacity 1s,left @crosshair-xy-time,top @crosshair-xy-time;
+    }
   }
-}
 
-#background_img {
-  position: absolute;
-  transition: left @bgimg-time-out, top @bgimg-time-out, width @bgimg-time-out , height @bgimg-time-out ;
+  #gamegoal {
+    position: absolute;
+    opacity: 0;
+    background-color: @gamegoal-color;
+    border-radius: 50px;
 
-  &.transform {
-    left: 0px !important;
-    top: 0px !important;
-    width: 100% !important;
-    height: 100% !important;
-    transition: left @bgimg-time-in, top @bgimg-time-in, width @bgimg-time-in , height @bgimg-time-in ;
+    transition: opacity @gamegoal-opacity-time;
+    &.show {
+      opacity: @gamegoal-opacity !important;
+      transition: opacity @gamegoal-opacity-time;
+    }
+  }
+
+  #background_img {
+    position: absolute;
+    transition: left @bgimg-time-out, top @bgimg-time-out, width @bgimg-time-out , height @bgimg-time-out ;
+
+    &.transform {
+      left: 0px !important;
+      top: 0px !important;
+      width: 100% !important;
+      height: 100% !important;
+      transition: left @bgimg-time-in, top @bgimg-time-in, width @bgimg-time-in , height @bgimg-time-in ;
+    }
   }
 }

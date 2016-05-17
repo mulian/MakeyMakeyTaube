@@ -14,6 +14,7 @@ var def = {
       "diff": 8
   }
 }
+var gameGoalTime = 1; //show in secounds
 
 let ch =null;
 
@@ -28,8 +29,9 @@ class Crosshair extends ViewClass {
     this.NONE= 0; this.LEFT= 11; this.RIGHT= 12; this.UP= 21; this.DOWN= 22; this.FIRE= 30;
     this.value= 20;
   }
-  init(id) {
+  init(id,gameGoalId) {
     this.id = id;
+    this.gameGoal = gameGoalId;
   }
   //TODO: REMOVE css...
   _move(direction) {
@@ -94,24 +96,11 @@ class Crosshair extends ViewClass {
     });
   }
   showGoal() {
-    var gameGoal = this.goal;
-    var goalElement = $("<div/>", {
-      id: "gamegoal",
-      text: "",
-      css: {
-        left: (gameGoal.x*(window.innerWidth/100))-(gameGoal.diff*(window.innerWidth/100)),
-        top: (gameGoal.y*(window.innerHeight/100))-(gameGoal.diff*(window.innerHeight/100)),
-        width: (gameGoal.diff*2*(window.innerWidth/100))+"px",
-        height: (gameGoal.diff*2*(window.innerHeight/100))+"px",
-        "background-color": "#FFF"
-      }
-    });
-    $("body").append(goalElement);
-    goalElement.addClass("showg");
-    setTimeout(function() {
-      goalElement.removeClass("showg");
-      goalElement.remove();
-    },1000);
+    this.gameGoal.addClass("show");
+    if(this.goalTimeout!=undefined) clearTimeout(this.goalTimeout);
+    this.goalTimeout = setTimeout(() => {
+      this.gameGoal.removeClass("show");
+    },gameGoalTime*1000);
   }
 
   //SETTER & GETTER
@@ -133,6 +122,10 @@ class Crosshair extends ViewClass {
     });
     this._id = id;
   }
+  set gameGoal(id='gamegoal') {
+    this._gameGoal = $(`#${id}`);
+    this._gameGoalId = id;
+  }
   set url(url = 'crosshair.png') {
     if(this.element!=undefined) this.element.attr("src", `/${url}`);
     this._url= url;
@@ -147,9 +140,7 @@ class Crosshair extends ViewClass {
   }
   set currentPos(pos) {
     if(this.element!=undefined) {
-      // console.log("setpos!",this.element);
-      this.x= pos.x;
-      this.y= pos.y;
+      this.x= pos.x; this.y= pos.y;
     }
   }
   set x(val) {
@@ -160,9 +151,18 @@ class Crosshair extends ViewClass {
     this.element.css('top', val);
     this._y=val;
   }
-  set goal(goal={x: 91,y: 52,diff: 8}) { this._goal= goal; }
-  get x() { return this._x}
-  get y() { return this._y}
+  set goal(goal={x: 91,y: 52,diff: 8}) {
+    this._goal= goal;
+    this.gameGoal.css({
+      left: (goal.x*(window.innerWidth/100))-(goal.diff*(window.innerWidth/100)),
+      top: (goal.y*(window.innerHeight/100))-(goal.diff*(window.innerHeight/100)),
+      width: (goal.diff*2*(window.innerWidth/100))+"px",
+      height: (goal.diff*2*(window.innerHeight/100))+"px"
+    });
+  }
+  get gameGoal() {return this._gameGoal; }
+  get x() { return this._x; }
+  get y() { return this._y; }
   get id() { return this._id; }
   get obj() { return this._obj; }
   get url() { return this._url; }

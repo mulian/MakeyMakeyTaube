@@ -1,6 +1,9 @@
 <template name="game">
-  {{#with game}}
-  <img id='background_img' src='/{{img}}'>
-  {{/with}}
-  <img id='crosshair' src='/../../crosshair.png'>
+  <div id='game'>
+    {{#with game}}
+      <img id='background_img' src='/{{img}}'>
+    {{/with}}
+    <div id='gamegoal'></div>
+    <img id='crosshair' src='/../../crosshair.png'>
+  </div>
 </template>
