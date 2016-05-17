@@ -12,7 +12,7 @@ var map = package.keymap;
 // Should the CrosshairController part of GameController and not of main?
 
 //Template Controller
-import MenuController from '../../api/menu-controller.js';
+// import MenuController from '../../api/menu-controller.js';
 
 import '../../ui/stylesheets/main.css'
 
