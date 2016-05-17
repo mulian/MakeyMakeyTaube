@@ -1,15 +1,12 @@
 import './game.html'
-// import GameController from '../../../api/game-controller.js';
 import {crosshair} from './crosshair.js';
-
-import package from '../../../../package.json';
-
-import Games from "../../../../games.json";
+import ViewClass from '../../../api/view-class.js'
 //Notie
 import notie from 'notie';
 import 'notie/dist/notie.css';
 
-import ViewClass from '../../../api/view-class.js'
+import package from '../../../../package.json';
+import Games from "../../../../games.json";
 
 class Game extends ViewClass {
   constructor() {
@@ -74,19 +71,16 @@ class Game extends ViewClass {
   // ViewClass functions
   addEvents() {
     return [
-      {
-        name:'game:check',
-        call: ()=> this.check()
-      }
+      { name:'game:check', call: ()=> this.check() }
     ]
   }
   addKeys() {
     return [
-      {key:'W', call:'crosshair:up', multiKey:true},
-      {key:'S', call:'crosshair:down', multiKey:true},
-      {key:'A', call:'crosshair:left', multiKey:true},
-      {key:'D', call:'crosshair:right', multiKey:true},
-      {key:' ', call:'game:check'}
+      { key:'W', call:'crosshair:up', multiKey:true},
+      { key:'S', call:'crosshair:down', multiKey:true},
+      { key:'A', call:'crosshair:left', multiKey:true},
+      { key:'D', call:'crosshair:right', multiKey:true},
+      { key:' ', call:'game:check'}
     ]
   }
 }

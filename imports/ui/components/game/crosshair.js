@@ -20,7 +20,7 @@ let ch =null;
 export default
 class Crosshair extends ViewClass {
   constructor(id) {
-    super('game');
+    super('game',false);
     this.init(id);
     this._setAttr();
   }

@@ -1,25 +1,12 @@
 import './menu.html'
 
-// import {menu} from '../../../api/menu-controller.js';
 import Games from "../../../../games.json";
-
-import {eventManager} from '../../../api/event-manager.js'
-import {keymapManager} from '../../../api/keymap-manager.js';
-
 import ViewClass from '../../../api/view-class.js'
 
 class Menu extends ViewClass {
   constructor(id) {
     super('menu');
     this.id = id;
-    // this.initEvents();
-  }
-  initEvents() {
-    eventManager.addAll([
-      {name:'menu:left', call: ()=> this.prev()},
-      {name:'menu:right', call: ()=> this.next()},
-      {name:'menu:enter', call: ()=> this.enter()}
-    ]);
   }
   prev() {
     this.aktivate(this.selectedElement.prev());
@@ -61,38 +48,27 @@ class Menu extends ViewClass {
     this._id=val;
   }
 
+  // ViewClass functions
   addEvents() {
     return [
-      {name:'menu:left', call: ()=> this.prev()},
-      {name:'menu:right', call: ()=> this.next()},
-      {name:'menu:enter', call: ()=> this.enter()}
+      { name:'menu:left', call: ()=> this.prev() },
+      { name:'menu:right', call: ()=> this.next() },
+      { name:'menu:enter', call: ()=> this.enter() }
     ];
   }
   addKeys() {
     return [
-      {key:'A', call: 'menu:left'},
-      {key:'D', call: 'menu:right'},
-      {key:' ', call: 'menu:enter'}
+      { key:'A', call: 'menu:left' },
+      { key:'D', call: 'menu:right' },
+      { key:' ', call: 'menu:enter' }
     ];
   }
 }
-
 var menu = new Menu();
-
-
-
-/*
-keymapManager.bindAll('menu',[
-  {key:'A', call: 'menu:left'},
-  {key:'D', call: 'menu:right'},
-  {key:' ', call: 'menu:enter'}
-]);
-*/
 
 Template.menu.onCreated(function() {
   //reset picSize on every recreate
   Session.set('picSize', null);
-  keymapManager.currentTamplate = 'menu';
 });
 Template.menu.helpers({
   games: function() {
@@ -103,25 +79,10 @@ Template.menu.helpers({
 Template.menu.rendered = function() {
 
   menu.id = 'menu_lu'; //to instanceiate Dom Vars only once
-  //bind key's to Functions
-  /*
-  GlobalKeyBinder.bind([
-    {
-      key: keyMap[map].LEFT,
-      call: MenuController.prev(),
-    }, {
-      key: keyMap[map].RIGHT,
-      call: MenuController.next(),
-    }, {
-      key: keyMap[map].FIRE,
-      call: MenuController._enter(),
-    },
-  ]);
-  */
 }
 Template.menu.events({
   'click li': function(event, instance) {
     // On click, call enter
-    MenuController.enter();
+    menu.enter();
   }
 });

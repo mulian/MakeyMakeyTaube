@@ -6,7 +6,6 @@ export default class EventManager {
   add(name,call) {
     this.eventMap[name] = call;
     window.addEventListener(name,call);
-    this.printfEventList();
   }
   addAll(array) {
     for(item of array) {
@@ -19,10 +18,8 @@ export default class EventManager {
   }
   dispatch(name,obj) {
     var event = new CustomEvent(name, {detail:obj});
+    // console.log('dispatch: '+name);
     window.dispatchEvent(event);
-  }
-  printfEventList() {
-    // console.log(this.eventMap);
   }
   static create() {
     if(EM==null) EM = new this();

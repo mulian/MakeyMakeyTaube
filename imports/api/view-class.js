@@ -7,6 +7,7 @@ export default
 class ViewClass {
   constructor(templateName,keyTemplate=true) {
     this.templateName = templateName;
+    // console.log(this.templateName);
     this.keyTemplate = keyTemplate;
     this.initTemplateFunctions();
     this.initOtherFunctions();
@@ -22,8 +23,8 @@ class ViewClass {
     if(this.events!=undefined) Template[this.templateName].events( this.events() ); //return obj
 
     if(this.keyTemplate)
-      Template[this.templateName].onCreated (function() {
-        keymapManager.currentTamplate = 'game';
+      Template[this.templateName].onCreated (() => {
+        keymapManager.currentTamplate = this.templateName;
       });
   }
 }

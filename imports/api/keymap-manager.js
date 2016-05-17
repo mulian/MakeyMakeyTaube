@@ -13,7 +13,6 @@ export default class KeymapManager {
   }
   regEvents() {
     document.body.addEventListener('keydown', (e) => {
-      // console.log(String.fromCharCode(e.keyCode));
       this.down(e);
     });
     document.body.addEventListener('keyup', (e) => {
@@ -40,14 +39,10 @@ export default class KeymapManager {
   //normal Key press
   press(e) {
     var key = String.fromCharCode(e.keyCode);
-    // console.log('key: <'+key+'>');
     var targetMap = this.keyMap[this.currentTamplate];
-    // console.log(targetMap);
-    // console.log(key);
     if(targetMap!=undefined) {
       var call = targetMap[key.toUpperCase()];
       if(call!=undefined) {
-        console.log("dispatch: "+call);
         eventManager.dispatch(call);
       }
     }
