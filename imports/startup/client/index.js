@@ -4,7 +4,7 @@ import {ReactiveVar} from 'meteor/reactive-var';
 import './routes.js'
 
 // import GlobalKeyBinder from '../../api/keys/global-key-binder.js'
-import keyMap from '../../api/keys/key-map.js'
+// import keyMap from '../../api/keys/key-map.js'
 import package from '../../../package.json'
 import Games from "../../../games.json";
 var map = package.keymap;

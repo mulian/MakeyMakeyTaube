@@ -3,7 +3,6 @@ import './menu.html'
 import {menu} from '../../../api/menu-controller.js';
 import Games from "../../../../games.json";
 
-import keyMap from '../../../api/keys/key-map.js'
 //TODO: ingame!
 import package from '../../../../package.json'
 var map = package.keymap;
