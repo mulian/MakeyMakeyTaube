@@ -1,0 +1,39 @@
+#crosshair {
+  position: absolute;
+  left:0px;
+  top:0px;
+  /*width: 100px;*/
+  opacity: 0;
+  transition: left 0.3s,top 0.3s,opacity 1s;
+  z-index: 999;
+}
+#gamegoal {
+  position: absolute;
+  opacity: 0;
+  transition: opacity 1s;
+  z-index: 200;
+  border-radius: 50px;
+}
+
+.showg {
+  opacity: 0.5 !important;
+  transition: opacity 1s;
+}
+.show {
+  opacity: 1 !important;
+  transition: opacity 1s;
+}
+
+#background_img {
+  position: absolute;
+  transition: left 0.5s, top 0.5s, width 0.5s , height 0.5s ;
+  z-index: 0;
+}
+
+.transform {
+  left: 0px !important;
+  top: 0px !important;
+  width: 100% !important;
+  height: 100% !important;
+  transition: left 0.5s, top 0.5s, width 0.5s , height 0.5s ;
+}

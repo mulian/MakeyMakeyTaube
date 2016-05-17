@@ -1,4 +1,5 @@
 import './menu.html'
+import '../../stylesheets/menu.less'
 
 import Games from "../../../../games.json";
 import ViewClass from '../../../api/view-class.js'

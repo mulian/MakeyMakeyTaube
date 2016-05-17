@@ -3,7 +3,7 @@
 
 import './routes.js'
 
-import '../../ui/stylesheets/main.css'
+import '../../ui/stylesheets/main.less'
 
 import Game from '../../ui/components/game/game.js'
 import Menu from '../../ui/components/menu/menu.js'

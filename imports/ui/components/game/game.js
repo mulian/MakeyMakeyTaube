@@ -1,4 +1,5 @@
 import './game.html'
+import '../../stylesheets/game.less'
 import {crosshair} from './crosshair.js';
 import ViewClass from '../../../api/view-class.js'
 //Notie
