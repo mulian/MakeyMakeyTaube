@@ -13,6 +13,9 @@ import {getGames} from "../../../api/games.js";
 class Game extends ViewClass {
   constructor() {
     super('game');
+    getGames((Games) => {
+      this.games = Games;
+    });
   }
   init() {
     this.img = "background_img";
@@ -20,7 +23,7 @@ class Game extends ViewClass {
     crosshair.init();
   }
   getGameById(id) {
-    var Games = getGames();
+    var Games = this.games;
     for (var i = 0; i < Games.length; i++) {
       if (Games[i].id == id) {
         return Games[i];

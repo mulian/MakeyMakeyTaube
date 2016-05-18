@@ -4,6 +4,11 @@ import '../../stylesheets/menu.less'
 import {getGames} from "../../../api/games.js";
 import ViewClass from '../../../api/view-class.js'
 
+var Games = null;
+getGames(function(games) {
+  Games = games;
+});
+
 class Menu extends ViewClass {
   constructor(id) {
     super('menu');
@@ -74,7 +79,7 @@ Template.menu.onCreated(function() {
 Template.menu.helpers({
   games: function() {
     //Call from View, get all Games
-    return getGames();
+    return Games;
   }
 });
 Template.menu.rendered = function() {

@@ -1,20 +1,20 @@
-
-//TODO: remove history loading call?!
-
-// console.log("route gerade:");
-var originalPath = window.location.pathname;
 var games = null;
-Router.go('loading');
-Meteor.call('getGames',function(err,result) {
+var calls = [];
 
+Meteor.call('getGames',function(err,result) {
   games = result;
-  // console.log(games);
-  Router.go(originalPath);
-  // window.location.replace(originalPath);
+  var call=undefined;
+  while(( call=calls.pop())!=undefined) {
+    call(games);
+  }
 });
 
-var getGames = function() {
-  return games;
+var getGames = function(callback) {
+  if(games!=null) {
+    callback(games);
+  } else {
+    calls.push(callback);
+  }
 }
 
 export {getGames};
