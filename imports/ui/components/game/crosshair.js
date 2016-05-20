@@ -1,5 +1,6 @@
-// import {eventManager} from '../../../api/event-manager.js'
-import ViewClass from '../../../api/view-class.js'
+import ViewClass from '../../../api/client/view-class.js'
+
+// # Set Default Values
 
 var def = {
   "url": "baseball_crosshair.png",
@@ -14,34 +15,35 @@ var def = {
       "diff": 8
   }
 }
-var gameGoalTime = 1; //show in secounds
-
+var gameGoalTime = 1; //show Goal in secounds
 let ch =null;
 
-export default
+// # Crosshair Class
+export default //to get this Class default on import
 class Crosshair extends ViewClass {
+  // called on new Crosshair(id)
   constructor(id) {
     super('game',false);
     this.init(id);
     this._setAttr();
   }
+  // Private
+  // Init class Attributes
   _setAttr() {
     this.NONE= 0; this.LEFT= 11; this.RIGHT= 12; this.UP= 21; this.DOWN= 22; this.FIRE= 30;
     this.value= 1;
   }
+  // call after DOM is ready
   init(id,gameGoalId) {
     this.id = id;
     this.gameGoal = gameGoalId;
   }
-  //TODO: REMOVE css...
+  // call move direction
+  // the set x function (below) set the css left/top position
   _move(direction) {
     // console.log("move?",direction);
     if (direction == undefined)
       direction = this.NONE;
-    // if (direction == 0) {
-      // this.element.css('left', this.x);
-      // this.element.css('top', this.y);
-    // } else
     if (direction < 20) { //left/right
       if (direction == this.LEFT)
         this.x -= this.value;
@@ -52,9 +54,6 @@ class Crosshair extends ViewClass {
       } else if ((this.x + this.value) > window.innerWidth) {
         this.x -= this.value;
       }
-      // else {
-        // this.element.css('left', this.x);
-      // }
     } else if (direction >= 20) { //UP/DOWN
       if (direction == this.UP)
         this.y -= this.value;
@@ -65,12 +64,9 @@ class Crosshair extends ViewClass {
       } else if ((this.y + this.value) > window.innerHeight) {
         this.y -= this.value;
       }
-      // else {
-        // this.element.css('top', this.y);
-      // }
     }
   }
-
+  // check if crosshair is in goal
   isGoal(gameGoal= this.goal) {
     if(gameGoal==undefined) {
       if(this.crosshairInfo!=undefined) gameGoal = this.crosshairInfo.goal;
@@ -93,13 +89,7 @@ class Crosshair extends ViewClass {
       return false;
     }
   }
-  debugCrosshairClick() {
-    $("body").click(function(e) {
-      console.log(e);
-      console.log("x: " + e.clientX / (window.innerWidth / 100) + "%");
-      console.log("y: " + e.clientY / (window.innerHeight / 100) + "%");
-    });
-  }
+  // Show goal
   showGoal() {
     this.gameGoal.addClass("show");
     if(this.goalTimeout!=undefined) clearTimeout(this.goalTimeout);
@@ -107,11 +97,18 @@ class Crosshair extends ViewClass {
       this.gameGoal.removeClass("show");
     },gameGoalTime*1000);
   }
+  // on package.debuge it will show you the current x/y pos of pics
+  debugCrosshairClick() {
+    $("body").click(function(e) {
+      console.log(e);
+      console.log("x: " + e.clientX / (window.innerWidth / 100) + "%");
+      console.log("y: " + e.clientY / (window.innerHeight / 100) + "%");
+    });
+  }
 
-  //SETTER & GETTER
+  // ## SETTER & GETTER
   set obj(obj=def) {
     var {url,width,startpos,goal} = obj;
-    // this.url = url;
     this.width = width;
     this.startpos = startpos;
     this.goal = goal;
@@ -120,7 +117,6 @@ class Crosshair extends ViewClass {
   set id(id='crosshair') {
     $(document).ready(() => {
       this.element = $(`#${id}`);
-      // console.log(this.element);
       setTimeout(() => {
         this.element.addClass('show')
       }, 1);
@@ -154,7 +150,6 @@ class Crosshair extends ViewClass {
     this._x=val;
   }
   set y(val) {
-    // console.log(this.element.css());
     this.element.css('top', val+'%');
     this._y=val;
   }
@@ -167,6 +162,7 @@ class Crosshair extends ViewClass {
       height: (goal.diff*2)+"%"
     });
   }
+
   get gameGoal() {return this._gameGoal; }
   get x() { return this._x; }
   get y() { return this._y; }
@@ -176,12 +172,14 @@ class Crosshair extends ViewClass {
   get width() { return this._width; }
   get pos() { return this._pos; }
   get goal() { return this._goal; }
+
+  // return only one (maby already created) instance of this Class
   static create() {
     if(ch==null) ch = new this();
     return ch;
   }
 
-  //Viewclass methodes
+  // ## ViewClass functions (more info in ViewClass)
   addEvents() {
     return [
       {name:'crosshair:left',call: ()=> this._move(this.LEFT)},

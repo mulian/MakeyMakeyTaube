@@ -1,7 +1,9 @@
 const fs = require('fs');
-// const watch = require('node-watch');
 
-//TODO: move to api
+/*
+  This File will collect the games, from public Folder
+*/
+
 //depreciadet! CHANGE THIS!
 var base = process.env.PWD;
 

@@ -1,1 +1,2 @@
-import '/imports/startup/client';
+// Main Client class
+import '/imports/startup/client/index.js';

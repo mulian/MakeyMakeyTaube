@@ -1,15 +1,18 @@
 import './game.html'
 import '../../stylesheets/game.less'
 import {crosshair} from './crosshair.js';
-import ViewClass from '../../../api/view-class.js'
+import ViewClass from '../../../api/client/view-class.js'
+
+import package from '../../../../package.json';
+
+//to get Server Informations
+import {getGames} from "../../../api/client/games.js";
+
 //Notie
 import notie from 'notie';
 import 'notie/dist/notie.css';
 
-import package from '../../../../package.json';
-// import Games from "../../../../games.json";
-import {getGames} from "../../../api/games.js";
-
+// # Game Class
 class Game extends ViewClass {
   constructor() {
     super('game');
@@ -17,6 +20,7 @@ class Game extends ViewClass {
       this.games = Games;
     });
   }
+  // after DOM is ready
   init() {
     this.img = "background_img";
     this.setPicSize();
@@ -30,12 +34,14 @@ class Game extends ViewClass {
       }
     }
   }
+  //Go to Menu, with animation
   gotoMenu() {
     this.img.removeClass('transform');
     setTimeout(function() {
       Router.go('/');
     }, 500);
   }
+  //Animation on from Menu to Game (if set)
   setPicSize() {
     var picSize = Session.get('picSize');
     if (picSize != null) {
@@ -54,13 +60,16 @@ class Game extends ViewClass {
       this.img.addClass('transform');
     }
   }
+  //Called if goal is reached
   goalReached() {
     this.gotoMenu();
     notie.alert(1, "Gewonnen!", 2)
   }
+  //Called if goal is not reached
   goalNotReached() {
     notie.alert(3, "Falsch!", 1)
   }
+  // Check if goal is reached
   check() {
     if (crosshair.isGoal()) {
       this.goalReached();
@@ -70,14 +79,15 @@ class Game extends ViewClass {
     }
   }
 
-  //GETTER & SETTER
+  // ## GETTER & SETTER
+  //will called everytime on this.img = 'xxx'
   set img(val= 'background_img') {
     this._img = $(`#${val}`);
   }
-
+  //will called everytime on return this.img
   get img() { return this._img; }
 
-  // ViewClass functions
+  // ## ViewClass functions (more info in ViewClass)
   addEvents() {
     return [
       { name:'game:check', call: ()=> this.check() }
@@ -93,7 +103,10 @@ class Game extends ViewClass {
     ]
   }
 }
+// ## instanceiate a game for Meteor Template
 var game = new Game();
+
+// # Default Meteor Template functions
 
 Template.game.rendered = function() {
   // GlobalKeyBinder = Session.get('GlobalKeyBinder');
