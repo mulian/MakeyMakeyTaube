@@ -117,7 +117,7 @@ Template.game.rendered = function() {
   // Define Dom Vars for Controller
   crosshair.init();
   game.init();
-  game.$('#clock').countdown('2016/05/24 19:15:00')
+  $('#clock').countdown('2016/05/24 19:15:00')
       .on('update.countdown', function(event) {
         var format = '%H:%M:%S';
         if (event.offset.days > 0) {
