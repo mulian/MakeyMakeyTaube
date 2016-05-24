@@ -159,7 +159,9 @@
         <item url="file://$USER_HOME$/.meteor/packages/modules/0.6.1/web.browser/stubs.js" />
         <item url="file://$USER_HOME$/.meteor/packages/iron_router/1.0.12/web.browser/lib/plugins.js" />
         <item url="file://$USER_HOME$/.meteor/packages/iron_router/1.0.12/web.browser/lib/helpers.js" />
+        <item url="file://$USER_HOME$/.meteor/packages/momentjs_moment/2.13.1/web.browser/moment.js" />
         <item url="file://$USER_HOME$/.meteor/packages/iron_router/1.0.12/web.browser/lib/http_methods.js" />
+        <item url="file://$USER_HOME$/.meteor/packages/momentjs_moment/2.13.1/web.browser/meteor/export.js" />
         <item url="file://$USER_HOME$/.meteor/packages/allow-deny/1.0.4/web.browser/allow-deny.js" />
         <item url="file://$USER_HOME$/.meteor/packages/iron_router/1.0.12/web.browser/lib/current_options.js" />
         <item url="file://$USER_HOME$/.meteor/packages/iron_router/1.0.12/web.browser/lib/route_controller_client.js" />
@@ -329,7 +331,9 @@
       <root url="file://$USER_HOME$/.meteor/packages/modules/0.6.1/web.browser/stubs.js" />
       <root url="file://$USER_HOME$/.meteor/packages/iron_router/1.0.12/web.browser/lib/plugins.js" />
       <root url="file://$USER_HOME$/.meteor/packages/iron_router/1.0.12/web.browser/lib/helpers.js" />
+      <root url="file://$USER_HOME$/.meteor/packages/momentjs_moment/2.13.1/web.browser/moment.js" />
       <root url="file://$USER_HOME$/.meteor/packages/iron_router/1.0.12/web.browser/lib/http_methods.js" />
+      <root url="file://$USER_HOME$/.meteor/packages/momentjs_moment/2.13.1/web.browser/meteor/export.js" />
       <root url="file://$USER_HOME$/.meteor/packages/allow-deny/1.0.4/web.browser/allow-deny.js" />
       <root url="file://$USER_HOME$/.meteor/packages/iron_router/1.0.12/web.browser/lib/current_options.js" />
       <root url="file://$USER_HOME$/.meteor/packages/iron_router/1.0.12/web.browser/lib/route_controller_client.js" />

@@ -23,3 +23,4 @@ random
 iron:router
 session
 less
+momentjs:moment

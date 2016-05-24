@@ -12,6 +12,9 @@ import {getGames} from "../../../api/client/games.js";
 import notie from 'notie';
 import 'notie/dist/notie.css';
 
+//Countdown
+import 'jquery-countdown/dist/jquery.countdown.min.js';
+
 // # Game Class
 class Game extends ViewClass {
   constructor() {
@@ -19,6 +22,7 @@ class Game extends ViewClass {
     getGames((Games) => {
       this.games = Games;
     });
+    var moment = new ReactiveVar();
   }
   // after DOM is ready
   init() {
@@ -62,9 +66,11 @@ class Game extends ViewClass {
   }
   //Called if goal is reached
   goalReached() {
+    // TODO: get last inserted player, count index +1 up
+    var time = moment().subtract(Session.get('current_stamp'));
     Players.insert({
-      name: "Test",
-      time: 1
+      name: "Team1",
+      time: time,
     });
     this.gotoMenu();
     notie.alert(1, "Gewonnen!", 2)
@@ -117,6 +123,10 @@ Template.game.rendered = function() {
   // Define Dom Vars for Controller
   crosshair.init();
   game.init();
+  var current_stamp = moment(new Date(), "X");
+  console.log(current_stamp);
+  Session.set('current_stamp', current_stamp);
+  /*
   $('#clock').countdown('2016/05/24 19:15:00')
       .on('update.countdown', function(event) {
         var format = '%H:%M:%S';
@@ -132,6 +142,7 @@ Template.game.rendered = function() {
         $(this).html('Zeit überschritten! Spiel wird neu gestartet!');
         location.reload();
       });
+  */
 
   //Define currentGame from instance
   var currentGame = game.getGameById(Template.instance().data.currentGame);
