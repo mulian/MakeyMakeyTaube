@@ -1,6 +1,10 @@
 <template name="game">
   <div id='game'>
     {{#with game}}
+      <div class="countdown">
+          Ihr habt eine Minute Zeit
+          <span id="clock"></span>
+      </div>
       <img id='background_img' src='/{{path}}/{{img}}'>
       <div id='gamegoal'></div>
       <img id='crosshair' src='/{{path}}/{{crosshair.url}}'>

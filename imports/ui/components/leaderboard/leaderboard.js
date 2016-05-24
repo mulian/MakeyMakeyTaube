@@ -1,15 +1,16 @@
 import './leaderboard.html'
 import '../../stylesheets/leaderboard.less'
 
-import {getBoards} from "../../../api/client/leaderboard.js";
-import ViewClass from '../../../api/client/view-class.js'
-
+//import {getBoards} from "../../../api/client/leaderboard.js";
+//import ViewClass from '../../../api/client/view-class.js'
+/*
 var Boards = null;
 getBoards(function(boards) {
     Boards = boards;
-});
+});*/
 
 // # Menu Class
+/*
 class Leaderboard extends ViewClass {
     constructor(id) {
         super('leaderboard');
@@ -77,7 +78,7 @@ class Leaderboard extends ViewClass {
         ];
     }
     */
-}
+//}
 
 /*
 //instanceiate a game for Meteor Template
@@ -105,5 +106,10 @@ Template.menu.events({
         menu.enter();
     }
 });
-
 */
+Template.leaderboard.helpers({
+    'player': function(){
+        return Players.find();
+    }
+});
+

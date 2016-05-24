@@ -3,8 +3,10 @@
         Rangliste
     </div>
     <div id="leaderboard_div">
-        <ul id="leaderboard_table">
-
+        <ul>
+        {{#each player}}
+            <li>{{name}}: {{time}}</li>
+        {{/each}}
         </ul>
     </div>
 </template>

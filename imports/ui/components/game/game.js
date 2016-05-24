@@ -62,6 +62,10 @@ class Game extends ViewClass {
   }
   //Called if goal is reached
   goalReached() {
+    Players.insert({
+      name: "Test",
+      time: 1
+    });
     this.gotoMenu();
     notie.alert(1, "Gewonnen!", 2)
   }
@@ -113,6 +117,22 @@ Template.game.rendered = function() {
   // Define Dom Vars for Controller
   crosshair.init();
   game.init();
+  game.$('#clock').countdown('2016/05/24 19:15:00')
+      .on('update.countdown', function(event) {
+        var format = '%H:%M:%S';
+        if (event.offset.days > 0) {
+          format = '%-d day%!d ' + format;
+        }
+        if (event.offset.weeks > 0) {
+          format = '%-w week%!w ' + format;
+        }
+        $(this).html(event.strftime(format));
+      })
+      .on('finish.countdown', function(event) {
+        $(this).html('Zeit überschritten! Spiel wird neu gestartet!');
+        location.reload();
+      });
+
   //Define currentGame from instance
   var currentGame = game.getGameById(Template.instance().data.currentGame);
   crosshair.obj = currentGame.crosshair;
