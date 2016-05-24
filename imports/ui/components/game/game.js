@@ -22,7 +22,6 @@ class Game extends ViewClass {
     getGames((Games) => {
       this.games = Games;
     });
-    var moment = new ReactiveVar();
   }
   // after DOM is ready
   init() {
