@@ -6,10 +6,10 @@ import {getGames} from '../../api/client/games.js'
 Router.route('/', function() {
   // on Route / goto Template 'menu'
   getGames((games) => {
-    this.render('menu');
+    this.render('main');
   });
 }, {
-  name: 'menu' //currently no need?
+  name: 'main' //currently no need?
 });
 // ## Route from /games/xxx
 Router.route('/game/:_gameID', function() {
