@@ -1,5 +1,7 @@
 import './menu.html'
 import '../../stylesheets/menu.less'
+import '../../stylesheets/leaderboard.less'
+
 
 import {getGames} from "../../../api/client/games.js";
 import ViewClass from '../../../api/client/view-class.js'
@@ -99,5 +101,10 @@ Template.menu.events({
   'click li': function(event, instance) {
     // On click, call enter
     menu.enter();
+  }
+});
+Template.menu.helpers({
+  'player': function(){
+    return Players.find({}, {sort:{time:1}})
   }
 });

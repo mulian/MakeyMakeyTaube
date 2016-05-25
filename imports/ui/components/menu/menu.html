@@ -9,4 +9,14 @@
       {{/each}}
     </ul>
   </div>
+    <div id="leaderboard_title">
+        Rangliste
+    </div>
+    <div id="leaderboard_div">
+        <ul>
+            {{#each player}}
+                <li>{{name}}: {{time}}</li>
+            {{/each}}
+        </ul>
+    </div>
 </template>

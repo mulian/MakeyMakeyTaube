@@ -22,6 +22,7 @@ class Game extends ViewClass {
     getGames((Games) => {
       this.games = Games;
     });
+    var current_stamp = new ReactiveVar();
   }
   // after DOM is ready
   init() {
@@ -66,11 +67,24 @@ class Game extends ViewClass {
   //Called if goal is reached
   goalReached() {
     // TODO: get last inserted player, count index +1 up
-    var time = moment().subtract(Session.get('current_stamp'));
-    Players.insert({
-      name: "Team1",
-      time: time,
-    });
+    var end = moment(new Date()).unix();
+    var difference = end-current_stamp;
+    var seconds = moment.duration(difference, 'milliseconds');
+    seconds = seconds['_milliseconds'];
+    var players_count = Players.find().count();
+    if (players_count == 0) {
+      var initialindex = 1;
+      Players.insert({
+        name: "Team" + initialindex,
+        time: seconds
+      });
+    } else {
+      var nextindex = players_count+1;
+      Players.insert({
+        name: "Team" + nextindex,
+        time: seconds
+      });
+    }
     this.gotoMenu();
     notie.alert(1, "Gewonnen!", 2)
   }
@@ -122,26 +136,22 @@ Template.game.rendered = function() {
   // Define Dom Vars for Controller
   crosshair.init();
   game.init();
-  var current_stamp = moment(new Date(), "X");
-  console.log(current_stamp);
-  Session.set('current_stamp', current_stamp);
-  /*
-  $('#clock').countdown('2016/05/24 19:15:00')
+  // get current time
+  current_stamp = moment(new Date()).unix();
+
+  // todo: countdown is not visible
+  var sixty_seconds = new Date().getTime() + 60000;
+  $('#clock').countdown(sixty_seconds, {elapse: true})
+  //$('#clock').countdown('2016/05/24 19:15:00')
       .on('update.countdown', function(event) {
-        var format = '%H:%M:%S';
-        if (event.offset.days > 0) {
-          format = '%-d day%!d ' + format;
+        var $this = $(this);
+        if (event.elapsed) {
+          notie.alert(3, "Zeit überschritten", 5);
+          location.reload();
+        } else {
+
         }
-        if (event.offset.weeks > 0) {
-          format = '%-w week%!w ' + format;
-        }
-        $(this).html(event.strftime(format));
-      })
-      .on('finish.countdown', function(event) {
-        $(this).html('Zeit überschritten! Spiel wird neu gestartet!');
-        location.reload();
       });
-  */
 
   //Define currentGame from instance
   var currentGame = game.getGameById(Template.instance().data.currentGame);
