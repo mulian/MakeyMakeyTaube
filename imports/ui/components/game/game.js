@@ -118,10 +118,10 @@ class Game extends ViewClass {
   }
   addKeys() {
     return [
-      { key:'W', call:'crosshair:up', multiKey:true},
-      { key:'S', call:'crosshair:down', multiKey:true},
-      { key:'A', call:'crosshair:left', multiKey:true},
-      { key:'D', call:'crosshair:right', multiKey:true},
+      { key:'ARROW_UP', call:'crosshair:up', multiKey:true},
+      { key:'ARROW_DOWN', call:'crosshair:down', multiKey:true},
+      { key:'ARROW_LEFT', call:'crosshair:left', multiKey:true},
+      { key:'ARROW_RIGHT', call:'crosshair:right', multiKey:true},
       { key:' ', call:'game:check'}
     ]
   }

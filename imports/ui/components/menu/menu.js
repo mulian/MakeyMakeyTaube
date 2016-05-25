@@ -72,8 +72,8 @@ class Menu extends ViewClass {
   }
   addKeys() {
     return [
-      { key:'A', call: 'menu:left' },
-      { key:'D', call: 'menu:right' },
+      { key:'ARROW_LEFT', call: 'menu:left' , multiKey:true },
+      { key:'ARROW_RIGHT', call: 'menu:right', multiKey:true },
       { key:' ', call: 'menu:enter' }
     ];
   }
