@@ -29,6 +29,7 @@ class Game extends ViewClass {
     this.img = "background_img";
     this.setPicSize();
     crosshair.init();
+    notie.alert(2, 'Ihr habt eine Minute Zeit!', 3);
   }
   getGameById(id) {
     var Games = this.games;
@@ -72,21 +73,24 @@ class Game extends ViewClass {
     var seconds = moment.duration(difference, 'milliseconds');
     seconds = seconds['_milliseconds'];
     var players_count = Players.find().count();
+    var index = 0;
     if (players_count == 0) {
       var initialindex = 1;
+      index = initialindex;
       Players.insert({
         name: "Team " + initialindex,
         time: seconds
       });
     } else {
       var nextindex = players_count+1;
+      index = nextindex;
       Players.insert({
         name: "Team " + nextindex,
         time: seconds
       });
     }
     this.gotoMenu();
-    notie.alert(1, "Getroffen!", 3)
+    notie.alert(1, "Getroffen! " + " Team " + index, 3)
   }
   //Called if goal is not reached
   goalNotReached() {

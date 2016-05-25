@@ -39,6 +39,8 @@
         <item url="file://$USER_HOME$/.meteor/packages/tracker/1.0.13/web.browser/tracker.js" />
         <item url="file://$USER_HOME$/.meteor/packages/es5-shim/4.5.10/web.browser/server.js" />
         <item url="file://$USER_HOME$/.meteor/packages/mongo-id/1.0.4/web.browser/id.js" />
+        <item url="file://$USER_HOME$/.meteor/packages/twbs_bootstrap/3.3.6/web.browser/dist/js/bootstrap.js" />
+        <item url="file://$USER_HOME$/.meteor/packages/twbs_bootstrap/3.3.6/web.browser/dist/css/bootstrap.css" />
         <item url="file://$USER_HOME$/.meteor/packages/underscore/1.0.8/web.browser/underscore.js" />
         <item url="file://$USER_HOME$/.meteor/packages/underscore/1.0.8/web.browser/pre.js" />
         <item url="file://$USER_HOME$/.meteor/packages/underscore/1.0.8/web.browser/post.js" />
@@ -211,6 +213,8 @@
       <root url="file://$USER_HOME$/.meteor/packages/tracker/1.0.13/web.browser/tracker.js" />
       <root url="file://$USER_HOME$/.meteor/packages/es5-shim/4.5.10/web.browser/server.js" />
       <root url="file://$USER_HOME$/.meteor/packages/mongo-id/1.0.4/web.browser/id.js" />
+      <root url="file://$USER_HOME$/.meteor/packages/twbs_bootstrap/3.3.6/web.browser/dist/js/bootstrap.js" />
+      <root url="file://$USER_HOME$/.meteor/packages/twbs_bootstrap/3.3.6/web.browser/dist/css/bootstrap.css" />
       <root url="file://$USER_HOME$/.meteor/packages/underscore/1.0.8/web.browser/underscore.js" />
       <root url="file://$USER_HOME$/.meteor/packages/underscore/1.0.8/web.browser/pre.js" />
       <root url="file://$USER_HOME$/.meteor/packages/underscore/1.0.8/web.browser/post.js" />
