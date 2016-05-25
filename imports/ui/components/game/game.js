@@ -75,13 +75,13 @@ class Game extends ViewClass {
     if (players_count == 0) {
       var initialindex = 1;
       Players.insert({
-        name: "Team" + initialindex,
+        name: "Team " + initialindex,
         time: seconds
       });
     } else {
       var nextindex = players_count+1;
       Players.insert({
-        name: "Team" + nextindex,
+        name: "Team " + nextindex,
         time: seconds
       });
     }
