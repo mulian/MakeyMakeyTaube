@@ -1,0 +1,18 @@
+{
+  "id": "baum",
+  "name": "Baum",
+  "img": "background.jpg",
+  "crosshair": {
+    "url": "crosshair.png",
+    "width": 50,
+    "startpos": {
+      "x": 5,
+      "y": 5
+    },
+    "goal": {
+      "x": 91,
+      "y": 52,
+      "diff": 8
+    }
+  }
+}

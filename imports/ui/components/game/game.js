@@ -86,11 +86,11 @@ class Game extends ViewClass {
       });
     }
     this.gotoMenu();
-    notie.alert(1, "Gewonnen!", 2)
+    notie.alert(1, "Getroffen!", 3)
   }
   //Called if goal is not reached
   goalNotReached() {
-    notie.alert(3, "Falsch!", 1)
+    notie.alert(3, "Nicht getroffen!", 3)
   }
   // Check if goal is reached
   check() {
@@ -146,8 +146,8 @@ Template.game.rendered = function() {
       .on('update.countdown', function(event) {
         var $this = $(this);
         if (event.elapsed) {
-          notie.alert(3, "Zeit überschritten", 5);
-          location.reload();
+          notie.alert(3, "Zeit überschritten", 3);
+          location.href = "/";
         } else {
 
         }
