@@ -25,11 +25,25 @@ class Game extends ViewClass {
     var current_stamp = new ReactiveVar();
   }
   // after DOM is ready
-  init() {
+  init(gameId) {
+    this.gameId = gameId;
     this.img = "background_img";
     this.setPicSize();
     crosshair.init();
-    notie.alert(2, 'Ihr habt eine Minute Zeit!', 3);
+    notie.alert(2, 'Ihr habt eine Minute Zeit!', 5);
+    var time = new ReactiveVar();
+    time = 59;
+    setInterval(function() {
+      if (time == 0) {
+        notie.alert(3, "Zeit abgelaufen", 3);
+        setTimeout(function() {
+          Router.go('/');
+        }, 3000);
+      } else {
+        $('span#clock').html("0:" + time + "&nbsp;s");
+        time--;
+      }
+    }, 1000);
   }
   getGameById(id) {
     var Games = this.games;
@@ -57,7 +71,7 @@ class Game extends ViewClass {
         top: picSize.top
       })
 
-      Session.set('picSize', null); //no need, becaus of menu onCreate reset?
+      Session.set('picSize', null); //no need, because of menu onCreate reset?
       setTimeout(() => {
         this.img.addClass('transform');
       }, 1);
@@ -67,7 +81,6 @@ class Game extends ViewClass {
   }
   //Called if goal is reached
   goalReached() {
-    // TODO: get last inserted player, count index +1 up
     var end = moment(new Date()).unix();
     var difference = end-current_stamp;
     var seconds = moment.duration(difference, 'milliseconds');
@@ -79,6 +92,7 @@ class Game extends ViewClass {
       index = initialindex;
       Players.insert({
         name: "Team " + initialindex,
+        game: this.gameId,
         time: seconds
       });
     } else {
@@ -86,6 +100,7 @@ class Game extends ViewClass {
       index = nextindex;
       Players.insert({
         name: "Team " + nextindex,
+        game: this.gameId,
         time: seconds
       });
     }
@@ -139,23 +154,9 @@ Template.game.rendered = function() {
   // GlobalKeyBinder = Session.get('GlobalKeyBinder');
   // Define Dom Vars for Controller
   crosshair.init();
-  game.init();
+  game.init(this.data.currentGame);
   // get current time
   current_stamp = moment(new Date()).unix();
-
-  // todo: countdown is not visible
-  var sixty_seconds = new Date().getTime() + 60000;
-  $('#clock').countdown(sixty_seconds, {elapse: true})
-  //$('#clock').countdown('2016/05/24 19:15:00')
-      .on('update.countdown', function(event) {
-        var $this = $(this);
-        if (event.elapsed) {
-          notie.alert(3, "Zeit überschritten", 3);
-          location.href = "/";
-        } else {
-
-        }
-      });
 
   //Define currentGame from instance
   var currentGame = game.getGameById(Template.instance().data.currentGame);

@@ -27,7 +27,7 @@ class Menu extends ViewClass {
   }
   // call enter of current item (goto game)
   enter() {
-    var currentTarget = $(this.selectedElement[0]);
+    var currentTarget = $(this.selectedElement[0]).children('li');
     Session.set('picSize', this.collectPicSize(currentTarget));
     var gameID = currentTarget.attr('gameid');
     Router.go('game', {_gameID: gameID});
@@ -103,8 +103,8 @@ Template.menu.events({
     menu.enter();
   }
 });
-Template.menu.helpers({
-  'player': function(){
-    return Players.find({}, {sort:{time:1}})
+Template.menu_game.helpers({
+  players: function(){
+    return Players.find({game: this.id}, {sort:{time:1}})
   }
-});
+})
