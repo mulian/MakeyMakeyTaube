@@ -30,17 +30,23 @@ class Game extends ViewClass {
     this.img = "background_img";
     this.setPicSize();
     crosshair.init();
-    notie.alert(2, 'Ihr habt eine Minute Zeit!', 5);
+    notie.alert(2, 'Ihr habt zwei Minuten Zeit!', 5);
     var time = new ReactiveVar();
-    time = 59;
+    time = 119;
     setInterval(function() {
       if (time == 0) {
         notie.alert(3, "Zeit abgelaufen", 3);
+        time--;
         setTimeout(function() {
           Router.go('/');
         }, 3000);
-      } else {
-        $('span#clock').html("0:" + time + "&nbsp;s");
+      } else if (time > 0) {
+        if (time > 59) {
+          var time_postfix = time-60;
+          $('span#clock').html("1:" + time_postfix + "&nbsp;s");
+        } else {
+          $('span#clock').html("0:" + time + "&nbsp;s");
+        }
         time--;
       }
     }, 1000);
