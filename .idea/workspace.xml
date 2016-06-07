@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2390a883-6298-4f60-baee-2c1325342af3" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/imports/ui/components/game/game.js" afterPath="$PROJECT_DIR$/imports/ui/components/game/game.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/imports/ui/components/menu/menu.html" afterPath="$PROJECT_DIR$/imports/ui/components/menu/menu.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/imports/ui/stylesheets/menu.less" afterPath="$PROJECT_DIR$/imports/ui/stylesheets/menu.less" />
     </list>
     <ignored path="taube.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -30,7 +27,7 @@
         <entry file="file://$PROJECT_DIR$/imports/ui/components/menu/menu.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="300">
-              <caret line="20" column="79" selection-start-line="20" selection-start-column="79" selection-end-line="20" selection-end-column="79" />
+              <caret line="20" column="72" selection-start-line="20" selection-start-column="72" selection-end-line="20" selection-end-column="72" />
               <folding>
                 <element signature="n#style#0;n#div#0;n#template#1;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#li#0;n#div#0;n#template#1;n#!!top" expanded="true" />
@@ -303,12 +300,12 @@
       <workItem from="1464790863326" duration="1130000" />
       <workItem from="1464792137086" duration="229000" />
       <workItem from="1464887782108" duration="1380000" />
-      <workItem from="1465323073638" duration="1385000" />
+      <workItem from="1465323073638" duration="1471000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="29994000" />
+    <option name="totallyTimeSpent" value="30080000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="0" />
@@ -661,7 +658,7 @@
     <entry file="file://$PROJECT_DIR$/imports/ui/components/menu/menu.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="300">
-          <caret line="20" column="79" selection-start-line="20" selection-start-column="79" selection-end-line="20" selection-end-column="79" />
+          <caret line="20" column="72" selection-start-line="20" selection-start-column="72" selection-end-line="20" selection-end-column="72" />
           <folding>
             <element signature="n#style#0;n#div#0;n#template#1;n#!!top" expanded="true" />
             <element signature="n#style#0;n#li#0;n#div#0;n#template#1;n#!!top" expanded="true" />
