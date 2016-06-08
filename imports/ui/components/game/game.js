@@ -99,7 +99,7 @@ class Game extends ViewClass {
   }
   //Called if goal is not reached
   goalNotReached() {
-    console.log(this.instance);
+    // console.log(this.instance);
     // console.log(duration.asMilliseconds);
     crosshair.showGoal();
     notie.alert(3, "Nicht getroffen!", 3)
@@ -170,6 +170,10 @@ Template.game.onRendered(function() {
   this.endTime = moment().add(gameTime,'milliseconds');
   var timer = setInterval(() => {
     this.duration.set(moment.duration(moment(this.endTime).diff(new Date())))
+    if(this.duration.get().seconds()<0) {
+      clearInterval(timer);
+      this.game.gotoMenu();
+    }
   },1000);
 
   //Define currentGame from instance
