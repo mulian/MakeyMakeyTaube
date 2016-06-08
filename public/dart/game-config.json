@@ -1,6 +1,6 @@
 {
   "id": "dart",
-  "name": "Dartspiel",
+  "name": "Dart",
   "img": "background.jpg",
   "crosshair": {
     "url": "crosshair.png",
@@ -12,7 +12,7 @@
     "goal": {
         "x": 50,
         "y": 50,
-        "diff": 5
+        "diff": 3
     }
   }
 }

@@ -2,7 +2,7 @@
   <div id='game'>
     {{#with game}}
       <div class="countdown">
-          <span id="clock" style="z-index:10000000000">0:60&nbsp;s</span>
+          <span id="clock" style="z-index:10000000000">{{getTime}}</span>
       </div>
       <img id='background_img' src='/{{path}}/{{img}}'>
       <div id='gamegoal'></div>

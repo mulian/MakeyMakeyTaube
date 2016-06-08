@@ -5,7 +5,12 @@
   <div id="menu">
     <ul id='menu_lu'>
       {{#each games}}
-          {{> menu_game}}
+      <li >
+        <div class='gameItem' style="background-image: url(/{{path}}/{{img}});" gameid='{{id}}'>
+          {{name}}
+        </div>
+        {{> menu_game}}
+      </li>
       {{/each}}
     </ul>
   </div>
@@ -13,14 +18,15 @@
 </template>
 
 <template name="menu_game">
-    <div id="leaderboard_div" style="display:inline">
-        <li style="background-image: url(/{{path}}/{{img}});" gameid='{{id}}'>
-            {{name}}
-            <ul class="nav navbar-nav leaderboard_ul">
-                {{#each players}}
-                    <li class="leaderboard_li">{{name}}: {{time}}&nbsp;s</li>
-                {{/each}}
-            </ul>
-        </li>
-    </div>
+  {{#if players}}
+    <table>
+      <tr><th>Team</th><th>min:sec:ms</th></tr>
+    {{#each players}}
+      <tr class="leaderboard_li {{highlight}}" >
+        <td class='table_name'>{{name}}</td>
+        <td class='table_time'>{{time}}</td>
+      </tr>
+    {{/each}}
+    </table>
+  {{/if}}
 </template>

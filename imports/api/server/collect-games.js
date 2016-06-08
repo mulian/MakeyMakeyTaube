@@ -1,5 +1,5 @@
 const fs = require('fs');
-
+import {Games} from '../booth/db.js'
 /*
   This File will collect the games, from public Folder
 */
@@ -24,22 +24,19 @@ class CollectGames {
     // });
   }
   searchGameFolders() {
-    this.games = []; //flush games
     var dir = fs.readdirSync(gameRootPath);
     for(item of dir) {
       if(fs.statSync(gameRootPath+item).isDirectory()) { //all Dirs
         var config = gameRootPath+item+'/game-config.json'
         if(fs.existsSync(config)) {
-          // console.log(Npm.require.cache);
-          // Object.keys(Npm.require.cache).forEach(function(key) { delete Npm.require.cache[key] })
-          // delete Npm.require.cache[Npm.require.resolve(config)]
           var gameObj = Npm.require(config);
           gameObj.path = item;
-          this.games.push(gameObj);
+          // this.games.push(gameObj);
+          Games.addGame(gameObj);
         }
       }
     }
-    console.log(this.games);
+    // console.log(this.games);
     // console.log(fs.statSync(rootDir+gameRootPath+'baseball/game-config.json').isDirectory());
   }
 }

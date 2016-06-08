@@ -17,8 +17,6 @@ import 'jquery-countdown/dist/jquery.countdown.min.js';
 
 import {Games,Players} from '../../../api/booth/db.js'
 
-var gameTime = (1000*60*2);
-
 // # Game Class
 class Game extends ViewClass {
   constructor(controller) {
@@ -59,7 +57,7 @@ class Game extends ViewClass {
   }
   //Go to Menu, with animation
   gotoMenu() {
-    $('#background_img').removeClass('transform');
+    this.img.removeClass('transform');
     setTimeout(function() {
       Router.go('/');
     }, 500);
@@ -85,23 +83,34 @@ class Game extends ViewClass {
   }
   //Called if goal is reached
   goalReached() {
-    var duration = this.instance.duration.get();
-    var player = Players.find({}).count()+1;
-    // console.log(players_count);
-    Players.insert({
-      name: player,
-      game: this.controller.state.get('gameId'),
-      milisecounds: (gameTime - duration.asMilliseconds()),
-    });
+    var end = moment(new Date()).unix();
+    var difference = end-current_stamp;
+    var seconds = moment.duration(difference, 'milliseconds');
+    seconds = seconds['_milliseconds'];
+    var players_count = Players.find().count();
+    var index = 0;
+    if (players_count == 0) {
+      var initialindex = 1;
+      index = initialindex;
+      Players.insert({
+        name: "Team " + initialindex,
+        game: this.gameId,
+        time: seconds
+      });
+    } else {
+      var nextindex = players_count+1;
+      index = nextindex;
+      Players.insert({
+        name: "Team " + nextindex,
+        game: this.gameId,
+        time: seconds
+      });
+    }
     this.gotoMenu();
-    notie.alert(1, "Getroffen! " + " Team " + player, 8)
-    Session.set('lastPlayer',player);
+    notie.alert(1, "Getroffen! " + " Team " + index, 3)
   }
   //Called if goal is not reached
   goalNotReached() {
-    console.log(this.instance);
-    // console.log(duration.asMilliseconds);
-    crosshair.showGoal();
     notie.alert(3, "Nicht getroffen!", 3)
   }
   // Check if goal is reached
@@ -111,8 +120,17 @@ class Game extends ViewClass {
       this.goalReached();
     } else {
       this.goalNotReached();
+      crosshair.showGoal();
     }
   }
+
+  // ## GETTER & SETTER
+  //will called everytime on this.img = 'xxx'
+  set img(val= 'background_img') {
+    this._img = $(`#${val}`);
+  }
+  //will called everytime on return this.img
+  get img() { return this._img; }
 
   // ## ViewClass functions (more info in ViewClass)
   addEvents() {
@@ -131,71 +149,41 @@ class Game extends ViewClass {
   }
 }
 // ## instanceiate a game for Meteor Template
-var game = new Game();
-Template.game.onCreated( function() {
-  this.game = game;
-  this.game.controller = Iron.controller();
-  this.game.instance = this;
-  this.duration = new ReactiveVar(null);
+var game = null;
 
+Template.game.onCreated( function() {
+  console.log("hier");
+  this.game = new Game(Iron.controller());
+  game = this.game;
 });
 
 // # Default Meteor Template functions
 
-Template.game.onRendered(function() {
+Template.game.rendered = function() {
   // GlobalKeyBinder = Session.get('GlobalKeyBinder');
   // Define Dom Vars for Controller
   crosshair.init();
   var controller = Iron.controller();
-
-  var picSize = Session.get('picSize');
-  var img = $('#background_img');
-  if (picSize != null) {
-    img.css({
-      width: picSize.width,
-      height: picSize.height,
-      left: picSize.left,
-      top: picSize.top
-    })
-
-    Session.set('picSize', null); //no need, because of menu onCreate reset?
-    setTimeout(() => {
-      img.addClass('transform');
-    }, 1);
-  } else {
-    img.addClass('transform');
-  }
-
-  //Timer
-  this.endTime = moment().add(gameTime,'milliseconds');
-  var timer = setInterval(() => {
-    this.duration.set(moment.duration(moment(this.endTime).diff(new Date())))
-  },1000);
+  game.init(controller.state.get('gameId'));
+  // get current time
+  current_stamp = moment(new Date()).unix();
 
   //Define currentGame from instance
   var currentGame = Games.findOne({id:controller.state.get('gameId')});
   crosshair.obj = currentGame.crosshair;
+  setTimeout(() => {
+    $('#background_img').addClass('transform');
+  },1);
 
   //Only debbuger! to Find the right coords fog Goal
   if (package.debug)
     crosshair.debugCrosshairClick();
-});
+}
 Template.game.helpers({
   game: function() {
+    //For Template, how needs background img url
     var controller = Iron.controller();
     return Games.findOne({id:controller.state.get('gameId')});
-  },
-  getTime: function() {
-    var duration = Template.instance().duration.get();
-    if(duration==null) return "0:00";
-    else if(duration.seconds()<0) {
-      //goto Menu? gotoMenu()
-      return "0:00";
-    }
-    else {
-      var sec = duration.seconds();
-      if(sec<=9) sec = '0'+sec;
-      return duration.minutes()+':'+sec;
-    }
+    // return game.getGameById(Template.instance().data.currentGame);
   }
 });

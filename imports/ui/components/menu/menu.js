@@ -6,10 +6,8 @@ import '../../stylesheets/leaderboard.less'
 import {getGames} from "../../../api/client/games.js";
 import ViewClass from '../../../api/client/view-class.js'
 
-var Games = null;
-getGames(function(games) {
-  Games = games;
-});
+import {Games,Players} from '../../../api/booth/db.js'
+
 
 // # Menu Class
 class Menu extends ViewClass {
@@ -27,7 +25,9 @@ class Menu extends ViewClass {
   }
   // call enter of current item (goto game)
   enter() {
-    var currentTarget = $(this.selectedElement[0]).children('li');
+    // console.log(this.selectedElement.find('.gameItem'));
+    // var currentTarget = $(this.selectedElement[0]).children('li').children('div');
+    var currentTarget = this.selectedElement.find('.gameItem');
     Session.set('picSize', this.collectPicSize(currentTarget));
     var gameID = currentTarget.attr('gameid');
     Router.go('game', {_gameID: gameID});
@@ -90,7 +90,8 @@ Template.menu.onCreated(function() {
 Template.menu.helpers({
   games: function() {
     //Call from View, get all Games
-    return Games;
+    // return Games;
+    return Games.find({});
   }
 });
 Template.menu.rendered = function() {
@@ -103,8 +104,29 @@ Template.menu.events({
     menu.enter();
   }
 });
+function addZero(number) {
+  if(number<=9) return '0'+number;
+  else return number;
+}
 Template.menu_game.helpers({
   players: function(){
-    return Players.find({game: this.id}, {sort:{time:1}})
+    // console.log(this);
+    return Players.find({game: this.id}, {
+      limit:10,
+      sort:{milisecounds:1},
+      transform: function(item) {
+        var duration = moment.duration(item.milisecounds);
+        item.time = addZero(duration.minutes())+':'+
+          addZero(duration.seconds())+':'+
+            addZero(duration.milliseconds());
+        // console.log(item.milisecounds);
+        // console.log(item.time);
+        if(Session.get('lastPlayer')==item.name) {
+          // console.log("this team");
+          item.highlight = 'highlight';
+        }
+        return item;
+      }
+    });
   }
 })

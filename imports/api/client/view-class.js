@@ -20,7 +20,7 @@ class ViewClass {
     if(this.addKeys!=undefined) keymapManager.bindAll(this.templateName, this.addKeys() ); //return obj!
     // Set current template for keymapManager
     if(this.keyTemplate) {
-      Template[this.templateName].onCreated (() => {
+      Template[this.templateName].onRendered (() => {
         keymapManager.currentTamplate = this.templateName;
       });
     }
