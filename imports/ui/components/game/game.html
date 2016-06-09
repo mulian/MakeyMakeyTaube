@@ -7,6 +7,9 @@
       <img id='background_img' src='/{{path}}/{{img}}'>
       <div id='gamegoal'></div>
       <img id='crosshair' src='/{{path}}/{{crosshair.url}}'>
+      {{#each getCollectItems}}
+        <img class='collect-item' src='{{img}}' style='left:{{x}}%;top:{{y}}%;width:{{width}}px'>
+      {{/each}}
     {{/with}}
   </div>
 </template>

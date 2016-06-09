@@ -95,7 +95,7 @@ Template.menu.helpers({
   }
 });
 Template.menu.rendered = function() {
-
+  Meteor.call('resetColectItems');
   menu.id = 'menu_lu'; //to instanceiate Dom Vars only once
 }
 Template.menu.events({

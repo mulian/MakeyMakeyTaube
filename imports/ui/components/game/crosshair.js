@@ -1,5 +1,6 @@
 import ViewClass from '../../../api/client/view-class.js'
 
+import {Games,Players,CollectItems} from '../../../api/booth/db.js'
 // # Set Default Values
 
 var def = {
@@ -15,8 +16,19 @@ var def = {
       "diff": 8
   }
 }
+
 var gameGoalTime = 1; //show Goal in secounds
 let ch =null;
+
+// var items = [
+//   {
+//     x: 90,
+//     y: 90,
+//     diff: 8,
+//     width: 100,
+//     img: '/public/korb/crosshair.png',
+//   }
+// ];
 
 // # Crosshair Class
 export default //to get this Class default on import
@@ -26,6 +38,8 @@ class Crosshair extends ViewClass {
     super('game',false);
     this.init(id);
     this._setAttr();
+    // this.collectItems = items;
+    // this.createCollectItems();
   }
   // Private
   // Init class Attributes
@@ -37,7 +51,36 @@ class Crosshair extends ViewClass {
   init(id,gameGoalId) {
     this.id = id;
     this.gameGoal = gameGoalId;
+    this.collectItems = this.getCollectItems();
   }
+
+  getCollectItems() {
+    return CollectItems.find({game:this.id});
+  }
+
+  checkCollected() {
+    // console.log(this.x,this.y,this.gameId);
+    var reachedItem = CollectItems.findOne({game:this.gameId,x:this.x,y:this.y});
+    // console.log(reachedItem);
+    if(reachedItem!=undefined) {
+      CollectItems.update({_id:reachedItem._id},{$set:{ready:true}});
+    }
+  }
+
+  // createCollectItems() {
+  //   for(item of this.collectItems) {
+  //     var item = $("<img>", {
+  //       src: item.img,
+  //       class: 'collectItem',
+  //       css: {
+  //         left: item.x + "%",
+  //         top: item.y + "%",
+  //         width: item.width + "px",
+  //       }
+  //     });
+  //     $('body').append(item);
+  //   }
+  // }
   // call move direction
   // the set x function (below) set the css left/top position
   _move(direction) {
@@ -148,10 +191,12 @@ class Crosshair extends ViewClass {
   set x(val) {
     this.element.css('left', val+'%');
     this._x=val;
+    this.checkCollected();
   }
   set y(val) {
     this.element.css('top', val+'%');
     this._y=val;
+    this.checkCollected();
   }
   set goal(goal={x: 91,y: 52,diff: 8}) {
     this._goal= goal;

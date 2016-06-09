@@ -15,7 +15,7 @@ import 'notie/dist/notie.css';
 //Countdown
 import 'jquery-countdown/dist/jquery.countdown.min.js';
 
-import {Games,Players} from '../../../api/booth/db.js'
+import {Games,Players,CollectItems} from '../../../api/booth/db.js'
 
 var gameTime = (1000*60*2);
 
@@ -59,6 +59,7 @@ class Game extends ViewClass {
   }
   //Go to Menu, with animation
   gotoMenu() {
+    Meteor.call('resetColectItems',this.controller.state.get('gameId'))
     $('#background_img').removeClass('transform');
     setTimeout(function() {
       Router.go('/');
@@ -102,15 +103,26 @@ class Game extends ViewClass {
     // console.log(this.instance);
     // console.log(duration.asMilliseconds);
     crosshair.showGoal();
-    notie.alert(3, "Nicht getroffen!", 3)
+    notie.alert(3, "Nicht getroffen, finde das Ziel!", 3)
+  }
+  notAllCollectItems(count) {
+    if(count==1)
+      notie.alert(3, "Sammel den letzten Ringe ein!", 3);
+    else
+      notie.alert(3, "Sammel die "+count+" Ringe ein!", 3);
   }
   // Check if goal is reached
   check() {
     console.log("check");
-    if (crosshair.isGoal()) {
-      this.goalReached();
+    var collectItems = CollectItems.find({game:this.controller.state.get('gameId'),ready:undefined});
+    if(collectItems.count()==0) {
+      if (crosshair.isGoal()) {
+        this.goalReached();
+      } else {
+        this.goalNotReached();
+      }
     } else {
-      this.goalNotReached();
+      this.notAllCollectItems(collectItems.count());
     }
   }
 
@@ -179,6 +191,7 @@ Template.game.onRendered(function() {
   //Define currentGame from instance
   var currentGame = Games.findOne({id:controller.state.get('gameId')});
   crosshair.obj = currentGame.crosshair;
+  crosshair.gameId = controller.state.get('gameId');
 
   //Only debbuger! to Find the right coords fog Goal
   if (package.debug)
@@ -188,6 +201,10 @@ Template.game.helpers({
   game: function() {
     var controller = Iron.controller();
     return Games.findOne({id:controller.state.get('gameId')});
+  },
+  getCollectItems: function() {
+    // console.log(this);
+    return CollectItems.find({game:this.id,ready:undefined});
   },
   getTime: function() {
     var duration = Template.instance().duration.get();

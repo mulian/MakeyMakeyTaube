@@ -26,6 +26,7 @@ Router.route('/game/:_gameID',{
     this.subscribe('default_db_config').wait();
     this.subscribe('default_db_games').wait();
     this.subscribe('default_db_players').wait();
+    this.subscribe('default_db_CollectItems').wait();
   },
   action: function() {
     this.state.set('gameId',this.params._gameID);

@@ -2,6 +2,7 @@ import GameClass from './Games.js'
 export const Players = new Mongo.Collection('players');
 export const Configurations = new Mongo.Collection('configurations');
 export const Games = new GameClass();
+export const CollectItems = new Mongo.Collection('collectitems');
 
 if(Meteor.isServer) {
   Meteor.publish('default_db_players', function(){
@@ -12,5 +13,16 @@ if(Meteor.isServer) {
   });
   Meteor.publish('default_db_games', function(){
     return Games.find({});
+  });
+  Meteor.publish('default_db_CollectItems', function(){
+    return CollectItems.find({});
+  });
+
+  Meteor.methods({
+    resetColectItems: function(gameId) {
+      if(gameId==undefined) {
+        CollectItems.update({},{$set:{ready:undefined}});
+      } else CollectItems.update({game:gameId},{$set:{ready:undefined}});
+    }
   });
 }
