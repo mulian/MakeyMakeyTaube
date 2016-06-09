@@ -4,6 +4,7 @@ import {Players,Configurations} from '../../api/booth/db.js'
 import '../../ui/components/game/game.js'
 import '../../ui/components/menu/menu.js'
 import '../../ui/components/loading/loading.js'
+import '../../ui/components/editor/editor.js'
 
 // # Routes
 
@@ -16,6 +17,20 @@ Router.route('/',{
   },
   action: function() {
     if(this.ready()) this.render('main');
+    else this.render('loading');
+  }
+});
+Router.route('/editor',{
+  subscriptions: function() {
+    this.subscribe('default_db_config').wait();
+    this.subscribe('default_db_games').wait();
+    this.subscribe('default_db_players').wait();
+    this.subscribe('default_db_CollectItems').wait();
+    this.subscribe('default_db_sounds').wait();
+
+  },
+  action: function() {
+    if(this.ready()) this.render('editor');
     else this.render('loading');
   }
 });

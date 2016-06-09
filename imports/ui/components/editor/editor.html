@@ -1,0 +1,59 @@
+<template name='editor'>
+  <div id='menu'>
+    <div id="title">
+      Spiel Editor
+    </div>
+    <ul id='menu_lu'>
+      {{#each games}}
+        {{> showGames}}
+      {{/each}}
+      <li >
+        <div class='gameItem newGame'>
+          Neues Spiel
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div>
+    Sounds:
+    <button class='soundColected'>Collect Item Sound setzen</button>
+    <button class='soundWin'>Erfolg Sound setzen</button>
+    <button class='soundLose'>Misserfolg Sound setzen</button>
+  </div>
+  <div>
+    SpielZeit:
+    <input type='text' class='timeMin' size='2'>:
+    <input type='text' class='timeSec' size='2'>
+  </div>
+  <div id='sound_list'>
+    <ul>
+    {{#each sounds}}
+      <li>{{name}}</li>
+    {{/each}}
+    </ul>
+  </div>
+</template>
+
+<template name='showGames'>
+  <li >
+    <div class='removeGame'><img src='/close.svg' width='20px'></div>
+    <div class='gameItem' style="background-image: url(/{{path}}/{{img}});" gameid='{{id}}'>
+      {{> Template.dynamic template=gameTitleTemplate }}
+      <div>Path:{{> Template.dynamic template=gameIdTemplate }}</div>
+    </div>
+  </li>
+</template>
+
+<template name='showGameId'>
+  <span class='gameId'>{{id}}</span>
+</template>
+<template name='changeGameId'>
+  <input type='text' class='gameId' value='{{id}}'>
+</template>
+
+<template name='showGameName'>
+  <span class='gameTitle'>{{name}}</span>
+</template>
+<template name='changeGameName'>
+  <input type='text' class='gameTitle' value='{{name}}'>
+</template>
