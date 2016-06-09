@@ -12,6 +12,12 @@
 #game {
   .collect-item {
     position: absolute;
+    transition: transform 1s;
+    &.collect-higlight {
+      transform: rotate(180deg);
+      -webkit-transform: rotate(180deg);
+      // transition-delay: 1s;
+    }
   }
   #crosshair {
     position: absolute;

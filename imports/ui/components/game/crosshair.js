@@ -60,9 +60,10 @@ class Crosshair extends ViewClass {
 
   checkCollected() {
     // console.log(this.x,this.y,this.gameId);
-    var reachedItem = CollectItems.findOne({game:this.gameId,x:this.x,y:this.y});
+    var reachedItem = CollectItems.findOne({game:this.gameId,x:this.x,y:this.y,ready:undefined});
     // console.log(reachedItem);
     if(reachedItem!=undefined) {
+      Meteor.call('sound_ready');
       CollectItems.update({_id:reachedItem._id},{$set:{ready:true}});
     }
   }

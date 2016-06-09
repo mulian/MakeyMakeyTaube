@@ -106,10 +106,14 @@ class Game extends ViewClass {
     notie.alert(3, "Nicht getroffen, finde das Ziel!", 3)
   }
   notAllCollectItems(count) {
-    if(count==1)
-      notie.alert(3, "Sammel den letzten Ringe ein!", 3);
-    else
-      notie.alert(3, "Sammel die "+count+" Ringe ein!", 3);
+    $('.collect-item').addClass('collect-higlight');
+    setTimeout(() => {
+      $('.collect-item').removeClass('collect-higlight');
+    },1000*1);
+    // if(count==1)
+    //   notie.alert(3, "Sammel den letzten Ringe ein!", 3);
+    // else
+    //   notie.alert(3, "Sammel die "+count+" Ringe ein!", 3);
   }
   // Check if goal is reached
   check() {
