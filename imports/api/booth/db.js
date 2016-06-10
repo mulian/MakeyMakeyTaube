@@ -4,6 +4,7 @@ export const Config = new Mongo.Collection('config');
 export const Games = new GameClass();
 export const CollectItems = new Mongo.Collection('collectitems');
 export const Sounds = new Mongo.Collection('sounds');
+export const Images = new Mongo.Collection('images');
 
 if(Meteor.isServer) {
   Meteor.publish('default_db_players', function(){
@@ -21,6 +22,9 @@ if(Meteor.isServer) {
   });
   Meteor.publish('default_db_sounds', function(){
     return Sounds.find({});
+  });
+  Meteor.publish('default_db_images', function(){
+    return Images.find({});
   });
 
   Meteor.methods({

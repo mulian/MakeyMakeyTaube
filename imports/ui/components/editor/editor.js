@@ -1,20 +1,20 @@
 import './editor.html'
 import './editor.less'
 
+import '../file/file.js'
+import '../file-drop/file-drop.js'
+
 import {Games,Players,CollectItems,Sounds,Config} from '../../../api/booth/db.js'
 
 Template.editor.helpers({
   games: function() {
     return Games.find({},{sort:{order:1}});
   },
-  sounds: function() {
-    return Sounds.find({});
-  },
   getConfig: function() {
     return Config.find({});
-  }
+  },
 });
-
+var currentFileChoose = null;
 Template.editor.events({
   'mouseenter li': function(e,instance) {
     $(e.target).addClass('selected');
@@ -37,10 +37,39 @@ Template.editor.events({
   },
   'click button': function(e,instance) {
     console.log("click sounds");
+    $('#files').show();
+    var target = $(e.target);
+    if(target.hasClass('soundColected')) {
+      currentFileChoose = 'soundOnCollect';
+    } else if(target.hasClass('soundWin')) {
+      currentFileChoose = 'soundOnWin';
+    } else if(target.hasClass('soundLose')) {
+      currentFileChoose = 'soundOnLose';
+    }
   },
   'click .removeGame': function(e,instance) {
     Games.remove({_id:this._id});
   },
+  'click .sound': function(e,instance) {
+    $('#files').hide();
+    var target = $(e.target);
+    var config = Config.findOne({});
+    switch(currentFileChoose) {
+      case 'soundOnCollect':
+        // target.attr('db-id');
+        Config.update({_id:config._id},{$set:{soundOnCollect:target.attr('db-id')}})
+        break;
+      case 'soundOnWin':
+        // target.attr('db-id');
+        Config.update({_id:config._id},{$set:{soundOnWin:target.attr('db-id')}})
+        break;
+      case 'soundOnLose':
+        // target.attr('db-id');
+        Config.update({_id:config._id},{$set:{soundOnLose:target.attr('db-id')}})
+        break;
+    }
+    currentFileChoose = null;
+  }
 });
 
 Template.showGames.onCreated(function () {

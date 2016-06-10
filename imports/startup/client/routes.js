@@ -14,6 +14,8 @@ Router.route('/',{
     this.subscribe('default_db_config').wait();
     this.subscribe('default_db_games').wait();
     this.subscribe('default_db_players').wait();
+    this.subscribe('default_db_images').wait();
+
   },
   action: function() {
     if(this.ready()) this.render('main');
@@ -27,6 +29,7 @@ Router.route('/editor',{
     this.subscribe('default_db_players').wait();
     this.subscribe('default_db_CollectItems').wait();
     this.subscribe('default_db_sounds').wait();
+    this.subscribe('default_db_images').wait();
 
   },
   action: function() {
@@ -42,6 +45,8 @@ Router.route('/game/:_gameID',{
     this.subscribe('default_db_games').wait();
     this.subscribe('default_db_players').wait();
     this.subscribe('default_db_CollectItems').wait();
+    this.subscribe('default_db_images').wait();
+    this.subscribe('default_db_sounds').wait();
   },
   action: function() {
     this.state.set('gameId',this.params._gameID);

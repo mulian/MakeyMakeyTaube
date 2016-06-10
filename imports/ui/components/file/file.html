@@ -1,0 +1,26 @@
+<template name='file'>
+  {{> file_sounds}}
+  {{> file_images}}
+</template>
+
+<template name='file_sounds'>
+  <ul class='file-manager sounds'>
+  {{#each sounds}}
+    <li class='file sound' db-id='{{_id}}'>
+      <audio controls>
+        <source src="{{url}}" type="{{type}}">
+      </audio>
+        {{name}}
+    </li>
+  {{/each}}
+  </ul>
+</template>
+<template name='file_images'>
+  <ul class='file-manager images'>
+  {{#each images}}
+    <li class='file image' db-id='{{_id}}'>
+      <img src='{{url}}' height="30px">{{name}}
+    </li>
+  {{/each}}
+  </ul>
+</template>

@@ -30,22 +30,18 @@
       Es werden die <input type='text' class='topTeamsCount' maxlength='2' width='2' value='{{topTeamsCount}}'> besten Teams angezeigt.
     </div>
   {{/each}}
-  <div id='sound_list'>
-    <ul>
-    {{#each sounds}}
-      <li>{{name}}</li>
-    {{/each}}
-    </ul>
+  <div id='files' style='display: none;'>
+    {{> file_sounds}}
   </div>
 </template>
 
 <template name='showGames'>
   <li >
-    <div class='removeGame'><img src='/close.svg' width='20px'></div>
-    <div class='gameItem' style="background-image: url(/{{path}}/{{img}});" gameid='{{id}}'>
+    <div class='removeGame pointer'><img src='/close.svg' width='20px'></div>
+    <div class='gameItem pointer' style="background-image: url(/{{path}}/{{img}});" gameid='{{id}}'>
       {{> Template.dynamic template=gameTitleTemplate }}
-      <div class='gameId'>Path:{{> Template.dynamic template=gameIdTemplate }}</div>
-      <div class='gameOrder'>Order:{{> Template.dynamic template=gameOrderTemplate }}</div>
+      <div class='gameId pointer'>Path:{{> Template.dynamic template=gameIdTemplate }}</div>
+      <div class='gameOrder pointer'>Order:{{> Template.dynamic template=gameOrderTemplate }}</div>
     </div>
   </li>
 </template>
