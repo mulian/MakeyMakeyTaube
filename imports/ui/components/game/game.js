@@ -15,7 +15,7 @@ import 'notie/dist/notie.css';
 //Countdown
 import 'jquery-countdown/dist/jquery.countdown.min.js';
 
-import {Games,Players,CollectItems} from '../../../api/booth/db.js'
+import {Games,Players,CollectItems,Config} from '../../../api/booth/db.js'
 
 var gameTime = (1000*60*2);
 
@@ -153,6 +153,8 @@ Template.game.onCreated( function() {
   this.game.controller = Iron.controller();
   this.game.instance = this;
   this.duration = new ReactiveVar(null);
+  var config = Config.findOne({});
+  gameTime = 1000*((config.gameMin*60)+config.gameSec);
 
 });
 

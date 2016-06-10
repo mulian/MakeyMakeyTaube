@@ -1,6 +1,6 @@
 import GameClass from './Games.js'
 export const Players = new Mongo.Collection('players');
-export const Configurations = new Mongo.Collection('configurations');
+export const Config = new Mongo.Collection('config');
 export const Games = new GameClass();
 export const CollectItems = new Mongo.Collection('collectitems');
 export const Sounds = new Mongo.Collection('sounds');
@@ -10,7 +10,8 @@ if(Meteor.isServer) {
     return Players.find({});
   });
   Meteor.publish('default_db_config', function(){
-    return Configurations.find({});
+    if(Config.find({}).count()==0) Config.insert({});
+    return Config.find({},{limit:1});
   });
   Meteor.publish('default_db_games', function(){
     return Games.find({});

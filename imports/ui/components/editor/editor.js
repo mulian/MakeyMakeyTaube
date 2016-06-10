@@ -1,15 +1,18 @@
 import './editor.html'
 import './editor.less'
 
-import {Games,Players,CollectItems,Sounds} from '../../../api/booth/db.js'
+import {Games,Players,CollectItems,Sounds,Config} from '../../../api/booth/db.js'
 
 Template.editor.helpers({
   games: function() {
-    return Games.find({});
+    return Games.find({},{sort:{order:1}});
   },
   sounds: function() {
     return Sounds.find({});
   },
+  getConfig: function() {
+    return Config.find({});
+  }
 });
 
 Template.editor.events({
@@ -43,6 +46,7 @@ Template.editor.events({
 Template.showGames.onCreated(function () {
   this.gameTitleTemp = new ReactiveVar('showGameName');
   this.gameIdTemp = new ReactiveVar('showGameId');
+  this.gameOrderTemp = new ReactiveVar('showOrderNr');
 });
 Template.showGames.helpers({
   gameTitleTemplate: function() {
@@ -51,6 +55,9 @@ Template.showGames.helpers({
   gameIdTemplate: function() {
     return Template.instance().gameIdTemp.get();
   },
+  gameOrderTemplate: function() {
+    return Template.instance().gameOrderTemp.get();
+  }
 });
 function enterInput(target,instance,_this) {
   if(target.hasClass('gameId')) {
@@ -59,8 +66,16 @@ function enterInput(target,instance,_this) {
   } else if(target.hasClass('gameTitle')) {
     Games.update({_id:_this._id},{$set:{name:target.val()}})
     instance.gameTitleTemp.set('showGameName');
-  } else if(target.hasClass('timeMin') || target.hasClass('timeSec')) {
-    console.log("set Time");
+  } else if(target.hasClass('gameOrder')) {
+    Games.update({_id:_this._id},{$set:{order:parseInt(target.val())}})
+    instance.gameOrderTemp.set('showOrderNr');
+  } else if(target.hasClass('timeMin')) {
+    // console.log("set Time");
+    Config.update({_id:_this._id},{$set:{gameMin:parseInt(target.val())}});
+  } else if (target.hasClass('timeSec')) {
+    Config.update({_id:_this._id},{$set:{gameSec:parseInt(target.val())}});
+  } else if(target.hasClass('topTeamsCount')) {
+    Config.update({_id:_this._id},{$set:{topTeamsCount:parseInt(target.val())}});
   }
 }
 Template.showGames.events({
@@ -69,6 +84,9 @@ Template.showGames.events({
   },
   'click .gameId': function(e,instance) {
     instance.gameIdTemp.set('changeGameId');
+  },
+  'click .gameOrder': function(e,instance) {
+    instance.gameOrderTemp.set('changeOrderNr');
   },
   'keypress input': function(e,instance) {
     var target = $(e.target);
@@ -87,5 +105,8 @@ Template.changeGameName.onRendered(function() {
   $(this.find('input')).select();
 });
 Template.changeGameId.onRendered(function() {
+  $(this.find('input')).select();
+});
+Template.changeOrderNr.onRendered(function() {
   $(this.find('input')).select();
 });

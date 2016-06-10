@@ -6,7 +6,7 @@ import '../../stylesheets/leaderboard.less'
 import {getGames} from "../../../api/client/games.js";
 import ViewClass from '../../../api/client/view-class.js'
 
-import {Games,Players} from '../../../api/booth/db.js'
+import {Games,Players,Config} from '../../../api/booth/db.js'
 
 
 // # Menu Class
@@ -91,7 +91,7 @@ Template.menu.helpers({
   games: function() {
     //Call from View, get all Games
     // return Games;
-    return Games.find({});
+    return Games.find({},{sort:{order:1}});
   }
 });
 Template.menu.rendered = function() {
@@ -112,7 +112,7 @@ Template.menu_game.helpers({
   players: function(){
     // console.log(this);
     return Players.find({game: this.id}, {
-      limit:10,
+      limit:Config.findOne({}).topTeamsCount,
       sort:{milisecounds:1},
       transform: function(item) {
         var duration = moment.duration(item.milisecounds);

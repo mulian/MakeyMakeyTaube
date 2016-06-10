@@ -14,17 +14,22 @@
       </li>
     </ul>
   </div>
-  <div>
-    Sounds:
-    <button class='soundColected'>Collect Item Sound setzen</button>
-    <button class='soundWin'>Erfolg Sound setzen</button>
-    <button class='soundLose'>Misserfolg Sound setzen</button>
-  </div>
-  <div>
-    SpielZeit:
-    <input type='text' class='timeMin' size='2'>:
-    <input type='text' class='timeSec' size='2'>
-  </div>
+  {{#each getConfig }}
+    <div>
+      Sounds:
+      <button class='soundColected'>Collect Item Sound setzen</button>
+      <button class='soundWin'>Erfolg Sound setzen</button>
+      <button class='soundLose'>Misserfolg Sound setzen</button>
+    </div>
+    <div>
+      SpielZeit:
+      <input type='text' class='timeMin' maxlength='2' width='2' value='{{gameMin}}' >:
+      <input type='text' class='timeSec' maxlength='2' width='2' value='{{gameSec}}' >
+    </div>
+    <div>
+      Es werden die <input type='text' class='topTeamsCount' maxlength='2' width='2' value='{{topTeamsCount}}'> besten Teams angezeigt.
+    </div>
+  {{/each}}
   <div id='sound_list'>
     <ul>
     {{#each sounds}}
@@ -39,13 +44,21 @@
     <div class='removeGame'><img src='/close.svg' width='20px'></div>
     <div class='gameItem' style="background-image: url(/{{path}}/{{img}});" gameid='{{id}}'>
       {{> Template.dynamic template=gameTitleTemplate }}
-      <div>Path:{{> Template.dynamic template=gameIdTemplate }}</div>
+      <div class='gameId'>Path:{{> Template.dynamic template=gameIdTemplate }}</div>
+      <div class='gameOrder'>Order:{{> Template.dynamic template=gameOrderTemplate }}</div>
     </div>
   </li>
 </template>
 
+<template name='showOrderNr'>
+  <span>{{order}}</span>
+</template>
+<template name='changeOrderNr'>
+  <input class='gameOrder' type='text' value='{{order}}'>
+</template>
+
 <template name='showGameId'>
-  <span class='gameId'>{{id}}</span>
+  <span >{{id}}</span>
 </template>
 <template name='changeGameId'>
   <input type='text' class='gameId' value='{{id}}'>
