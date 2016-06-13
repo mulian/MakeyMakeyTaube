@@ -9,6 +9,9 @@ import {Crosshair,Games,Players,CollectItems,Sounds,Config,Images} from '../../.
 import './editor-setsound.js'
 import './editor-input.js'
 
+import notie from 'notie';
+import 'notie/dist/notie.css';
+
 Template.editor.helpers({
   games: function() {
     return Games.find({},{sort:{order:1}});
@@ -46,4 +49,15 @@ Template.showGames.events({
   'dblclick': function(e,instance) {
     Router.go('editor',{_gameID:instance.data.path})
   },
+});
+
+var once=true;
+Template.editor.onRendered(function() {
+  if(once) {
+    notie.alert(1, "Klicke auf Spiel-Name,-Path und -Order um den Text zu ändern.", 5);
+    setTimeout(() => {
+      notie.alert(1, "Doppelklicke auf ein Spiel um das Spiel zu anzupassen.", 5);
+    },5*1000);
+    once=false;
+  }
 });

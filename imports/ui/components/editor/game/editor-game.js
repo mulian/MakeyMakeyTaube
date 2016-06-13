@@ -8,6 +8,9 @@ import {Crosshair,Games,Players,CollectItems,Sounds,Images,Config} from '../../.
 import './editor-game-resize.js'
 import './editor-game-move.js'
 
+import notie from 'notie';
+import 'notie/dist/notie.css';
+
 function getCurrentGame() {
   var controller = Iron.controller();
   return Games.findOne({path:controller.state.get('gameId')});
@@ -75,4 +78,14 @@ Template.editor_game.events({
       CollectItems.update({_id:this._id},{$set:{img:file.url}})
     });
   },
+});
+var once = true;
+Template.editor_game.onRendered(function() {
+  if(once) {
+    notie.alert(1, "Verschiebe das 'Fadenkreuz', die Collectitems und das Ziel. 'mousedown' halten und verschieben..", 5);
+    setTimeout(() => {
+      notie.alert(1, "Damit sich die größe ändert, einfach die Schwarzen balken an den 'Items' bewegen.", 5);
+    },5*1000);
+    once=false;
+  }
 });
