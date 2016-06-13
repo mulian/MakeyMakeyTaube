@@ -8,7 +8,7 @@
         {{> showGames}}
       {{/each}}
       <li >
-        <div class='gameItem newGame'>
+        <div class='gameItem newGame pointer'>
           Neues Spiel
         </div>
       </li>
@@ -22,23 +22,22 @@
       <button class='soundLose'>Misserfolg Sound setzen</button>
     </div>
     <div>
-      SpielZeit:
+      Standart SpielZeit:
       <input type='text' class='timeMin' maxlength='2' width='2' value='{{gameMin}}' >:
       <input type='text' class='timeSec' maxlength='2' width='2' value='{{gameSec}}' >
     </div>
+    <button class='resetHighscore'>Alle Highscores zurücksetzen</button>
     <div>
       Es werden die <input type='text' class='topTeamsCount' maxlength='2' width='2' value='{{topTeamsCount}}'> besten Teams angezeigt.
     </div>
   {{/each}}
-  <div id='files' style='display: none;'>
-    {{> file_sounds}}
-  </div>
+  {{> file_sounds}}
 </template>
 
 <template name='showGames'>
   <li >
     <div class='removeGame pointer'><img src='/close.svg' width='20px'></div>
-    <div class='gameItem pointer' style="background-image: url(/{{path}}/{{img}});" gameid='{{id}}'>
+    <div class='gameItem pointer' style="background-image: url('{{img}}');">
       {{> Template.dynamic template=gameTitleTemplate }}
       <div class='gameId pointer'>Path:{{> Template.dynamic template=gameIdTemplate }}</div>
       <div class='gameOrder pointer'>Order:{{> Template.dynamic template=gameOrderTemplate }}</div>
@@ -53,11 +52,11 @@
   <input class='gameOrder' type='text' value='{{order}}'>
 </template>
 
-<template name='showGameId'>
-  <span >{{id}}</span>
+<template name='showGamePath'>
+  <span >{{path}}</span>
 </template>
-<template name='changeGameId'>
-  <input type='text' class='gameId' value='{{id}}'>
+<template name='changeGamePath'>
+  <input type='text' class='gameId' value='{{path}}'>
 </template>
 
 <template name='showGameName'>

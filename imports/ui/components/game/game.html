@@ -1,15 +1,21 @@
 <template name="game">
   <div id='game'>
     {{#with game}}
+      <img id='background_img' src='{{img}}'>
       <div class="countdown">
           <span id="clock" style="z-index:10000000000">{{getTime}}</span>
       </div>
-      <img id='background_img' src='/{{path}}/{{img}}'>
-      <div id='gamegoal'></div>
-      <img id='crosshair' src='/{{path}}/{{crosshair.url}}'>
+      {{#with crosshair}}
+        <div id='gamegoal' style='left:{{goal.left}}%;top:{{goal.top}}%;right:{{goal.right}}%;bottom:{{goal.bottom}}%'></div>
+
+        <img id='crosshair' class='show' src='{{img}}' style='left:{{x}}%;top:{{y}}%;width:{{width}}px'>
+      {{/with}}
       {{#each getCollectItems}}
-        <img class='collect-item' src='{{img}}' style='left:{{x}}%;top:{{y}}%;width:{{width}}px'>
+        <img class='collect-item' src='{{img}}' db-id='{{_id}}' style='left:{{x}}%;top:{{y}}%;width:{{width}}px'>
       {{/each}}
     {{/with}}
+    <div id='los' class='hide'>
+      LOS!
+    </div>
   </div>
 </template>

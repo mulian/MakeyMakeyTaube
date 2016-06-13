@@ -1,0 +1,28 @@
+<template name="editor_game">
+  <div id='game'>
+    {{#with game}}
+      <img id='background_img' class='transform' src='{{img}}'>
+      <div class='div-button ci' style='left: 100px'>Neues Collect-Item</div>
+      <div class='div-button resetHighscore' style='left: 300px'>Reset game Highscores</div>
+      <div class='div-button gameTime' style='left: 500px'>
+        SpielZeit:
+        <input type='text' class='timeMin' maxlength='2' width='2' value='{{timeMin}}' >min. und
+        <input type='text' class='timeSec' maxlength='2' width='2' value='{{timeSec}}' >sec.
+      </div>
+      {{#with crosshair}}
+        <div id='gamegoal' class='show move-obj gamegoal' style='left:{{goal.left}}%;top:{{goal.top}}%;right:{{goal.right}}%;bottom:{{goal.bottom}}%'></div>
+        <div class='gamegoal resize-width' style='left:calc(100% - {{goal.right}}%);top:{{goal.top}}%;bottom:{{goal.bottom}}%,width:5px;'></div>
+        <div class='gamegoal resize-height' style='left:{{goal.left}}%;top:calc(100% - {{goal.bottom}}%);right:{{goal.right}}%;height:5px;'></div>
+
+        <img id='crosshair' class='show move-obj crosshair' src='{{img}}' style='left:{{x}}%;top:{{y}}%;width:{{width}}px'>
+        <div class='crosshair resize-width' style='left:calc({{x}}% + {{width}}px);top:{{y}}%'></div>
+      {{/with}}
+      {{#each getCollectItems}}
+        <img class='collect-item move-obj' src='{{img}}' db-id='{{_id}}' style='left:{{x}}%;top:{{y}}%;width:{{width}}px'>
+        <img class='collect-item remove' src='/close.svg' db-id='{{_id}}' style='left:calc({{x}}% + {{width}}px);top:calc({{y}}% - 20px);width:20px;'>
+        <div class='collect-item resize-width' db-id='{{_id}}' style='left:calc({{x}}% + {{width}}px);top:{{y}}%'></div>
+      {{/each}}
+    {{/with}}
+    {{> file_images}}
+  </div>
+</template>

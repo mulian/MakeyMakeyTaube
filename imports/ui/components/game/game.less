@@ -4,13 +4,29 @@
 
 @crosshair-xy-time: 0.4s;
 
-@bgimg-time-in: 0.8s;
+@bgimg-time-in: 0.5s;
 @bgimg-time-out: 0.5s;
 
 @above-notie-zindex:  1000000000;
 
 #game {
+  #los {
+    font-size: 200%;
+    font-weight: bold;
+    position: absolute;
+    top: 50%;
+    left: 45%;
+    background-color: white;
+    padding: 10px;
+    border-radius: 5px;
+    &.hide {
+      opacity: 0;
+      transition: opacity 0.5 !important;
+    }
+    opacity: 1;
+  }
   .collect-item {
+    z-index: @above-notie-zindex+1;
     position: absolute;
     transition: transform 1s;
     &.collect-higlight {
@@ -23,7 +39,7 @@
     position: absolute;
     left:0px;
     top:0px;
-    z-index: @above-notie-zindex+1;
+    z-index: @above-notie-zindex+2;
 
     opacity: 0;
     transition: opacity 1s;
@@ -34,11 +50,18 @@
   }
 
   .countdown {
-    color: #fff;
+    color: #000;
     position: absolute;
-    z-index: 1;
-    margin-top: 20px;
-    margin-left: 20px;
+    z-index: 9999999999;
+    padding: 5px;
+    background-color: white;
+    border-radius: 5px;
+
+    &.hot {
+      background-color: red;
+      color: white;
+    }
+    transition: background-color 0.5s, color 0.5s;
   }
 
   #gamegoal {
@@ -49,10 +72,12 @@
 
     z-index: @above-notie-zindex; //above notie
 
-    transition: opacity @gamegoal-opacity-time;
+    transition: opacity @gamegoal-opacity-time,background-color @gamegoal-opacity-time;
     &.show {
       opacity: @gamegoal-opacity !important;
-      transition: opacity @gamegoal-opacity-time;
+    }
+    &.green {
+      background-color: green;
     }
   }
 

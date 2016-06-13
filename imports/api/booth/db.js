@@ -5,6 +5,7 @@ export const Games = new GameClass();
 export const CollectItems = new Mongo.Collection('collectitems');
 export const Sounds = new Mongo.Collection('sounds');
 export const Images = new Mongo.Collection('images');
+export const Crosshair = new Mongo.Collection('crosshair');
 
 if(Meteor.isServer) {
   Meteor.publish('default_db_players', function(){
@@ -26,12 +27,20 @@ if(Meteor.isServer) {
   Meteor.publish('default_db_images', function(){
     return Images.find({});
   });
+  Meteor.publish('default_db_crosshair', function(){
+    return Crosshair.find({});
+  });
 
   Meteor.methods({
     resetColectItems: function(gameId) {
       if(gameId==undefined) {
         CollectItems.update({},{$set:{ready:undefined}});
       } else CollectItems.update({game:gameId},{$set:{ready:undefined}});
-    }
+    },
+    resetHighscore: function(gameId) {
+      if(gameId==undefined) {
+        Players.remove({});
+      } else Players.remove({game:gameId});
+    },
   });
 }
