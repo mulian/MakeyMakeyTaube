@@ -6,10 +6,10 @@ var path = "/upload/";
 //   Uploader.uploadUrl = Meteor.absoluteUrl("upload"); // Cordova needs absolute URL
 // });
 UploadServer.init({
-  tmpDir: process.env.PWD + '/public/uploads',
-  uploadDir: process.env.PWD + '/public/uploads',
-  // tmpDir: '/home/taube/uploads/tmp',
-  // uploadDir: '/home/taube/uploads/',
+  // tmpDir: process.env.PWD + '/public/uploads',
+  // uploadDir: process.env.PWD + '/public/uploads',
+  tmpDir: '/root/taube/uploads',
+  uploadDir: '/root/taube/uploads',
   checkCreateDirectories: true,
   uploadUrl: path,
   // *** For renaming files on server
