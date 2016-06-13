@@ -13,7 +13,7 @@ export var message = {
   collectItems: function(count) {
     var str = "";
     if(count==1) {
-      str = 'Sammel den letzten Gegenstände ein.';
+      str = 'Sammel den letzten Gegenstand ein.';
     } else {
       str = 'Sammel die '+count+' Gegenstände ein.';
     }
@@ -29,6 +29,6 @@ export var message = {
     notie.alert(2, 'Super, jetzt in das grün markierte Ziel!', 5);
   },
   gotoGoal: function() {
-    notie.alert(2, 'Bring den Cursor in das grün markierte Ziel!', 5);
+    notie.alert(2, 'Lenk den Cursor in das grün markierte Ziel!', 5);
   },
 };

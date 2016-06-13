@@ -65,16 +65,19 @@ Template.editor_game.events({
 Template.editor_game.events({
   'dblclick #background_img': function(e,i) {
     pickFile((file,e,i) => {
+      if(file.url==undefined) file.url = null;
       Games.update({_id:this._id},{$set:{img:file.url}})
     });
   },
   'dblclick #crosshair': function(e,i) {
     pickFile((file,e,i) => {
+      if(file.url==undefined) file.url = null;
       Crosshair.update({_id:this._id},{$set:{img:file.url}})
     });
   },
   'dblclick .collect-item': function(e,i) {
     pickFile((file,e,i) => {
+      if(file.url==undefined) file.url = null;
       CollectItems.update({_id:this._id},{$set:{img:file.url}})
     });
   },
@@ -82,9 +85,9 @@ Template.editor_game.events({
 var once = true;
 Template.editor_game.onRendered(function() {
   if(once) {
-    notie.alert(1, "Verschiebe das 'Fadenkreuz', die Collectitems und das Ziel. 'mousedown' halten und verschieben..", 5);
+    notie.alert(1, "Verschiebe das 'Fadenkreuz', die 'Sammelitems' und das Ziel. 'mousedown' halten und verschieben.", 5);
     setTimeout(() => {
-      notie.alert(1, "Damit sich die größe ändert, einfach die Schwarzen balken an den 'Items' bewegen.", 5);
+      notie.alert(1, "Damit sich die Größe ändert, einfach die schwarzen Balken an den 'Sammelitems' bewegen.", 5);
     },5*1000);
     once=false;
   }

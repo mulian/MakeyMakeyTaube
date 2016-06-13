@@ -54,9 +54,12 @@ Template.showGames.events({
 var once=true;
 Template.editor.onRendered(function() {
   if(once) {
-    notie.alert(1, "Klicke auf Spiel-Name,-Path und -Order um den Text zu ändern.", 5);
+    notie.alert(1, "Klicke auf Spiel- Name,-Pfad und -Sortiernummer um den Text zu ändern.", 5);
     setTimeout(() => {
-      notie.alert(1, "Doppelklicke auf ein Spiel um das Spiel zu anzupassen.", 5);
+      notie.alert(1, "Doppelklicke auf ein Spiel um das Spiel anzupassen.", 5);
+      setTimeout(() => {
+        notie.alert(2, "Lade Bilder (jpg,png,svg,...) und Sounds (mp3,wav,...) hoch, indem du die Datei vom Desktop auf diese Seite schiebst.", 5);
+      },10*1000);
     },5*1000);
     once=false;
   }

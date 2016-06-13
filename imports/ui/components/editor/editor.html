@@ -16,13 +16,13 @@
   </div>
   {{#each getConfig }}
     <div>
-      Sounds:
-      <button class='soundColected'>Collect Item Sound setzen</button>
-      <button class='soundWin'>Erfolg Sound setzen</button>
-      <button class='soundLose'>Misserfolg Sound setzen</button>
+      Geräusch:
+      <button class='soundColected'>Einsammelton auswählen</button>
+      <button class='soundWin'>Erfolgston auswählen</button>
+      <button class='soundLose'>Misserfolgston auswählen</button>
     </div>
     <div>
-      Standart SpielZeit:
+      Standard Spielzeit:
       <input type='text' class='timeMin time' maxlength='2' width='2' value='{{gameMin}}' >:
       <input type='text' class='timeSec time' maxlength='2' width='2' value='{{gameSec}}' >
     </div>
@@ -39,8 +39,8 @@
     <div class='removeGame pointer'><img src='/close.svg' width='20px'></div>
     <div class='gameItem pointer' style="background-image: url('{{img}}');">
       {{> Template.dynamic template=gameTitleTemplate }}
-      <div class='gameId pointer'>Path:{{> Template.dynamic template=gameIdTemplate }}</div>
-      <div class='gameOrder pointer'>Order:{{> Template.dynamic template=gameOrderTemplate }}</div>
+      <div class='gameId pointer'>Pfad:{{> Template.dynamic template=gameIdTemplate }}</div>
+      <div class='gameOrder pointer'>Sort.Nr.:{{> Template.dynamic template=gameOrderTemplate }}</div>
     </div>
   </li>
 </template>
