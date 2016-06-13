@@ -35,9 +35,9 @@ function isInGoal() {
 //TODO: to api
 function showGoal() {
   $('#gamegoal').addClass('show');
-  setTimeout(function() {
-    $('#gamegoal').removeClass('show');
-  },2000);
+  // setTimeout(function() {
+  //   $('#gamegoal').removeClass('show');
+  // },2000);
 }
 
 var action = {

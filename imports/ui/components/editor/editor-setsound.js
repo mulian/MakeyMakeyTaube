@@ -13,7 +13,7 @@ Template.editor.events({
       Config.update({_id:Config.findOne({})._id},{$set:{soundOnWin:file._id}})
     });
   },
-  'click button.soundOnLose': function(e,instance) {
+  'click button.soundLose': function(e,instance) {
     pickFile((file) => {
       Config.update({_id:Config.findOne({})._id},{$set:{soundOnLose:file._id}})
     });
