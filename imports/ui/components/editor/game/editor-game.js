@@ -81,6 +81,9 @@ Template.editor_game.events({
       CollectItems.update({_id:this._id},{$set:{img:file.url}})
     });
   },
+  'click .collect-item.remove': function(e,i) {
+    CollectItems.remove({_id:this._id});
+  },
 });
 var once = true;
 Template.editor_game.onRendered(function() {
