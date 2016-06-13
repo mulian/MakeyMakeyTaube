@@ -8,8 +8,8 @@ var path = "/upload/";
 UploadServer.init({
   // tmpDir: process.env.PWD + '/public/uploads',
   // uploadDir: process.env.PWD + '/public/uploads',
-  tmpDir: '/home/taube/Uploads/tmp',
-  uploadDir: '/home/taube/Uploads/',
+  tmpDir: '/home/taube/uploads/tmp',
+  uploadDir: '/home/taube/uploads/',
   checkCreateDirectories: true,
   uploadUrl: path,
   // *** For renaming files on server
