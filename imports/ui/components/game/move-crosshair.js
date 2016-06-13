@@ -15,17 +15,33 @@ function press(keyCode,down=true) {
   }
 }
 function move(keyCode) {
+  function changePossible(crosshair,kind='x',inc=1) {
+    if(kind=='x') {
+      if((crosshair.x+inc)>-1 && (crosshair.x+inc)<98) {
+        console.log('x true',crosshair.x);
+        return true;
+      }
+      else return false;
+    } else {
+      if((crosshair.y+inc)>-1 && (crosshair.y+inc)<98) return true;
+      else return false;
+    }
+  }
   return function() {
     let crosshair = Session.get('crosshair');
     switch(keyCode) {
       case 37: //left
-        crosshair.x-=1; break;
+        if(changePossible(crosshair,'x',-1)) crosshair.x-=1;
+      break;
       case 38: //up
-        crosshair.y-=1; break;
+        if(changePossible(crosshair,'y',-1)) crosshair.y-=1;
+      break;
       case 39: //right
-        crosshair.x+=1; break;
+        if(changePossible(crosshair,'x',+1)) crosshair.x+=1;
+      break;
       case 40: //down
-        crosshair.y+=1; break;
+        if(changePossible(crosshair,'y',+1)) crosshair.y+=1;
+        break;
     }
     Session.set('crosshair',crosshair);
   }
