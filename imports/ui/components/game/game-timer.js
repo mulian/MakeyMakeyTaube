@@ -44,7 +44,6 @@ Template.game.helpers({
 var timer = null;
 function countdown(duration,endTime) {
   duration.set(moment.duration(moment(endTime).diff(new Date())))
-  console.log(duration.get().asSeconds());
   if(duration.get().asSeconds()<=10) $('.countdown').addClass('hot');
   if(duration.get().asSeconds()<=0) {
     gotoMenu(false);
