@@ -2,9 +2,14 @@ import {Sounds,Images} from '../../../api/booth/db.js';
 var fs = Npm.require('fs');
 
 var path = "/upload/";
+// Meteor.startup(function() {
+//   Uploader.uploadUrl = Meteor.absoluteUrl("upload"); // Cordova needs absolute URL
+// });
 UploadServer.init({
-  tmpDir: process.env.PWD + '/public/uploads',
-  uploadDir: process.env.PWD + '/public/uploads',
+  // tmpDir: process.env.PWD + '/public/uploads',
+  // uploadDir: process.env.PWD + '/public/uploads',
+  tmpDir: '/home/taube/Uploads/tmp',
+  uploadDir: '/home/taube/Uploads/',
   checkCreateDirectories: true,
   uploadUrl: path,
   // *** For renaming files on server
