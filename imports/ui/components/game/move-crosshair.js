@@ -18,7 +18,6 @@ function move(keyCode) {
   function changePossible(crosshair,kind='x',inc=1) {
     if(kind=='x') {
       if((crosshair.x+inc)>-1 && (crosshair.x+inc)<98) {
-        console.log('x true',crosshair.x);
         return true;
       }
       else return false;

@@ -19,12 +19,14 @@ function showGoal() {
   //   $('#gamegoal').removeClass('show');
   // },2000);
 }
+var diff = 3;
 function collectItems(crosshair) {
   var collectitems = Session.get('collectitems');
   var procentCrosshair = calcProcent($('#crosshair'));
   for(item of collectitems) {
     var procent = calcProcent($('*[db-id="'+item._id+'"]'));
-    if(procentCrosshair.x==procent.x && procentCrosshair.y == procent.y) {
+    if((procentCrosshair.x>=procent.x-diff && procentCrosshair.x<=procent.x+diff) &&
+      (procentCrosshair.y >= procent.y-diff && procentCrosshair.y <= procent.y+diff)) {
       collectitems = $.grep(collectitems,function(i) {
         return item._id!=i._id;
       });

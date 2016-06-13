@@ -52,7 +52,7 @@ var action = {
 }
 
 function onKeyPress(e) {
-  if(e.keyCode==32) {
+  if(e.which==32) {
     e.preventDefault();
     if(isInGoal()) {
       action.onGoal();
