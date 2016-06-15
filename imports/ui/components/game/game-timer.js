@@ -61,14 +61,13 @@ Template.game.onRendered(function() {
   }
   setTimeout(() => {
     $('#gamegoal').addClass('show');
-    this.endTime = moment().add(gameTime+1,'seconds');
-    message.timeless(min,sec);
-    $('#los').addClass('hide');
+    this.endTime = moment().add(gameTime*1000+200,'ms');
     countdown(this.duration,this.endTime);
+    message.timeless(min,sec);
     timer = setInterval(() => {
       countdown(this.duration,this.endTime);
     },1000);
-  },0.5*1000);
+  },1*1000);
 
 });
 Template.game.onDestroyed(function() {

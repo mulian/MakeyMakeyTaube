@@ -1,94 +1,91 @@
 @menu-font-size:  180%;
 @menu-font-color: white;
+@menu-to-game-time: 0.2s;
 
-body {
-  background-color: #ddd;
-}
-
-.filter-grayscale(@scale) {
+.filter-grayscale(@scale,@transition-time) {
   -webkit-filter: grayscale(@scale);
   -moz-filter: grayscale(@scale);
   -ms-filter: grayscale(@scale);
   -o-filter: grayscale(@scale);
   filter: grayscale(@scale);
+
+  transition: filter @transition-time,-webkit-filter @transition-time, -moz-filter @transition-time;
 }
 
 #title {
   font-size: 300%;
   font-weight: bold;
-}
-.highlight {
-  font-weight: bold;
-  color: red;
+  transition: opacity @menu-to-game-time;
 }
 .selected .gameItem {
-  .filter-grayscale(0%) !important;
+  .filter-grayscale(0%,0.2s) !important;
+  opacity: 1 !important;
 }
-
+.no_opacity {
+  opacity: 0;
+}
 #menu {
   ul {
     list-style-type: none;
     padding:0; margin:0;
-    // float:right;
     white-space: nowrap;
     li {
-      display: inline-block;;
+      display: inline-block;
       width: 200px;
-      height: 100%;
-      table {
-        margin-left: 10px;
-        margin-rigth: 10px;
-        // text-align: right;
-        width: 100%;
-        th {
-          text-align: center;
-        }
-        .table_name {
-          text-align: center;
-        }
-        .table_time {
-          text-align: center;
-        }
-        .table_pos {
-          text-align: right;
-        }
+      margin-left: 5px;
+      margin-right: 5px;
+
+      .game_column {
+        margin: 10px;
       }
       .gameItem {
-        background-color: #CCC;
         background-size: 100% 100%;
         border-radius: 5px;
-        margin: 10px;
-        padding-left: 10px;
         padding-top: 20px;
+        padding-left: 5px;
+
         height: 160px;
-        width: 200px;
+        width: 100%;
 
         //font
         font-size: @menu-font-size;
         color: @menu-font-color;
         text-shadow: 2px 2px #000;
         font-weight: bold;
+
         //filter
-        transition: filter 0.5s;
-        .filter-grayscale(100%);
+        .filter-grayscale(100%,0.2s);
+
+        box-shadow: 8px 8px 8px #888888;
+        transition: opacity @menu-to-game-time;
       }
-      // .filter-grayscale(100%);
-      // transition: filter 0.5s;
-      // &.selected {
-      //   .filter-grayscale(0%) !important;
-      // }
+      .highscores {
+        width: 100%;
+        transition: opacity @menu-to-game-time;
+        .highscore_table {
+          width: 100%;
+          margin
+          th {
+            text-align: center;
+          }
+          .table_name {
+            text-align: center;
+          }
+          .table_time {
+            text-align: center;
+          }
+          .table_pos {
+            text-align: right;
+          }
+          .leaderboard_li {
+            border-top: 1px black dashed;
+            &.highlight {
+              font-weight: bold;
+              color: red;
+            }
+          }
+        }
+      }
     }
-  }
-  .leaderboard_ul {
-    margin-top: 100px;
-    margin-left: -40px;
-  }
-  .leaderboard_ul li.leaderboard_li {
-    background-color: transparent !important;
-    height: 0px;
-    text-shadow: none !important;
-  }
-  .leaderboard_li {
-    border-top: 1px black dashed;
   }
 }

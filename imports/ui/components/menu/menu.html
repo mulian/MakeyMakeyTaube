@@ -14,19 +14,25 @@
 
 <template name='game_menu'>
   <li class='menu_li' path='{{path}}'>
-    <div class='gameItem' style="background-image: url('{{img}}');">
+    <div class='gameItem game_column' style="background-image: url('{{img}}');">
       {{name}}
     </div>
-    {{> highscores}}
+    <div class='highscores game_column'>
+      {{> highscores}}
+    </div>
   </li>
 </template>
 
 <template name="highscores">
   {{#if players.count}}
-    <table>
-      <tr><th>Pos.</th><th>Team</th><th>min:sec.ms</th></tr>
+    <table class='highscore_table'>
+      <tr>
+        <th class='table_pos'>Pos.</th>
+        <th class='table_name'>Team</th>
+        <th class='table_time'>min:sec.ms</th>
+      </tr>
     {{#each players}}
-      <tr class="leaderboard_li" >
+      <tr class="leaderboard_li {{highlight}}" >
         <th class='table_pos'>{{pos}}.</th>
         <td class='table_name'>{{name}}</td>
         <td class='table_time'>{{time}}</td>

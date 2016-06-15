@@ -57,5 +57,5 @@ Template.game.helpers({
 Template.game.onRendered(function() {
   setTimeout(() => {
     $('.fadein').addClass('fade');
-  },1);
+  },200);
 });

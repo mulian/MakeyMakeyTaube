@@ -11,7 +11,6 @@ Template.highscores.helpers({
       limit:Config.findOne({}).topTeamsCount,
       sort:{milisecounds:1},
       transform: function(item) {
-        console.log(item);
         item.pos = inc++;
         var duration = moment.duration(item.milisecounds);
         item.time = addZero(duration.minutes())+':'+

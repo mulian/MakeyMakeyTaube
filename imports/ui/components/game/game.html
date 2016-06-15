@@ -2,8 +2,8 @@
   <div id='game'>
     {{#with game}}
       <img id='background_img' src='{{img}}'>
-      <div class="countdown">
-          <span id="clock" style="z-index:10000000000">{{getTime}}</span>
+      <div class="countdown fadein">
+          <span id="clock" class='fadein' style="z-index:10000000000">{{getTime}}</span>
       </div>
       {{#with crosshair}}
         <div id='gamegoal' style='left:{{goal.left}}%;top:{{goal.top}}%;right:{{goal.right}}%;bottom:{{goal.bottom}}%'></div>
@@ -14,8 +14,5 @@
         <img class='collect-item fadein' src='{{img}}' db-id='{{_id}}' style='left:{{x}}%;top:{{y}}%;width:{{width}}px'>
       {{/each}}
     {{/with}}
-    <div id='los' class='hide'>
-      LOS!
-    </div>
   </div>
 </template>

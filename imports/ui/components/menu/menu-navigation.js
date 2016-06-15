@@ -9,8 +9,14 @@ var navigation = {
   },
   enter: function() {
     var currentTarget = this.current;
-    Session.set('picSize', this.collectPicSize(currentTarget));
-    Router.go('game', {_gameID: currentTarget.attr('path')});
+    Session.set('picSize', this.collectPicSize(currentTarget.find('.gameItem')));
+    this.hideAllNotPicto();
+    setTimeout(() => {
+      Router.go('game', {_gameID: currentTarget.attr('path')});
+    },200)
+  },
+  hideAllNotPicto() {
+    $('#title,.highscores,.gameItem').addClass('no_opacity');
   },
   select: function(target) {
     if(this.current!=undefined) {
@@ -30,6 +36,7 @@ var navigation = {
     var picSize = target.offset();
     picSize.width = target.width();
     picSize.height = target.height();
+    // console.log(picSize);
     return picSize;
   },
 }
