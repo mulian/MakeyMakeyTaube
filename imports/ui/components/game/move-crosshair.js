@@ -1,6 +1,6 @@
 import {Crosshair,Games,Players,CollectItems,Sounds,Images,Config} from '../../../api/booth/db.js'
 
-var keyIntervalTime = 100*(3/4);
+var keyIntervalTime = 100;
 var keyInterval = {};
 function press(keyCode,down=true) {
   if(down && keyInterval[keyCode]==undefined) {
@@ -69,4 +69,7 @@ Template.game.onRendered(function() {
 Template.game.onDestroyed(function() {
   $('body').unbind('keydown',onKeyDown);
   $('body').unbind('keyup',onKeyUp);
+  for(interval in keyInterval) {
+    clearInterval(keyInterval[interval]);
+  }
 });

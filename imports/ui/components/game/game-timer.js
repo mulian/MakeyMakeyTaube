@@ -45,8 +45,9 @@ var timer = null;
 function countdown(duration,endTime) {
   duration.set(moment.duration(moment(endTime).diff(new Date())))
   if(duration.get().asSeconds()<=10) $('.countdown').addClass('hot');
-  if(duration.get().asSeconds()<=0) {
+  if(duration.get().asSeconds()<=0 && once) {
     gotoMenu(false);
+    clearInterval(timer);
   }
 }
 Template.game.onRendered(function() {

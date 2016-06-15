@@ -48,6 +48,7 @@ Template.game.onRendered(function() {
     message.onlyGoal();
   }
   Tracker.autorun(function() {
+    // console.log('autorun crosshair',Session.get('crosshair'));
     collectItems(Session.get('crosshair'));
   });
 });
