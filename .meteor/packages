@@ -26,3 +26,5 @@ momentjs:moment
 twbs:bootstrap
 dbarrett:dropzonejs
 tomi:upload-server
+accounts-ui
+accounts-password
