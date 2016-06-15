@@ -21,6 +21,12 @@ Router.route('/',{
     this.subscribe('default_db_images').wait();
 
   },
+  onBeforeAction: function() {
+    if (!Meteor.user()) {
+    // render the login template but keep the url in the browser the same
+      this.render('app_login');
+    } else this.next();
+  },
   action: function() {
     if(this.ready()) this.render('main');
     else this.render('loading');
@@ -37,6 +43,12 @@ Router.route('/game/:_gameID',{
     this.subscribe('default_db_images').wait();
     this.subscribe('default_db_sounds').wait();
     this.subscribe('default_db_crosshair').wait();
+  },
+  onBeforeAction: function() {
+    if (!Meteor.user()) {
+    // render the login template but keep the url in the browser the same
+      this.render('app_login');
+    } else this.next();
   },
   action: function() {
     this.state.set('gameId',this.params._gameID);
