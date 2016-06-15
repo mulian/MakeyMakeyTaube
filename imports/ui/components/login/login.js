@@ -11,6 +11,6 @@ Template.app_login.events({
         (window.location.hash.indexOf('letmein')<0) &&
         (Meteor.userId()==null))
         $('#signup-link').remove();
-    }, 50);
+    }, 20);
   },
 });
