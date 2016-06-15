@@ -1,6 +1,6 @@
 import {Crosshair,Games,Players,CollectItems,Sounds,Images,Config} from '../../../api/booth/db.js'
 
-var keyIntervalTime = 100;
+var keyIntervalTime = 100*(3/4);
 var keyInterval = {};
 function press(keyCode,down=true) {
   if(down && keyInterval[keyCode]==undefined) {

@@ -16,7 +16,12 @@ function getCurrentGame() {
   return Games.findOne({path:controller.state.get('gameId')});
 }
 function getCurrentCrosshair() {
-  return Crosshair.findOne({_id:getCurrentGame().crosshair})
+  return Crosshair.findOne({_id:getCurrentGame().crosshair},{
+    // transform: function(item) {
+    //   item.url = location.origin + item.url;
+    //   return item;
+    // }
+  })
 }
 
 Template.editor_game.helpers({
@@ -27,7 +32,12 @@ Template.editor_game.helpers({
     return getCurrentCrosshair();
   },
   getCollectItems: function() {
-    return CollectItems.find({game:this._id});
+    return CollectItems.find({game:this._id},{
+      // transform: function(item) {
+      //   item.url = location.origin + item.url;
+      //   return item;
+      // }
+    });
   },
 });
 
