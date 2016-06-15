@@ -93,7 +93,7 @@ Template.editor_game.onRendered(function() {
     setTimeout(() => {
       notie.alert(1, "Damit sich die Größe ändert, einfach die schwarzen Balken an den 'Sammelitems' bewegen.", 5);
       setTimeout(() => {
-        notie.alert(1, "Um Bilder zu ändern, einfach darauf Doppelklicken (Hintergrund,Cursor und Sammelitems).", 5);
+        notie.alert(1, "Um Bilder zu ändern, einfach auf den Hintergrund, Cursor oder Sammelitem Doppelklicken.", 5);
       },5*1000);
     },5*1000);
     once=false;
