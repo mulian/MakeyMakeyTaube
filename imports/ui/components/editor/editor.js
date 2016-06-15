@@ -40,7 +40,7 @@ Template.editor.events({
       Games.remove({_id:this._id});
   },
   'click .resetHighscore': function(e,i) {
-    console.log('reset');
+    // console.log('reset');
     Meteor.call('resetHighscore');
   },
 });
