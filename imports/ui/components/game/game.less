@@ -9,6 +9,14 @@
 
 @above-notie-zindex:  1000000000;
 
+.fadein {
+  opacity: 0;
+  transition: opacity 1s;
+  &.fade {
+    opacity: 1;
+  }
+}
+
 #game {
   #los {
     font-size: 200%;
@@ -28,12 +36,12 @@
   .collect-item {
     z-index: @above-notie-zindex+1;
     position: absolute;
-    transition: transform 1s;
-    &.collect-higlight {
-      transform: rotate(180deg);
-      -webkit-transform: rotate(180deg);
-      // transition-delay: 1s;
-    }
+    // transition: transform 1s;
+    // &.collect-higlight {
+    //   transform: rotate(180deg);
+    //   -webkit-transform: rotate(180deg);
+    //   // transition-delay: 1s;
+    // }
   }
   #crosshair {
     position: fixed;
@@ -41,12 +49,12 @@
     top:0px;
     z-index: @above-notie-zindex+2;
 
-    opacity: 0;
+    // opacity: 0;
     transition: opacity 1s;
-    &.show {
-      opacity: 1;
-      transition: opacity 1s,left @crosshair-xy-time,top @crosshair-xy-time;
-    }
+    // &.show {
+    //   opacity: 1;
+    //   transition: opacity 1s,left @crosshair-xy-time,top @crosshair-xy-time;
+    // }
   }
 
   .countdown {

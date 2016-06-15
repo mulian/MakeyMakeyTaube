@@ -54,3 +54,8 @@ Template.game.helpers({
     return Session.get('collectitems');
   },
 });
+Template.game.onRendered(function() {
+  setTimeout(() => {
+    $('.fadein').addClass('fade');
+  },1);
+});

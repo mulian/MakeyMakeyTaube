@@ -8,10 +8,10 @@
       {{#with crosshair}}
         <div id='gamegoal' style='left:{{goal.left}}%;top:{{goal.top}}%;right:{{goal.right}}%;bottom:{{goal.bottom}}%'></div>
 
-        <img id='crosshair' class='show' src='{{img}}' style='left:{{x}}%;top:{{y}}%;width:{{width}}px'>
+        <img id='crosshair' class='show fadein' src='{{img}}' style='left:{{x}}%;top:{{y}}%;width:{{width}}px'>
       {{/with}}
       {{#each getCollectItems}}
-        <img class='collect-item' src='{{img}}' db-id='{{_id}}' style='left:{{x}}%;top:{{y}}%;width:{{width}}px'>
+        <img class='collect-item fadein' src='{{img}}' db-id='{{_id}}' style='left:{{x}}%;top:{{y}}%;width:{{width}}px'>
       {{/each}}
     {{/with}}
     <div id='los' class='hide'>
