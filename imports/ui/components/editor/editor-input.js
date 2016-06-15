@@ -8,6 +8,8 @@ function enterInputEditor(target,instance,_this) {
     Config.update({_id:_this._id},{$set:{gameSec:parseInt(target.val())}});
   } else if(target.hasClass('topTeamsCount')) {
     Config.update({_id:_this._id},{$set:{topTeamsCount:parseInt(target.val())}});
+  } else if(target.hasClass('move_intervall')) {
+    Config.update({_id:_this._id},{$set:{move_intervall:parseInt(target.val())}});
   }
 };
 Template.editor.events({

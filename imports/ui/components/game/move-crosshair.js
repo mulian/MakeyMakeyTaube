@@ -58,6 +58,9 @@ function onKeyUp(e) {
   }
 }
 Template.game.onRendered(function() {
+  var config = Config.findOne({});
+  if(config.move_intervall!=undefined)
+    keyIntervalTime = config.move_intervall;
   setTimeout(() => {
     $('body').on('keydown',onKeyDown);
     $('body').on('keyup',onKeyUp);
