@@ -36,7 +36,8 @@ Template.editor.events({
     });
   },
   'click .removeGame': function(e,instance) {
-    Games.remove({_id:this._id});
+    if(confirm('Soll das Spiel '+this.name+' wirklich gelöscht werden?'))
+      Games.remove({_id:this._id});
   },
   'click .resetHighscore': function(e,i) {
     console.log('reset');

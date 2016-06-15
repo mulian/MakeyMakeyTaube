@@ -82,7 +82,8 @@ Template.editor_game.events({
     });
   },
   'click .collect-item.remove': function(e,i) {
-    CollectItems.remove({_id:this._id});
+    if(confirm('Soll das Sammelitem wirklich gelöscht werden?'))
+      CollectItems.remove({_id:this._id});
   },
 });
 var once = true;
@@ -91,6 +92,9 @@ Template.editor_game.onRendered(function() {
     notie.alert(1, "Verschiebe das 'Fadenkreuz', die 'Sammelitems' und das Ziel. 'mousedown' halten und verschieben.", 5);
     setTimeout(() => {
       notie.alert(1, "Damit sich die Größe ändert, einfach die schwarzen Balken an den 'Sammelitems' bewegen.", 5);
+      setTimeout(() => {
+        notie.alert(1, "Um Bilder zu ändern, einfach darauf Doppelklicken (Hintergrund,Cursor und Sammelitems).", 5);
+      },5*1000);
     },5*1000);
     once=false;
   }

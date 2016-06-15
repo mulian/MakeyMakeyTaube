@@ -3,8 +3,8 @@
     {{#with game}}
       <img id='background_img' class='transform' src='{{img}}'>
       <div class='div-button ci' style='left: 100px'>Neues Sammelitem</div>
-      <div class='div-button resetHighscore' style='left: 300px'>Spiel-Highscores zurücksetzen</div>
-      <div class='div-button gameTime' style='left: 600px'>
+      <!-- <div class='div-button resetHighscore' style='left: 300px'>Spiel-Highscores zurücksetzen</div> -->
+      <div class='div-button gameTime' style='left: 300px'>
         Spielzeit:
         <input type='text' class='timeMin time' maxlength='2' width='2' value='{{timeMin}}' >min. und
         <input type='text' class='timeSec time' maxlength='2' width='2' value='{{timeSec}}' >sec.
@@ -24,5 +24,6 @@
       {{/each}}
     {{/with}}
     {{> file_images}}
+    {{> file_drop}}
   </div>
 </template>
