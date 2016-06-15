@@ -18,30 +18,9 @@
 }
 
 #game {
-  #los {
-    font-size: 200%;
-    font-weight: bold;
-    position: absolute;
-    top: 50%;
-    left: 45%;
-    background-color: white;
-    padding: 10px;
-    border-radius: 5px;
-    &.hide {
-      opacity: 0;
-      transition: opacity 0.5 !important;
-    }
-    opacity: 1;
-  }
   .collect-item {
     z-index: @above-notie-zindex+1;
     position: absolute;
-    // transition: transform 1s;
-    // &.collect-higlight {
-    //   transform: rotate(180deg);
-    //   -webkit-transform: rotate(180deg);
-    //   // transition-delay: 1s;
-    // }
   }
   #crosshair {
     position: fixed;
@@ -49,12 +28,7 @@
     top:0px;
     z-index: @above-notie-zindex+2;
 
-    // opacity: 0;
     transition: opacity 1s;
-    // &.show {
-    //   opacity: 1;
-    //   transition: opacity 1s,left @crosshair-xy-time,top @crosshair-xy-time;
-    // }
   }
 
   .countdown {
@@ -94,14 +68,16 @@
 
   #background_img {
     position: absolute;
-    transition: left @bgimg-time-out, top @bgimg-time-out, width @bgimg-time-out , height @bgimg-time-out ;
+    // opacity: 0.8;
+    transition: opacity  @bgimg-time-out,left @bgimg-time-out, top @bgimg-time-out, width @bgimg-time-out , height @bgimg-time-out ;
 
     &.transform {
       left: 0px !important;
       top: 0px !important;
       width: 100% !important;
       height: 100% !important;
-      transition: left @bgimg-time-in, top @bgimg-time-in, width @bgimg-time-in , height @bgimg-time-in ;
+      opacity: 1;
+      // transition: left @bgimg-time-in, top @bgimg-time-in, width @bgimg-time-in , height @bgimg-time-in ;
     }
   }
 }
