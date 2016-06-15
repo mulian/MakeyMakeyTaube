@@ -22,11 +22,12 @@
 </template>
 
 <template name="highscores">
-  {{#if players}}
+  {{#if players.count}}
     <table>
-      <tr><th>Team</th><th>min:sec.ms</th></tr>
+      <tr><th>Pos.</th><th>Team</th><th>min:sec.ms</th></tr>
     {{#each players}}
-      <tr class="leaderboard_li {{highlight}}" >
+      <tr class="leaderboard_li" >
+        <th class='table_pos'>{{pos}}.</th>
         <td class='table_name'>{{name}}</td>
         <td class='table_time'>{{time}}</td>
       </tr>
