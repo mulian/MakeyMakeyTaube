@@ -1,0 +1,18 @@
+<template name='texte'>
+  <div id='texte'>
+    <table>
+      <tr>
+        <th>Titel</th>
+        <th>Text</th>
+        <th>Anzeigezeit</th>
+      </tr>
+      {{each texte}}
+      <tr>
+        <td>{{title}}</td>
+        <td><imput value='{{text}}' type='text'></td>
+        <td><imput value='{{time}}' type='text' maxlength='2'>sec.</td>
+      </tr>
+      {{/each}}
+    </table>
+  </div>
+</template>

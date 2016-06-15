@@ -6,6 +6,7 @@ export const CollectItems = new Mongo.Collection('collectitems');
 export const Sounds = new Mongo.Collection('sounds');
 export const Images = new Mongo.Collection('images');
 export const Crosshair = new Mongo.Collection('crosshair');
+export const Texte = new Mongo.Collection('texte');
 
 if(Meteor.isServer) {
   Meteor.publish('default_db_players', function(){
