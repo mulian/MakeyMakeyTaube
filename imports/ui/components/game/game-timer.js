@@ -42,12 +42,14 @@ Template.game.helpers({
   }
 });
 var timer = null;
+var once = true;
 function countdown(duration,endTime) {
   duration.set(moment.duration(moment(endTime).diff(new Date())))
   if(duration.get().asSeconds()<=10) $('.countdown').addClass('hot');
   if(duration.get().asSeconds()<=0 && once) {
-    gotoMenu(false);
+    once = false; //only for backup
     clearInterval(timer);
+    gotoMenu(false);
   }
 }
 Template.game.onRendered(function() {
