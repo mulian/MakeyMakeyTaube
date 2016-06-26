@@ -1,9 +1,9 @@
 # Taube
-Game: Chrosshair move with keyboard, collect items and win. With Level editor.
+Game: crosshair move with keyboard, collect items and win. With Level editor.
 
-Createt for TU-Night Brunswick (Germany) (wi2).
+Created for TU-Night Brunswick (Germany) (wi2).
 
-## Run (dev mode)
+## Run (dev-mode)
 Currently there are no Games, you could add your own games.
 ### [Install Meteor](https://www.meteor.com/install)
 Linux/Max: `curl https://install.meteor.com/ | sh`
@@ -19,13 +19,13 @@ Ready!
 ## Game
 * url: `yourdomain:port/`
 * Local example with dev-mode: [http://localhost:3000/](http://localhost:3000/)
-* Use Arrow Key to navigate and for Chrosshair moves.
+* Use Arrow Key to navigate and for crosshair moves.
 * Use Space to select a Game or trigger goal.
 
 ## Editor
 * url: `yourdomain:port/editor`
 * Local example with dev-mode: [http://localhost:3000/editor](http://localhost:3000/editor)
-* Drag your Files (Images,Sounds) from Desktop to Browser with open game Editor.
+* Drag your Files (images,sounds) from Desktop to Browser with open game Editor.
 
 ## Images
 ### Game
