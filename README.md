@@ -1,6 +1,8 @@
 # Taube
 Game: Chrosshair move with keyboard, collect items and win. With Level editor.
 
+Createt for TU-Night Brunswick (Germany) (wi2).
+
 ## Run (dev mode)
 Currently there are no Games, you could add your own games.
 ### [Install Meteor](https://www.meteor.com/install)
