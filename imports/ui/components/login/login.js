@@ -3,6 +3,7 @@ import './login.html'
 Template.app_login.onRendered(function() {
 });
 
+/*
 function removeCreate() {
   if((window.location.host.indexOf('home.wi2.phil.tu-bs.de')>=0) &&
     (window.location.hash.indexOf('letmein')<0) &&
@@ -18,3 +19,4 @@ Template.app_login.events({
     setTimeout(removeCreate, 1);
   },
 });
+*/

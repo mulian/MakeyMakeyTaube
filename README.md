@@ -37,3 +37,7 @@ Ready!
 ![Editor Menu View](/game_editor_menu.jpg)
 #### Game
 ![Editor Game View](/game_editor_game.jpg)
+
+## Known Issue
+* Each user could create an account.
+* Each user that who logged in, could edit and play.
