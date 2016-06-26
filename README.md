@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Taube
 Ist ein interaktives Spiel.
 
@@ -21,3 +22,7 @@ Ist ein interaktives Spiel.
 
 ## Veröffentlichung
 18.06.16
+=======
+# taube
+Game: Chrosshair move with keyboard, collect items and win. With Level editor.
+>>>>>>> 730885a9a4515818c182e8d8324f7e3792244395
