@@ -42,4 +42,4 @@ Ready!
 
 ## Known Issue
 * Each user could create an account.
-* Each user that who logged in, could edit and play.
+* Each user who is logged in, could edit and play.
