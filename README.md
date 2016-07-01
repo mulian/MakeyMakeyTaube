@@ -1,12 +1,12 @@
 # Taube
-Game: crosshair move with keyboard, collect items and win. With Level editor.
+Makey Makey Game: crosshair move with keyboard, collect items and win. With Level editor.
 
 Created for TU-Night Brunswick (Germany) (wi2).
 
 ## Run (dev-mode)
 Currently there are no Games, you could add your own games.
 ### [Install Meteor](https://www.meteor.com/install)
-Linux/Max: `curl https://install.meteor.com/ | sh`
+Linux/Mac: `curl https://install.meteor.com/ | sh`
 ### Run Taube
 ```
 cd <project_root_folder>
