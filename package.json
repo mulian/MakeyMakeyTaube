@@ -3,6 +3,9 @@
   "private": true,
   "debug": false,
   "keymap": "AWSD",
+  "keywords": [
+    "Makey Makey","Makey", "game", "moorhun", "taube"
+  ],
   "scripts": {
     "start": "meteor run"
   },
